@@ -1,0 +1,199 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: poppins, sans-serif;
+    }
+
+    body {
+      background: #0b2e4a;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1458a6;
+  padding: 15px 30px;
+  color: white;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #f2f2d0;
+    margin-left: 10px;
+    align-items: center;
+}
+
+header .inicio {
+  background: #f2f2d0;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logo img {
+  width: 60px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+    header nav button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #fff;
+      color: #0b2e4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header nav button:hover {
+      background: #4db3ff;
+      color: #fff;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      text-align: center;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    }
+
+    .hero button {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4db3ff;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 15px 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+      background: #3490dc;
+    }
+
+    /* Serviços */
+    .servicos {
+      text-align: center;
+      padding: 40px 20px;
+      background: #14476d;
+    }
+
+    .servicos h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .servicos p {
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fdfdfd;
+      color: #000;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #14476d;
+    }
+
+    /* Contato */
+    .contato {
+      padding: 40px 20px;
+      text-align: center;
+      background: #0b2e4a;
+    }
+
+    .contato h2 {
+      margin-bottom: 20px;
+    }
+
+    .contato-info {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .info {
+      text-align: left;
+    }
+
+    .info p {
+      margin: 5px 0;
+    }
+
+    iframe {
+      border: 0;
+      width: 100%;
+      max-width: 500px;
+      height: 250px;
+      border-radius: 12px;
+    }
+    i{
+      margin-right: 8px;
+        color: #dbc135;
+    }
+    .fa-github{
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      background: #072033;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    footer a {
+      color: #4db3ff;
+      text-decoration: none;
+      margin: 0 5px;
+    }
