@@ -55,7 +55,13 @@ header .btn-inicio, header .btn-agendamento {
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
+ }
+ header .btns {
+  display: flex;
+  gap: 8px; /* controla a distância entre os dois */
+  align-items: center;
 }
+
 a{
     text-decoration: none;
     color: #0f304c;
@@ -129,6 +135,7 @@ header .btn-inicio:hover, header .btn-agendamento:hover {
     button:hover {
       background: #143a5a;
     }
+    /* Footer */
 .footer {
   margin-top: auto; /* empurra o footer para o fim */
   padding: 12px;
