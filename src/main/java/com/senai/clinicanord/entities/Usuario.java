@@ -40,11 +40,6 @@ public class Usuario {
 	private LocalDate data_nascimento;
 	
 	@ManyToOne
-	@JoinColumn(name = "tipo_usuario")
-	@JsonBackReference
-	private TipoUsuario tipoUsuario;
-	
-	@ManyToOne
 	@JoinColumn(name="ENDERECO_id_endereco")
 	private Endereco endereco;
 	
@@ -122,14 +117,6 @@ public class Usuario {
 		this.data_nascimento = data_nascimento;
 	}
 
-	public TipoUsuario getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(TipoUsuario tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
-	}
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
@@ -138,6 +125,4 @@ public class Usuario {
 		this.endereco = endereco;
 	}
 
-	
-	
 }
