@@ -184,6 +184,9 @@ a {
     gap: 8px;
     text-align: center;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   header img {
     height: 40px;
@@ -215,5 +218,6 @@ a {
     display: flex;
     flex-direction: row;
     gap: 8px;
+    width: 100%;
   }
 }
