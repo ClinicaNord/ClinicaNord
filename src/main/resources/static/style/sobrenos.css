@@ -217,4 +217,20 @@ nav a:hover {
   .texto ul {
     font-size: 14px;
   }
+  footer{ 
+    font-size: 12px;
+    padding: 10px;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .devs {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .devs a {
+    font-size: 12px;
+  } 
+  .devs i {
+    font-size: 12px;
+  }
 }

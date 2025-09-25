@@ -208,6 +208,10 @@ header .inicio {
       margin-right: 8px;
         color: #dbc135;
     }
+    .instagram a {
+      color: #ccc;
+      text-decoration: none;
+    }
     .fa-github{
       color: #ccc;
     }
