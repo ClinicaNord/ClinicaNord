@@ -1,4 +1,4 @@
-/* Reset*/
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -12,6 +12,7 @@ html, body {
   color: #fff; 
   background: url("img/letras.png") center center / cover no-repeat fixed; 
   padding: 0; 
+  background-image: url("../img/letras.png");
 }
 
 /* Wrapper para o conteúdo interno */
@@ -23,7 +24,7 @@ html, body {
 
 /* Header */
 header {
-  background-color: rgba(28, 76, 117, 0.9);
+  background-color: #30638e;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -44,8 +45,7 @@ header {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: linear-gradient(135deg,#0b3f57,#1c7aa5);
-  object-fit: cover;
+   object-fit: cover;
 }
 
 .logo h1 {
@@ -76,10 +76,10 @@ nav a:hover {
   align-items: flex-start;
   padding: 60px 20px;
   gap: 80px;
-  background: rgba(0,0,0,0.4); 
   border-radius: 10px;
   max-width: 1200px;
   margin: 40px auto;
+  color: black;
 }
 
 .imagem-container {
@@ -102,6 +102,7 @@ nav a:hover {
   min-width: 280px;
   padding-left: 20px;
   padding-right: 20px;
+  
 }
 
 .texto h2 {
@@ -199,5 +200,21 @@ nav a:hover {
   nav a {
     margin: 5px 0;
     text-align: center;
+  }
+  .imagem-container {
+    max-width: 100%;
+  }
+  .imagem-container::before {
+    top: -10px;
+    right: -10px;
+  }
+  .texto h2 {
+    font-size: 24px;
+  }
+  .texto p {
+    font-size: 14px;
+  }
+  .texto ul {
+    font-size: 14px;
   }
 }
