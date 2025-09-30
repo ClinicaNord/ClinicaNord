@@ -12,7 +12,7 @@ body {
 
 /* Header */
 header {
-  background: #2562a4;
+  background: #296198;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -42,8 +42,8 @@ header h1 {
 }
 
 header .btn-inicio {
-  background: #fdfdfd;
-  color: #000;
+  background: #fdfce9;
+  color: #092549;
   border: none;
   border-radius: 30px;
   padding: 10px 25px;
@@ -53,8 +53,8 @@ header .btn-inicio {
 }
 
 header .btn-inicio:hover {
-  background: #3490dc;
-  color: #fff;
+  background: #092549;
+  color: #fdfce9;
 }
 
 /* Formulário */
@@ -66,7 +66,7 @@ header .btn-inicio:hover {
 }
 
 .form-box {
-  background: #2562a4;
+  background: #296198;
   padding: 30px;
   border-radius: 20px;
   width: 100%;
@@ -80,7 +80,7 @@ header .btn-inicio:hover {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #fff;
+  color: #fdfce9;
 }
 
 .form-box input {
@@ -88,7 +88,7 @@ header .btn-inicio:hover {
   padding: 10px;
   border-radius: 30px;
   border: none;
-  background: #fdfdfd;
+  background: #fdfce9;
   font-size: 14px;
 }
 
@@ -114,7 +114,7 @@ header .btn-inicio:hover {
 
 /* Footer */
 footer {
-  background: #072033;
+  background: #092549;
   padding: 15px;
   text-align: center;
   font-size: 14px;

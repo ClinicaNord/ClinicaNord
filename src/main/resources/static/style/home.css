@@ -17,7 +17,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1458a6;
+  background: #30638e;
   padding: 15px 30px;
   color: white;
   width: 100%;
@@ -37,7 +37,7 @@ header h1 {
 }
 
 header .inicio {
-  background: #f2f2d0;
+  background: #fdfce9;
   border: none;
   border-radius: 20px;
   padding: 10px 25px;
@@ -57,7 +57,7 @@ header .inicio {
       padding: 10px 20px;
       border: none;
       border-radius: 20px;
-      background: #fff;
+      background: #fdfce9;
       color: #0b2e4a;
       font-weight: bold;
       cursor: pointer;
@@ -107,7 +107,7 @@ header .inicio {
       bottom: 20%;
       left: 50%;
       transform: translateX(-50%);
-      background: #4db3ff;
+      background: #84b6cb;
       color: #fff;
       border: none;
       border-radius: 30px;
@@ -126,7 +126,7 @@ header .inicio {
       display: table-columns;
       text-align: center;
       padding: 40px 20px;
-      background: #14476d;
+      background: #30638e;
     }
 
     .servicos h2 {
@@ -136,7 +136,7 @@ header .inicio {
 
     .servicos p {
       margin-bottom: 30px;
-      color: #ddd;
+      color: #000;
     }
 
     .cards {
@@ -150,10 +150,10 @@ header .inicio {
       max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
-    }
+        }
 
     .card {
-      background: #fdfdfd;
+      background: #fdfce9;
       color: #000;
       border-radius: 12px;
       padding: 20px;
@@ -175,7 +175,9 @@ header .inicio {
       padding: 40px 20px;
       text-align: center;
       background: #0b2e4a;
-    }
+      background-image: url(../img/Contato.png);
+      background-size: cover;
+      background-position: center;}
 
     .contato h2 {
       margin-bottom: 20px;
@@ -218,7 +220,7 @@ header .inicio {
 
     /* Footer */
     footer {
-      background: #072033;
+      background: #0f304c;
       padding: 15px;
       text-align: center;
       font-size: 14px;
