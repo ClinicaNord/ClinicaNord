@@ -28,15 +28,13 @@ main {
   box-sizing: border-box;
 }
 
-     header {
-  background: #296198;
+ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  color: #fdfce9;
-  flex-wrap: wrap;
-  gap: 6px;
+  background: #30638e;
+  padding: 15px 30px;
+  color: white;
   width: 100%;
 }
 
@@ -53,30 +51,31 @@ header .logo img {
   height: auto;
 }
 /* Botão */
-header .btn-inicio, header .btn-sobrenos {
-  background: #fdfce9;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 25px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
- }
- header .btns {
-  display: flex;
-  gap: 8px; /* controla a distância entre os dois */
-  align-items: center;
-}
+header nav button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      margin: 4px;
+      border: none;
+      border-radius: 20px;
+      background: #fdfce9;
+      color: #0b2e4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-a{
-    text-decoration: none;
-    color: #0f304c;
-}
-header .btn-inicio:hover, header .btn-agendamento:hover {
-  background: #0f304c;
-  color: #f0f0f0;
-}
+    header nav button:hover {
+      background: #0f304c;
+      color: #fff;
+    }
+    header nav .btn-inicio a {
+      text-decoration: none;
+      color: #0b2e4a;
+    } 
+    header nav .btn-sobrenos a:hover {
+      text-decoration: none;
+      color: #072033;
+    } 
 /* Container do agendamento */
   .agendamento-container {
       background: #fff;
