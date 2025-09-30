@@ -122,6 +122,15 @@ header nav button {
 .form-box .full {
   grid-column: span 2;
 }
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #fdfce9;
+  font-size: 14px;
+  color: #333;
+}
 
 /* Footer */
 footer {
