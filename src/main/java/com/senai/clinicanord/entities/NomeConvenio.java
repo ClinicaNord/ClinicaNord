@@ -23,8 +23,8 @@ public class NomeConvenio {
 			@Column(name = "nomeConv", nullable = false)
 			private String nomeConv;
 			
-			@OneToMany(mappedBy = "nomeConvenio")
 			
+			@OneToMany(mappedBy = "nomeConvenio")
 			private List<Convenio> convenios;
 			
 			//Construtores 

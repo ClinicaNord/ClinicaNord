@@ -1,0 +1,164 @@
+/* RESET: Garantir margens e padding zerados */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* BODY */
+body {
+  font-family: Arial, sans-serif;
+  background: #ccc;
+  color: #ccc;
+  display: flex;
+  flex-direction: column; /* Para organizar os elementos em coluna */
+  min-height: 100vh; /* Garante que o body ocupe a tela inteira */
+  margin: 0;
+}
+
+/* HEADER - Fixar no topo */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #30638e;
+  padding: 15px 30px;
+  color: white;
+  width: 100%;
+  position: fixed; /* Fixa o header no topo */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Para garantir que fique acima do conteúdo */
+  height: 80px;
+}
+
+/* LOGO DO HEADER */
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+header .logo img {
+  width: 50px;
+  height: auto;
+}
+
+/* MAIN - Ocupa o espaço restante e centraliza o conteúdo */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; /* Para que o main ocupe o restante da tela */
+  min-height: calc(100vh - 100px); /* Ajusta a altura para não sobrepor o header */
+  width: 100%;
+  padding: 20px;
+  margin: 40px 0 0 0; /* Espaço para o header fixo */
+  box-sizing: border-box;
+  padding-top: 50px; /* Dá um espaço para o header fixo */
+}
+
+/* CONTAINER (conteúdo centralizado) */
+.container {
+  background: #efefef;
+  padding: 0px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 350px;
+  height: 350px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* RESTANTE DO CÓDIGO (sem modificações) */
+
+/* CHECKMARK - Apenas animação e estilo */
+.checkmark {
+  font-size: 80px;
+  color: #0b2e4a;
+  animation: pop 0.5s ease;
+}
+
+h1 {
+  margin: 20px 0 10px;
+  font-size: 28px;
+  color: #000;
+}
+
+p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+button {
+  background: #1e88e5;
+  border: none;
+  padding: 12px 25px;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0b0491;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* LOGO */
+.logo img {
+  width: 100px;
+  margin-bottom: 20px;
+}
+/* ESPAÇO PARA O FOOTER */
+.espaco {
+  height: 10px; /* Ajuste conforme a altura do seu footer */
+}
+
+/* FOOTER - Fixa no final da tela */
+footer {
+  background: #0f304c;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 20px;
+  width: 100%;
+  position: absolute;
+  bottom: 0; /* Fixa o rodapé no fundo */
+  left: 0;
+    box-sizing: border-box;
+    height: 90px;
+}
+
+/* LINKS DO FOOTER */
+footer a {
+  color: #4db3ff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: none;
+}
+
+.fa-github {
+  margin-right: 8px;
+  color: #ccc;
+}
