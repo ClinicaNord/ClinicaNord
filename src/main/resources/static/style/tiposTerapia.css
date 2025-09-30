@@ -1,0 +1,163 @@
+*{
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    font-family: 'Poppins', sans-serif;
+    }
+
+body {
+      background-color: #f5f8fc;
+    }
+.fundo {
+    background-image: url('../img/selecione_um_tipo_de_terapia.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    }
+    /* Cabeçalho */
+    header {
+      background-color: #1e4f7b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      color: white;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      width: 50px;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    nav button {
+      margin-left: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #fefee9;
+      color: #1e4f7b;
+    }
+
+    /* Conteúdo principal */
+    main {
+      text-align: center;
+      padding: 40px 20px;
+        min-height: calc(100vh - 140px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #0d2236; /* não mexa aqui */
+        width: 80%;
+        margin: 20px auto;
+        border-radius: 16px;
+    }
+
+    main h2 {
+      font-size: 28px;
+      margin-bottom: 40px;
+      color: #fefee9;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .card {
+      border-radius: 16px;
+      box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+      width: 250px;
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      height: 150px;
+      object-fit: cover;
+    }
+        .card.selected {
+      background-color: #1e4f7b;
+    }
+
+    .card h3 {
+      margin-top: 15px;
+      background-color: #fefee9;
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #1e2f3d;
+    }
+
+    button.selecionar {
+      margin-top: 30px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      background-color: #1e4f7b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button.selecionar:hover {
+      background-color: #163d5c;
+    }
+
+    /* Rodapé */
+    footer {
+      background-color: #0d2236;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #4db8ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: none;
+    }
+    
+    .fa-github {
+      font-size: 20px;
+      margin-right: 8px;
+        color: #ccc;
+    }
