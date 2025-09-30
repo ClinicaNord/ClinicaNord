@@ -3,16 +3,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Fonte geral e fundo da página toda */
 html, body {
   height: 100%; 
-  font-family: Arial, sans-serif;
   color: #fff; 
   background: url("img/letras.png") center center / cover no-repeat fixed; 
   padding: 0; 
   background-image: url("../img/letras.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Wrapper para o conteúdo interno */
@@ -45,7 +48,8 @@ header {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-   object-fit: cover;
+  object-fit: cover;
+
 }
 
 .logo h1 {
@@ -153,7 +157,21 @@ nav a:hover {
   border: 2px solid #dceeff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
+footer {
+      background: #0f304c;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 20px;
+      width: 100%;
+    }
 
+    footer a {
+      color: #4db3ff;
+      text-decoration: none;
+      margin: 0 5px;
+    }
 
 
 /* Responsividade: tablets */
