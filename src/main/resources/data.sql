@@ -7,6 +7,6 @@ INSERT IGNORE INTO tb_servicos (id_servicos, nome_servicos) VALUES
 (2, 'FonoTerapia'),
 (3, 'Reabilitação Auditiva');
 
-INSERT IGNORE INTO tb_nomeConvenio (idNomeConv, nome) VALUES
+INSERT IGNORE INTO tb_nomeConvenio (id_nome_conv, nome_conv) VALUES
 (1, 'Funcerv'),
 (2, 'Apas');
