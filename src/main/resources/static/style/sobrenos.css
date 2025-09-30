@@ -3,16 +3,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Fonte geral e fundo da página toda */
 html, body {
   height: 100%; 
-  font-family: Arial, sans-serif;
   color: #fff; 
   background: url("img/letras.png") center center / cover no-repeat fixed; 
   padding: 0; 
   background-image: url("../img/letras.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Wrapper para o conteúdo interno */
@@ -45,7 +48,8 @@ header {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-   object-fit: cover;
+  object-fit: cover;
+
 }
 
 .logo h1 {
@@ -153,7 +157,21 @@ nav a:hover {
   border: 2px solid #dceeff;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
+footer {
+      background: #0f304c;
+      padding: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 20px;
+      width: 100%;
+    }
 
+    footer a {
+      color: #4db3ff;
+      text-decoration: none;
+      margin: 0 5px;
+    }
 
 
 /* Responsividade: tablets */
@@ -234,3 +252,81 @@ nav a:hover {
     font-size: 12px;
   }
 }
+  .devs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 5px;
+  }
+  .devs a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .devs i {
+    color: #ccc;
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  .devs a:hover {
+    text-decoration: underline;
+  }
+  .devs i:hover {
+    color: #fff;
+  }
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      height: 150px;
+      object-fit: cover;
+    }
+        .card.selected {
+      background-color: #1e4f7b;
+    }
+    .card h3 {
+      margin-top: 15px;
+      background-color: #fefee9;
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #1e2f3d;
+    }
+    button.selecionar {
+      margin-top: 30px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      background-color: #1e4f7b;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button.selecionar:hover {
+      background-color: #163d5c;
+    }
+    /* Rodapé */
+    footer {
+      background-color: #0d2236;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+    }
+    footer a {
+      color: #4db8ff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: none;
+    }
+    .fa-github {
+      font-size: 20px;
+      margin-right: 8px;
+        color: #ccc;
+    }
+    
