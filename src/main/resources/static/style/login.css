@@ -47,17 +47,15 @@
       transition: 0.3s;
       
     }
-
-    header .btn-inicio:hover {
+    header  .btn-inicio:hover {
       background: #092549;
       color: #fff;
     }
-    header .btn-inicio a {
+     header .btn-inicio a {
       text-decoration: none;
-      color: #000;
+      color: #092549;
       font-weight: bold;
-    }
-
+     }
     /* Formulário */
     .login-container {
       display: flex;
@@ -92,7 +90,8 @@
     }
 
     .login-box button {
-      background: #f9f9e7;
+      background: #072033;
+      color: #f9f9e7;
       border: none;
       padding: 12px;
       border-radius: 30px;
@@ -103,7 +102,7 @@
     }
 
     .login-box button:hover {
-      background: #092549;
+      background: #14476d;
       color: #fff;
     }
 
