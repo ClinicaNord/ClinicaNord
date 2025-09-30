@@ -1,10 +1,17 @@
 package com.senai.clinicanord.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Table(name = "tb_convenio")
@@ -25,6 +32,14 @@ public class Convenio {
 		@Column(name = "validade", nullable = false)
 		private String validade;
 		
+		@OneToMany(mappedBy = "convenio")
+		
+		private List<Usuario> usuarios;
+		
+		@ManyToOne
+		@JsonIgnoreProperties
+		@JoinColumn(name = "nomeconvenio")
+		private NomeConvenio nomeConvenio;
 		//CONSTRUTORES
 		public Convenio () {
 			
@@ -61,6 +76,19 @@ public class Convenio {
 		public void setValidade(String validade) {
 			this.validade = validade;
 		}
+		public List<Usuario> getUsuarios() {
+			return usuarios;
+		}
+		public void setUsuarios(List<Usuario> usuarios) {
+			this.usuarios = usuarios;
+		}
+		public NomeConvenio getNomeConvenio() {
+			return nomeConvenio;
+		}
+		public void setNomeConvenio(NomeConvenio nomeConvenio) {
+			this.nomeConvenio = nomeConvenio;
+		}
+		
 		
 		
 
