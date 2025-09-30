@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Endereço - Clínica Nord</title>
+  <script src="./script/cadastroEndereco.js"></script>
   <link rel="stylesheet" href="./style/cadastro.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -25,7 +26,7 @@
     <form class="form-box" id="formEndereco">
       <div>
         <label for="cep">CEP:</label>
-        <input type="text" id="cep" name="cep" required>
+        <input type="text" id="cep" name="cep"  onblur="buscarCep()" maxlength="8">
       </div>
       <div>
         <label for="numero">Número:</label>
