@@ -6,6 +6,7 @@
     <title>Tela de Login</title>
     <link rel="stylesheet" href="./style/login.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="./script/login.js"></script>
 </head>
 <body>
 <!-- Cabeçalho -->
@@ -40,20 +41,6 @@
     <a href="https://github.com/TuannyThomazelli"><i class="fa fa-github"></i> Tuanny Thomazelli</a>
     </div>
     </footer>
-
-<!-- Script -->
-    <script>
-    function login() {
-        const email = document.getElementById("email").value;
-        const senha = document.getElementById("senha").value;
-
-        if (email === "" || senha === "") {
-        alert("Preencha todos os campos!");
-        } else {
-        alert(`Login realizado com sucesso! Email: ${email}`);
-    }
-    }
-    </script>
 </body>
 </html>
 
