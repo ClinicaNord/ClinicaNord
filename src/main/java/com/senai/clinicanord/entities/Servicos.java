@@ -1,10 +1,13 @@
 package com.senai.clinicanord.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +20,9 @@ public class Servicos {
 	
 	@Column(name = "nomeServicos", nullable = false, length = 100)
 	private String servicos;
+	
+	@OneToMany(mappedBy = "servicos")
+	private List<Agendamento> agendamento;
 	
 	//construtores
 	public Servicos() {
@@ -43,4 +49,13 @@ public class Servicos {
 	public void setServicos(String servicos) {
 		this.servicos = servicos;
 	}
+
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+	
 }
