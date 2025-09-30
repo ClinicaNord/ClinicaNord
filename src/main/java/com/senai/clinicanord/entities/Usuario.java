@@ -50,6 +50,7 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos;
+	
 	@ManyToOne
 	@JsonIgnoreProperties
 	@JoinColumn(name = "convenio")
