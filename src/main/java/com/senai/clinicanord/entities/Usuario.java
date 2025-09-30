@@ -1,8 +1,11 @@
 package com.senai.clinicanord.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,9 +44,14 @@ public class Usuario {
 	private LocalDate data_nascimento;
 	
 	@ManyToOne
-	@JoinColumn(name="ENDERECO_id_endereco")
-	private Endereco endereco;
+	@JsonIgnoreProperties
+	@JoinColumn(name = "tipoUsuario")
+	private TipoUsuario tipoUsuario;
 	
+	@OneToMany(mappedBy = "usuario")
+	
+	private List<Endereco> enderecos;
+
 
 	// Construtores
 	public Usuario() {
@@ -58,7 +67,7 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.data_nascimento = data_nascimento;
-		this.endereco = endereco;
+		
 	}
 
 	public Long getIdUsuario() {
@@ -116,13 +125,22 @@ public class Usuario {
 	public void setData_nascimento(LocalDate data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
-
-	public Endereco getEndereco() {
-		return endereco;
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+	
+	public List<Endereco> getEndereco() {
+		return enderecos;
+	}
+	public void setEndereco(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+	
+
+
 
 }

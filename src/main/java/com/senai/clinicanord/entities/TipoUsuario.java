@@ -1,10 +1,13 @@
 package com.senai.clinicanord.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,11 @@ public class TipoUsuario {
 		
 		 @Column(name = "nome", nullable = false)
 		 private String nome;
+		 
+		 // @JsonManagedReference
+		    @OneToMany(mappedBy = "idUsuario") 
+		    private List<Usuario> usuarios;
+		 
 		 
 		 //Construtores
 		 
@@ -43,6 +51,11 @@ public class TipoUsuario {
 		public void setNome(String nome) {
 			this.nome = nome;
 		}
-		 
+		public List<Usuario> getUsuarios() {
+			return usuarios;
+		}
+		public void setUsuarios(List<Usuario> usuarios) {
+			this.usuarios = usuarios;
+		}
 
 }
