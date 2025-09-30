@@ -175,6 +175,16 @@ a {
   footer {
     font-size: 13px;
   }
+  .fa-github {
+    font-size: 15px;
+  }
+  a {
+    font-size: 13px;
+  }
+  .btn-inicio a {
+    font-size: 13px;
+  }
+  
 }
 
 /* Celulares */
@@ -219,5 +229,17 @@ a {
     flex-direction: row;
     gap: 8px;
     width: 100%;
+  }
+  footer {
+    font-size: 12px;
+  }
+  .fa-github {
+    font-size: 12px;
+  }
+  a {
+    font-size: 12px;
+  }
+  .btn-inicio a {
+    font-size: 12px;
   }
 }
