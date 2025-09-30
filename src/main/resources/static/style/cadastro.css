@@ -41,21 +41,48 @@ header h1 {
   font-weight: bold;
 }
 
-header .btn-inicio {
-  background: #fdfce9;
-  color: #092549;
+/* Botão */
+header nav button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      margin: 2px;
+      border: none;
+      border-radius: 20px;
+      background: #fdfce9;
+      color: #0b2e4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header nav button:hover {
+      background: #0f304c;
+      color: #fff;
+    }
+    header nav .btn-inicio a {
+      text-decoration: none;
+      color: #0b2e4a;
+    } 
+.btn-submit {
+  grid-column: span 2;
+  background: #072033;
+  color: #fff;
   border: none;
   border-radius: 30px;
-  padding: 10px 25px;
+  padding: 12px;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-header .btn-inicio:hover {
-  background: #092549;
-  color: #fdfce9;
-}
+.btn-submit:hover {
+  background: #14476d;
+} 
+.btn-submit a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold
+  }
 
 /* Formulário */
 .container {
@@ -96,22 +123,6 @@ header .btn-inicio:hover {
   grid-column: span 2;
 }
 
-.btn-submit {
-  grid-column: span 2;
-  background: #072033;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn-submit:hover {
-  background: #14476d;
-}
-
 /* Footer */
 footer {
   background: #092549;
@@ -141,12 +152,6 @@ a {
   text-decoration: none;
   color: #ccc;
 }
-.btn-inicio a {
-  text-decoration: none;
-  color: #000;
-}
-
-
 
 /* Responsividade */
 

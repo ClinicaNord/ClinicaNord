@@ -46,30 +46,31 @@ header .logo img {
 }
 
 /* Botão */
-header .btn-inicio, header .btn-agendamento {
-  background: #fdfce9;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 25px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
- }
- header .btns {
-  display: flex;
-  gap: 8px; /* controla a distância entre os dois */
-  align-items: center;
-}
+header nav button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      margin: 4px;
+      border: none;
+      border-radius: 20px;
+      background: #fdfce9;
+      color: #0b2e4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-a{
-    text-decoration: none;
-    color: #0f304c;
-}
-header .btn-inicio:hover, header .btn-agendamento:hover {
-  background: #0f304c;
-  color: #f0f0f0;
-}
+    header nav button:hover {
+      background: #0f304c;
+      color: #fff;
+    }
+    header nav .btn-inicio a {
+      text-decoration: none;
+      color: #0b2e4a;
+    } 
+    header nav .btn-sobrenos a:hover {
+      text-decoration: none;
+      color: #072033;
+    } 
 
 /* Responsividade */
 @media (max-width: 768px) {

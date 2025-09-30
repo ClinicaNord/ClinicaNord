@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Realizado</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b2e4a;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      color: #333;
+      text-align: center;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      animation: fadeIn 1s ease;
+      max-width: 400px;
+    }
+
+    .checkmark {
+      font-size: 80px;
+      color: #4caf50;
+      animation: pop 0.5s ease;
+    }
+
+    h1 {
+      margin: 20px 0 10px;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #1e88e5;
+      border: none;
+      padding: 12px 25px;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #0b0491;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .logo img {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      font-size: 14px;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    footer div {
+      display: inline-block;
+      width: 1px;
+      height: 14px;
+      background: #fff;
+      margin: 0 5px;
+    }
+    footer i {
+      margin-right: 5px;
+    }
+    footer p {
+      margin: 0;
+    }
+    footer .fa {
+      font-size: 14px;
+    }
+    footer .fa:hover {
+      color: #ddd;
+    }
+    footer .fa:active {
+      color: #bbb;
+    }
+    footer .fa:visited {
+      color: #fff;
+    }
+    footer .fa:focus {
+      outline: none;
+    }
+    footer .fa:disabled {
+      color: #999;
+      cursor: not-allowed;
+    }
+    footer .fa:checked {
+      color: #4caf50;
+    }
+    footer .fa:indeterminate {
+      color: #ff9800;
+    }
+    footer .fa:required {
+      color: #f44336;
+    }
+    footer .fa:optional {
+      color: #2196f3;
+    }
+    footer .fa:valid {
+      color: #4caf50;
+    }
+    footer .fa:invalid {
+      color: #f44336;
+    }
+    footer .fa:in-range {
+      color: #2196f3;
+    }
+    footer .fa:out-of-range {
+      color: #f44336;
+    }
+    footer .fa:read-only {
+      color: #999;
+    }
+    footer .fa:read-write {
+      color: #2196f3;
+    }
+    footer .fa:placeholder-shown {
+      color: #999;
+    }
+    footer .fa:default {
+      color: #2196f3;
+    }
+    footer .fa:checked + a {
+      font-weight: bold;
+    }
+    footer .fa:focus + a {
+      text-decoration: underline;
+    }
+    footer .fa:hover + a {
+      text-decoration: underline;
+    }
+    footer .fa:active + a {
+      text-decoration: underline;
+    }
+    footer .fa:visited + a {
+      color: #fff;
+    }
+    footer .fa:disabled + a {
+      color: #999;
+      cursor: not-allowed;
+    }
+    footer .fa:required + a {
+      color: #f44336;
+    }
+    footer .fa:optional + a {
+      color: #2196f3;
+    }
+    footer .fa:valid + a {
+      color: #4caf50;
+    }
+    footer .fa:invalid + a {
+      color: #f44336;
+    }
+    footer .fa:in-range + a {
+      color: #2196f3;
+    }
+    footer .fa:out-of-range + a {
+      color: #f44336;
+    }
+    footer .fa:read-only + a {
+      color: #999;
+    }
+    footer .fa:read-write + a {
+      color: #2196f3;
+    }
+    footer .fa:placeholder-shown + a {
+      color: #999;
+    }
+    footer .fa:default + a {
+      color: #2196f3;
+    }
+    footer .fa + a:hover {
+      text-decoration: underline;
+    }
+    footer .fa + a:active {
+      text-decoration: underline;
+    }
+    footer .fa + a:visited {
+      color: #fff;
+    }
+    footer .fa + a:disabled {
+      color: #999;
+      cursor: not-allowed;
+    }
+    footer .fa + a:required {
+      color: #f44336;
+    }
+    footer .fa + a:optional {
+      color: #2196f3;
+    }
+    footer .fa + a:valid {
+      color: #4caf50;
+    }
+    footer .fa + a:invalid {
+      color: #f44336;
+    }
+    footer .fa + a:in-range {
+      color: #2196f3;
+    }
+    footer .fa + a:out-of-range {
+      color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+        <img src="./img/logo.png" alt="">
+    </div>
+    <div class="checkmark">✔</div>
+    <h1>Cadastro concluído!</h1>
+    <p>Seu cadastro foi realizado com sucesso.</p>
+    <button onclick="voltar()">Ir para Login</button>
+  </div>
+
+  <footer>
+    <p>Feito por 
+        <div></div>
+      <i class="fa fa-github"></i><a href="#">Gustavo Leme</a>,
+       <i class="fa fa-github"></i><a href="#">Isabele Agapito</a>,
+       <i class="fa fa-github"></i><a href="#">Júlia França</a>,
+       <i class="fa fa-github"></i><a href="#">Natália Dias</a>,
+       <i class="fa fa-github"></i><a href="#">Tuanny Thomazelli</a>
+    </p>
+  </footer>
+  <script>
+    function voltar() {
+      // Redireciona para a página de login (ajuste o link conforme sua necessidade)
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

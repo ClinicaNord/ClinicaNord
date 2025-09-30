@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("img/fundo.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #265b8a;
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 70px;
+  height: 100px;
+}
+
+.navbar button {
+  background: #fdfce9;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Card central */
+.card {
+  background: #2f6fa5;
+  color: white;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;   
+  margin: 106px auto;
+  display: flex;       
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  text-align: left;
+}
+
+.profile-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column; 
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.buttons button {
+  background: #0d2c47;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 15px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Rodapé */
+footer {
+  background: #0d2c47;
+  color: white;
+  text-align: center;
+  padding: 17px;
+  font-size: 14px;
+}
+
+footer a {
+  color: #a7d2ff;
+  text-decoration: none;
+  margin: 0 3px;
+}
+
+.icon {
+  width: 18px;
+  vertical-align: middle;
+  margin: 0 4px;
+}

@@ -57,20 +57,36 @@ header {
   font-weight: bold;
 }
 
-nav a {
-  background-color: white;
-  color: #1c4c75;
-  text-decoration: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  border-radius: 20px;
-  font-weight: bold;
-  transition: 0.3s;
-}
+/* Botão */
+header nav button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      margin: 2px;
+      border: none;
+      border-radius: 20px;
+      background: #fdfce9;
+      color: #0b2e4a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-nav a:hover {
-  background-color: #dceeff;
-}
+    header nav button:hover {
+      background: #0f304c;
+      color: #fff;
+    }
+    header nav .btn-inicio a {
+      text-decoration: none;
+      color: #0b2e4a;
+    } 
+    header nav .btn-sobrenos a:hover {
+      text-decoration: none;
+      color: #072033;
+    } 
+       header nav .btn-cadastroCliente a:hover {
+      text-decoration: none;
+      color: #072033;
+    } 
 
 /* Sobre nós*/
 .sobre-nos {
@@ -126,7 +142,6 @@ nav a:hover {
   list-style-type: disc;
   padding-left: 20px;
 }
-
 
 /* Retangulo atrás da imagem */
 

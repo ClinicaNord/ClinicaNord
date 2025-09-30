@@ -46,17 +46,34 @@ body {
       font-size: 22px;
       margin: 0;
     }
+    /* Botão */
 
-    nav button {
-      margin-left: 15px;
+  header nav button {
+      margin-left: 10px;
       padding: 10px 20px;
+      margin: 4px;
       border: none;
-      border-radius: 12px;
-      cursor: pointer;
+      border-radius: 20px;
+      background: #fdfce9;
+      color: #0b2e4a;
       font-weight: bold;
-      background-color: #fefee9;
-      color: #1e4f7b;
+      cursor: pointer;
+      transition: 0.3s;
     }
+
+    header nav button:hover {
+      background: #0f304c;
+      color: #fff;
+    }
+    header nav .btn-inicio a {
+      text-decoration: none;
+      color: #0b2e4a;
+    } 
+    header nav .btn-sobrenos a:hover {
+      text-decoration: none;
+      color: #072033;
+    } 
+
 
     /* Conteúdo principal */
     main {
