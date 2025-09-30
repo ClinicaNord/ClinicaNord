@@ -16,7 +16,7 @@ import com.senai.clinicanord.services.TipoUsuarioService;
 
 
 @RestController
-@RequestMapping("/agendamento")
+@RequestMapping("/tipousuario")
 public class TipoUsuarioController {
 	  @Autowired
 	    private TipoUsuarioService tipoUsuarioService;
