@@ -49,13 +49,13 @@ public class Usuario {
 	private TipoUsuario tipoUsuario;
 	
 	@OneToMany(mappedBy = "usuario")
-	
+	private List<Endereco> enderecos;
 	@ManyToOne
 	@JsonIgnoreProperties
 	@JoinColumn(name = "convenio")
 	private Convenio convenio;
 	
-	private List<Endereco> enderecos;
+	
 
 
 	// Construtores

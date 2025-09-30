@@ -1,10 +1,14 @@
 package com.senai.clinicanord.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +19,11 @@ public class Agendamento {
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 @Column(name = "idAgendamento", nullable = false, unique = true)
 	 private Long idAgendamento;
+	
+	@ManyToOne
+	@JsonIgnoreProperties
+	@JoinColumn(name = "sevicos")
+	private Servicos servicos;
 	 
 	 // CONSTRUTORES
 	 public Agendamento() {
@@ -30,6 +39,12 @@ public class Agendamento {
 	}
 	public void setIdAgendamento(Long idAgendamento) {
 		this.idAgendamento = idAgendamento;
+	}
+	public Servicos getServicos() {
+		return servicos;
+	}
+	public void setServicos(Servicos servicos) {
+		this.servicos = servicos;
 	}
 	 
 
