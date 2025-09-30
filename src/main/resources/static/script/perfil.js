@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!usuarioJson) {
     alert('Usuário não está logado! Redirecionando para o login...');
-    window.location.href = 'entrarcliente.html';  // redireciona para login se não tiver dados
+    window.location.href = 'login.html';  // redireciona para login se não tiver dados
     return;
   }
 
