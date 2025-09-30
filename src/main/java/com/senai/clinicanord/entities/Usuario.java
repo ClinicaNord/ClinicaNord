@@ -50,6 +50,11 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	
+	@ManyToOne
+	@JsonIgnoreProperties
+	@JoinColumn(name = "convenio")
+	private Convenio convenio;
+	
 	private List<Endereco> enderecos;
 
 
@@ -131,13 +136,23 @@ public class Usuario {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
-	public List<Endereco> getEndereco() {
+
+	public Convenio getConvenio() {
+		return convenio;
+	}
+
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
+	}
+
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
-	public void setEndereco(List<Endereco> enderecos) {
+
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+	
 
 	
 
