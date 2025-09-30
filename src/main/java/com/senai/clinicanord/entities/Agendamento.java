@@ -24,6 +24,11 @@ public class Agendamento {
 	@JsonIgnoreProperties
 	@JoinColumn(name = "sevicos")
 	private Servicos servicos;
+	
+	@ManyToOne
+	@JsonIgnoreProperties
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
 	 
 	 // CONSTRUTORES
 	 public Agendamento() {
@@ -46,6 +51,13 @@ public class Agendamento {
 	public void setServicos(Servicos servicos) {
 		this.servicos = servicos;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	 
 
 }

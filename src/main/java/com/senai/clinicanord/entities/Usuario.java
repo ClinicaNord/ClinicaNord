@@ -55,6 +55,8 @@ public class Usuario {
 	@JoinColumn(name = "convenio")
 	private Convenio convenio;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<Agendamento> agendamento;
 	
 
 
@@ -126,6 +128,7 @@ public class Usuario {
 	public LocalDate getData_nascimento() {
 		return data_nascimento;
 	}
+	
 
 	public void setData_nascimento(LocalDate data_nascimento) {
 		this.data_nascimento = data_nascimento;
@@ -151,6 +154,14 @@ public class Usuario {
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
 	}
 	
 
