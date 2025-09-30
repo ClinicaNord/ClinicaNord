@@ -38,7 +38,7 @@ public class Convenio {
 		
 		@ManyToOne
 		@JsonIgnoreProperties
-		@JoinColumn(name = "nomeconvenio")
+		@JoinColumn(name = "nomeConvenio")
 		private NomeConvenio nomeConvenio;
 		//CONSTRUTORES
 		public Convenio () {
