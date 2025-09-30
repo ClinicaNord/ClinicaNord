@@ -1,8 +1,11 @@
 package com.senai.clinicanord.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -40,9 +44,21 @@ public class Usuario {
 	private LocalDate data_nascimento;
 	
 	@ManyToOne
-	@JoinColumn(name="ENDERECO_id_endereco")
-	private Endereco endereco;
+	@JsonIgnoreProperties
+	@JoinColumn(name = "tipoUsuario")
+	private TipoUsuario tipoUsuario;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<Endereco> enderecos;
+	@ManyToOne
+	@JsonIgnoreProperties
+	@JoinColumn(name = "convenio")
+	private Convenio convenio;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Agendamento> agendamento;
+	
+
 
 	// Construtores
 	public Usuario() {
@@ -58,7 +74,7 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.data_nascimento = data_nascimento;
-		this.endereco = endereco;
+		
 	}
 
 	public Long getIdUsuario() {
@@ -112,17 +128,45 @@ public class Usuario {
 	public LocalDate getData_nascimento() {
 		return data_nascimento;
 	}
+	
 
 	public void setData_nascimento(LocalDate data_nascimento) {
 		this.data_nascimento = data_nascimento;
 	}
-
-	public Endereco getEndereco() {
-		return endereco;
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
+	}
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public Convenio getConvenio() {
+		return convenio;
 	}
+
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
+
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+	
+
+	
+
+
 
 }

@@ -1,10 +1,13 @@
 package com.senai.clinicanord.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,6 +22,10 @@ public class NomeConvenio {
 			
 			@Column(name = "nomeConv", nullable = false)
 			private String nomeConv;
+			
+			@OneToMany(mappedBy = "nomeconvenio")
+			
+			private List<Convenio> convenios;
 			
 			//Construtores 
 			public NomeConvenio() {
@@ -42,4 +49,11 @@ public class NomeConvenio {
 			public void setNomeConv(String nomeConv) {
 				this.nomeConv = nomeConv;
 			}
+			public List<Convenio> getConvenios() {
+				return convenios;
+			}
+			public void setConvenios(List<Convenio> convenios) {
+				this.convenios = convenios;
+			}
+			
 }

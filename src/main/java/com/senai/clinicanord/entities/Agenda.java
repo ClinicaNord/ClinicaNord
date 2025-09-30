@@ -1,12 +1,14 @@
 package com.senai.clinicanord.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -29,6 +31,9 @@ public class Agenda {
 		
 		@Column(name = "diponibilidade", nullable = false)
 		private Boolean diponibilidade;
+		
+		@OneToMany(mappedBy = "agenda")
+		private List<Agendamento> agendamento;
 		
 		// CONSTRUTORES
 		
@@ -66,6 +71,12 @@ public class Agenda {
 		}
 		public void setDiponibilidade(Boolean diponibilidade) {
 			this.diponibilidade = diponibilidade;
+		}
+		public List<Agendamento> getAgendamento() {
+			return agendamento;
+		}
+		public void setAgendamento(List<Agendamento> agendamento) {
+			this.agendamento = agendamento;
 		}
 		
 		

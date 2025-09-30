@@ -16,7 +16,7 @@
 
     /* Header */
     header {
-      background: #2562a4;
+      background: #296198;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -49,8 +49,8 @@
     }
 
     header .btn-inicio:hover {
-      background: #ddd;
-      
+      background: #092549;
+      color: #fff;
     }
     header .btn-inicio a {
       text-decoration: none;
@@ -67,7 +67,7 @@
     }
 
     .login-box {
-      background: #2562a4;
+      background: #296198;
       padding: 40px 30px;
       border-radius: 20px;
       display: flex;
@@ -103,12 +103,13 @@
     }
 
     .login-box button:hover {
-      background: #ddd;
+      background: #092549;
+      color: #fff;
     }
 
     /* Footer */
     footer {
-      background: #0a2a47;
+      background: #092549;
       color: #fff;
       display: flex;
       align-items: center;
