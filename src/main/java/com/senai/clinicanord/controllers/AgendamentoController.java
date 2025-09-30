@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.senai.clinicanord.entities.Agendamento;
 import com.senai.clinicanord.services.AgendamentoService;
 
-
-
 @RestController
 @RequestMapping("/agendamento")
 public class AgendamentoController {
