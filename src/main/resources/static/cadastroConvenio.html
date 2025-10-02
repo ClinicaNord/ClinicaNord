@@ -28,13 +28,17 @@
         <!-- Campo 1 -->
         <div class="full">
           <label for="numero">Número da carteirinha</label>
-          <input type="number" id="numero" name="numero" placeholder="Digite o número da carteirinha" required>
+          <input type="number" id="numero" name="numero" placeholder="Digite o número da carteirinha" min="0" required>
         </div>
 
         <!-- Campo 2 -->
         <div class="full">
           <label for="convenio">Convênio</label>
-          <input type="text" id="convenio" name="convenio" placeholder="Digite o nome do convênio" required>
+          <select name="convenio" id="convenio" class="select">
+            <option value="" disabled selected>Selecione o convênio</option>
+            <option value="funcerv">Funcerv</option>
+            <option value="apas">Apas</option>
+          </select>
         </div>
 
         <!-- Campo 3 -->

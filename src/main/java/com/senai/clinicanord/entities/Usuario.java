@@ -67,7 +67,7 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nomeUsuario, String cpf, String telefone, String email, String senha,
-			LocalDate data_nascimento, Endereco endereco) {
+			LocalDate data_nascimento) {
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.cpf = cpf;
@@ -75,7 +75,6 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.data_nascimento = data_nascimento;
-		
 	}
 
 	public Long getIdUsuario() {
