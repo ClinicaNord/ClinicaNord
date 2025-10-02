@@ -40,7 +40,7 @@ public class UsuarioController {
 		return usuarioService.getUsuarioById(id);
 	}
 
-	@PutMapping
+	@PutMapping("/cadastro")
 	public Usuario editUsuario(@RequestBody Usuario usuario) {
 		return usuarioService.saveUsuario(usuario);
 	}

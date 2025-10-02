@@ -11,42 +11,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senai.clinicanord.entities.Convenio;
-import com.senai.clinicanord.services.ConvenioService;
+import com.senai.clinicanord.entities.Carteirinha;
+import com.senai.clinicanord.services.CarteirinhaService;
 
 
 @RestController
 @RequestMapping("/convenio")
-public class ConvenioController {
+public class CarteirinhaController {
 
 	//ATRIBUTOS
     @Autowired
-    private ConvenioService convenioService;
+    private CarteirinhaService carteirinhaService;
 
     //MÉTODOS
     //método para postar/salvar um novo convenio
     @PostMapping
-    public Convenio createConvenio(@RequestBody Convenio convenio) {
-        return convenioService.saveConvenio(convenio);
+    public Carteirinha createCarteirinha(@RequestBody Carteirinha carteirinha) {
+        return carteirinhaService.saveCarteirinha(carteirinha);
     }
 
     //método para listar todos os convenios
     @GetMapping
-    public List<Convenio> getAllConvenio() {
-        return convenioService.getAllConvenio();
+    public List<Carteirinha> getAllCarteirinha() {
+        return carteirinhaService.getAllCarteirinha();
     }
 
     //método para buscar o convenio pelo id
     @GetMapping("/{id}")
-    public Convenio getConvenio(@PathVariable Long idConvenio) {
-        return convenioService.getConvenioById(idConvenio);
+    public Carteirinha getCarteirinha(@PathVariable Long idCarteirinha) {
+        return carteirinhaService.getCarteirinhaById(idCarteirinha);
     }
 
 
     //método para deletar o convenio pelo id
     @DeleteMapping("/{id}")
-    public void deleteConvenio (@PathVariable Long idConvenio) {
-        convenioService.deleteConvenio(idConvenio);
+    public void deleteCarteirinha (@PathVariable Long idCarteirinha) {
+        carteirinhaService.deleteCarteirinha(idCarteirinha);
     
 }
 }

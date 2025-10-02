@@ -54,8 +54,8 @@ public class Usuario {
 	
 	@ManyToOne
 	@JsonIgnoreProperties
-	@JoinColumn(name = "convenio")
-	private Convenio convenio;
+	@JoinColumn(name = "carteirinha")
+	private Carteirinha carteirinha;
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Agendamento> agendamento;
@@ -68,7 +68,7 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nomeUsuario, String cpf, String telefone, String email, String senha,
-			LocalDate dataNascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Convenio convenio, List<Agendamento> agendamento) {
+			LocalDate dataNascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Carteirinha carteirinha, List<Agendamento> agendamento) {
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.cpf = cpf;
@@ -78,7 +78,7 @@ public class Usuario {
 		this.dataNascimento = dataNascimento;
 		this.tipoUsuario = tipoUsuario;
 		this.enderecos = endereco;
-		this.convenio = convenio;
+		this.carteirinha = carteirinha;
 		this.agendamento = agendamento;
 		
 	}
@@ -146,12 +146,12 @@ public class Usuario {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public Convenio getConvenio() {
-		return convenio;
+	public Carteirinha getCarteirinha() {
+		return carteirinha;
 	}
 
-	public void setConvenio(Convenio convenio) {
-		this.convenio = convenio;
+	public void setCarteirinha(Carteirinha carteirinha) {
+		this.carteirinha = carteirinha;
 	}
 
 	public List<Endereco> getEndereco() {
