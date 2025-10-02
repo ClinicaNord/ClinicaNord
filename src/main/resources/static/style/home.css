@@ -234,3 +234,118 @@ header .inicio {
       text-decoration: none;
       margin: 0 5px;
     }
+    /* Responsividade */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header nav {
+        margin-top: 10px;
+      }
+      header h1 {
+        font-size: 20px;
+      }
+      .btn-agendar {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      .hero img {
+        height: 300px;
+      }
+      .hero button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      .hero{
+        height: 300px;
+        overflow: hidden;
+      }
+      .hero button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .contato-info {
+        flex-direction: column;
+        align-items: center;
+      }
+      .info {
+        text-align: center;
+      }
+      .card {
+        width: 100%;
+        max-width: 400px;
+      }
+
+    }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 20px;
+      }
+      .btn-agendar {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      .hero{
+        height: 250px;
+      }      
+      .hero img {
+        height: 250px;
+      }
+      .hero button {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+      .btn-agendar {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+      .servicos h2 {
+        font-size: 24px;
+      }
+      .card {
+        padding: 15px;
+        max-width: 300px;
+      }
+      .card h3 {
+        font-size: 18px;
+      }
+      .contato h2 {
+        font-size: 20px;
+      }
+      iframe {
+        height: 200px;
+      }
+    }
+    @media (max-width: 320px) {
+      header h1 {
+        font-size: 18px;
+      }
+
+      .hero button {
+        padding: 6px 12px;
+        font-size: 10px;
+      }
+      .btn-agendar {
+        padding: 6px 12px;
+        font-size: 10px;
+      }
+      .servicos h2 {
+        font-size: 20px;
+      }
+      .card h3 {
+        font-size: 16px;
+      }
+      .contato h2 {
+        font-size: 18px;
+      }
+      iframe {
+        height: 150px;
+      }
+
+    }
