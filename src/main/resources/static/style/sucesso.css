@@ -8,12 +8,12 @@
 
 /* BODY */
 body {
-  font-family: Arial, sans-serif;
+  height: 100vh;
   background: #ccc;
   color: #ccc;
   display: flex;
   flex-direction: column; /* Para organizar os elementos em coluna */
-  min-height: 100vh; /* Garante que o body ocupe a tela inteira */
+  min-height: 100vh; 
   margin: 0;
 }
 
@@ -26,7 +26,6 @@ header {
   padding: 15px 30px;
   color: white;
   width: 100%;
-  position: fixed; /* Fixa o header no topo */
   top: 0;
   left: 0;
   z-index: 1000; /* Para garantir que fique acima do conteúdo */
@@ -68,9 +67,11 @@ main {
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   text-align: center;
+  align-items: center;
   width: 350px;
-  height: 350px;
+  height: 400px;
   animation: fadeIn 0.5s ease;
+  margin-top: 0px;
 }
 
 /* Animações */
@@ -83,9 +84,10 @@ main {
 
 /* CHECKMARK - Apenas animação e estilo */
 .checkmark {
-  font-size: 80px;
+  font-size: 55px;
   color: #0b2e4a;
   animation: pop 0.5s ease;
+  margin-bottom: 0px;
 }
 
 h1 {
@@ -96,12 +98,12 @@ h1 {
 
 p {
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   color: #000;
 }
 
 button {
-  background: #1e88e5;
+  background: #30638e;
   border: none;
   padding: 12px 25px;
   color: #fff;
@@ -112,7 +114,7 @@ button {
 }
 
 button:hover {
-  background: #0b0491;
+  background: #0f304c;
 }
 
 @keyframes pop {
@@ -123,12 +125,12 @@ button:hover {
 
 /* LOGO */
 .logo img {
-  width: 100px;
+  width: 75px;
   margin-bottom: 20px;
 }
 /* ESPAÇO PARA O FOOTER */
 .espaco {
-  height: 10px; /* Ajuste conforme a altura do seu footer */
+  height: 70px; /* Ajuste conforme a altura do seu footer */
 }
 
 /* FOOTER - Fixa no final da tela */
@@ -136,29 +138,61 @@ footer {
   background: #0f304c;
   padding: 15px;
   text-align: center;
-  font-size: 14px;
   color: #ccc;
-  margin-top: 20px;
+  font-size: 14px;
   width: 100%;
-  position: absolute;
-  bottom: 0; /* Fixa o rodapé no fundo */
+  box-sizing: border-box;
+  bottom: 0;
   left: 0;
-    box-sizing: border-box;
-    height: 90px;
 }
 
-/* LINKS DO FOOTER */
+footer p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 footer a {
   color: #4db3ff;
   text-decoration: none;
-  margin: 0 5px;
 }
 
 footer a:hover {
-  text-decoration: none;
+  color: #4db3ff;
+  text-decoration: underline;
 }
 
 .fa-github {
-  margin-right: 8px;
   color: #ccc;
+  font-size: 1.2em;
 }
+
+.fa-github:hover {
+  color: #4db3ff;
+}
+
+/* Responsividade: itens em coluna em telas menores */
+@media (max-width: 600px) {
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  footer{
+    position: relative;
+     }
+}
+
+
