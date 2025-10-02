@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,16 +40,17 @@ public class Usuario {
 	@Column(name = "senha", nullable = false, length = 50)
 	private String senha;
 	
-	@Column(name = "data_nascimento", unique = false)
-	private LocalDate data_nascimento;
+	@Column(name = "dataNascimento", unique = false)
+	private LocalDate dataNascimento;
 	
 	@ManyToOne
 	@JsonIgnoreProperties
 	@JoinColumn(name = "tipoUsuario")
 	private TipoUsuario tipoUsuario;
 	
-	@OneToMany(mappedBy = "endereco")
-	private List<Endereco> endereco;
+	@OneToMany(mappedBy = "usuario")
+	@JsonManagedReference
+	private List<Endereco> enderecos;
 	
 	@ManyToOne
 	@JsonIgnoreProperties
@@ -66,16 +68,16 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nomeUsuario, String cpf, String telefone, String email, String senha,
-			LocalDate data_nascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Convenio convenio, List<Agendamento> agendamento) {
+			LocalDate dataNascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Convenio convenio, List<Agendamento> agendamento) {
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = dataNascimento;
 		this.tipoUsuario = tipoUsuario;
-		this.endereco = endereco;
+		this.enderecos = endereco;
 		this.convenio = convenio;
 		this.agendamento = agendamento;
 		
@@ -129,13 +131,13 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public LocalDate getData_nascimento() {
-		return data_nascimento;
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
 	}
 	
 
-	public void setData_nascimento(LocalDate data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public TipoUsuario getTipoUsuario() {
 		return tipoUsuario;
@@ -153,11 +155,11 @@ public class Usuario {
 	}
 
 	public List<Endereco> getEndereco() {
-		return endereco;
+		return enderecos;
 	}
 
 	public void setEndereco(List<Endereco> endereco) {
-		this.endereco = endereco;
+		this.enderecos = endereco;
 	}
 
 	public List<Agendamento> getAgendamento() {
