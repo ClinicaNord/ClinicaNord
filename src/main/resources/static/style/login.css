@@ -22,6 +22,9 @@
       justify-content: space-between;
       padding: 10px 30px;
       color: #fff;
+      flex-wrap: wrap;
+      z-index: 10;
+      width: 100%;
     }
 
     header img {
@@ -29,11 +32,15 @@
       height: 100px;
       border-radius: 50%;
     }
-
+    header span {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-left: 10px;
+    }
     header h1 {
       flex: 1;
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       font-weight: bold;
     }
 
@@ -47,15 +54,16 @@
       transition: 0.3s;
       
     }
-    header  .btn-inicio:hover {
+    .btn-inicio:hover {
       background: #092549;
       color: #fff;
+      cursor: pointer;
     }
-     header .btn-inicio a {
+    .btn-inicio a {
       text-decoration: none;
       color: #092549;
       font-weight: bold;
-     }
+    }
     /* Formulário */
     .login-container {
       display: flex;
@@ -117,6 +125,13 @@
       padding: 10px;
       flex-wrap: wrap;
       font-size: 14px;
+      text-align: center;
+      width: 100%;
+      z-index: 10;
+      position: relative;
+      bottom: 0;
+      left: 0;
+      right: 0;
     }
 
     footer img {
@@ -141,3 +156,67 @@
     .fa-github {
   color: #ccc;
 }
+/* Responsive */
+@media (max-width: 600px) {
+  header {
+    text-align: center;
+  }
+  header h1 {
+    margin: 10px 0;
+  }
+  .login-box {
+    width: 90%;
+  }
+  footer {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .devs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .devs a {
+    padding: 5px 10px;
+  }
+  .page-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .conteudo {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .texto {
+    padding: 0 10px;
+  }
+  .imagem img {
+    width: 100%;
+    height: auto;
+  }
+  footer {
+    font-size: 12px;
+  }
+    .page-wrapper {
+      flex-direction: column;
+      padding: 20px;
+    }
+    .conteudo {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .imagem img {
+      width: 100%;
+      height: auto;
+    }
+    footer {
+      font-size: 12px;
+    }
+    form{ 
+      width: 90%;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+}
+
