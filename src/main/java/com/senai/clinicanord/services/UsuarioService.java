@@ -5,16 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senai.clinicanord.entities.TipoUsuario;
 import com.senai.clinicanord.entities.Usuario;
+import com.senai.clinicanord.repositories.TipoUsuarioRepository;
 import com.senai.clinicanord.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService {
 	
 	@Autowired
+	private TipoUsuarioRepository tipoUsuarioRepository;
+	
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
 	public Usuario saveUsuario( Usuario usuario) {
+		if(usuario.getTipoUsuario() == null) {
+			TipoUsuario cliente = tipoUsuarioRepository.findById(1L)
+					.orElseThrow(() -> new RuntimeException("Tipo CLIENTE não encontrado!"));
+			usuario.setTipoUsuario(cliente);
+		}
 		return usuarioRepository.save(usuario);
 	}
 	

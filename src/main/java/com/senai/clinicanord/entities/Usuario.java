@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -48,8 +47,8 @@ public class Usuario {
 	@JoinColumn(name = "tipoUsuario")
 	private TipoUsuario tipoUsuario;
 	
-	@OneToMany(mappedBy = "usuario")
-	private List<Endereco> enderecos;
+	@OneToMany(mappedBy = "endereco")
+	private List<Endereco> endereco;
 	
 	@ManyToOne
 	@JsonIgnoreProperties
@@ -67,7 +66,7 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nomeUsuario, String cpf, String telefone, String email, String senha,
-			LocalDate data_nascimento) {
+			LocalDate data_nascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Convenio convenio, List<Agendamento> agendamento) {
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.cpf = cpf;
@@ -75,6 +74,11 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.data_nascimento = data_nascimento;
+		this.tipoUsuario = tipoUsuario;
+		this.endereco = endereco;
+		this.convenio = convenio;
+		this.agendamento = agendamento;
+		
 	}
 
 	public Long getIdUsuario() {
@@ -148,12 +152,12 @@ public class Usuario {
 		this.convenio = convenio;
 	}
 
-	public List<Endereco> getEnderecos() {
-		return enderecos;
+	public List<Endereco> getEndereco() {
+		return endereco;
 	}
 
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
+	public void setEndereco(List<Endereco> endereco) {
+		this.endereco = endereco;
 	}
 
 	public List<Agendamento> getAgendamento() {
@@ -163,10 +167,4 @@ public class Usuario {
 	public void setAgendamento(List<Agendamento> agendamento) {
 		this.agendamento = agendamento;
 	}
-	
-
-	
-
-
-
 }
