@@ -43,7 +43,7 @@ public class Endereco {
 	private String complemento;
 	@ManyToOne
 	@JsonBackReference
-	@JoinColumn(name = "idUsuario")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
 //Construtores
@@ -132,8 +132,4 @@ public class Endereco {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
-	
 }
