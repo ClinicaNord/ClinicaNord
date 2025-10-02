@@ -11,5 +11,3 @@ INSERT IGNORE INTO tb_nomeConvenio (id_nome_conv, nome_conv) VALUES
 (1, 'Funcerv'),
 (2, 'Apas');
 
-INSERT IGNORE INTO tb_usuario(id_usuario, nome_usuario, cpf, telefone, email, senha, data_nascimento, tipo_usuario_id)VALUES
-(1, "Cristiane", 00000000000, 15999999999,"cristiane@gmail.com", "12345", 20.05.2000,2);
