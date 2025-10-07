@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const cpf = document.getElementById("cpf").value;
 		const email = document.getElementById("email").value;
 		const telefone = document.getElementById("telefone").value;
-		const data_nascimento = document.getElementById("data_nascimento").value;
+		const dataNascimento = document.getElementById("data_nascimento").value;
 		const senha = document.getElementById("senha").value;
 		try { 
 			// Envia os dados para o backend via POST
@@ -25,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 					email,
 					telefone,
 					senha,
-					data_nascimento,
+					dataNascimento,
+					tipoUsuario: {
+						id : 2
+					}
 				})
 			});
 			// Verifica se a resposta foi bem-sucedida
@@ -35,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Converte a resposta para JSON
 			const data = await response.json();
 			// Salva o ID do usuário no localStorage
-			localStorage.setItem('pessoaId', data.id_usuario);
+			localStorage.setItem('pessoaId', data.idUsuario);
 			// Redireciona para a página de cadastro de endereço
 			window.location.href = './cadastroendereco.html';
 		} catch (error) {

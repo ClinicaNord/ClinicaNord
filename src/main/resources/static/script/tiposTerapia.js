@@ -18,8 +18,11 @@ const cards = document.querySelectorAll(".card");
     });
 
     btnSelecionar.addEventListener("click", () => {
-      if (terapiaSelecionada) {
+      if (terapiaSelecionada == null) {
         // redireciona para a página escolhida
-        window.location.href = `agendamento.html?terapia=${terapiaSelecionada}`;
+        alert("Por favor, selecione um tipo de terapia.");
+        return;
+      } else {
+        window.location.href = `./agendamento.html?tipo=${terapiaSelecionada}`;
       }
-    });
+          });
