@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				},
 				body: JSON.stringify({ 
 					numero,
-					convenio,
+					convenio: {
+						id: convenio
+					},
 					validade
 				})
 			});

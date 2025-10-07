@@ -7,22 +7,27 @@
 }
 
 /* Fonte geral e fundo da página toda */
+/* body */
 body {
-  height: 100%; 
-  color: #fff; 
-  background: url("img/letras.png") center center / cover no-repeat fixed; 
-  padding: 0; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-image: url("../img/letras.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  color: #fff;
 }
 
-/* Wrapper para o conteúdo interno */
+/* .page-wrapper cresce para empurrar o rodapé */
 .page-wrapper {
-  max-width: 1200px; 
+  flex: 1;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
 }
+
 
 /* Header */
 header {
@@ -82,7 +87,7 @@ header nav button {
       text-decoration: none;
       color: #072033;
     } 
-       header nav .btn-cadastroCliente a:hover {
+    header nav .btn-cadastroCliente a:hover {
       text-decoration: none;
       color: #072033;
     } 
@@ -153,9 +158,13 @@ header nav button {
 .imagem-container::before {
   content: "";
   position: absolute;
-  top: -15px;     
-  right: -15px;   
+  top: 15px;     
+  right: 15px;   
   width: 100%;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+  top: 15px;
   height: 100%;
   background-color: #6295c4; 
   border-radius: 15px;       
@@ -172,14 +181,20 @@ header nav button {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 footer {
-      background: #0f304c;
-      padding: 15px;
-      text-align: center;
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 20px;
-      width: 100%;
-    }
+  background: #0f304c;
+  padding: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #ccc;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
 
     footer a {
       color: #4db3ff;
