@@ -1,6 +1,6 @@
 package com.senai.clinicanord.entities;
 
-import java.util.List;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.Table;
 
 @Table(name = "tb_carteirinha")
@@ -20,8 +20,8 @@ public class Carteirinha {
 	// Atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idConvenio", nullable = false, unique = true)
-	private Long idConvenio;
+	@Column(name = "idCarteirinha", nullable = false, unique = true)
+	private Long idCarteirinha;
 
 	@Column(name = "numero", nullable = false)
 	private String numero;
@@ -32,8 +32,12 @@ public class Carteirinha {
 	@Column(name = "validade", nullable = false)
 	private String validade;
 
-	@OneToMany(mappedBy = "carteirinha")
-	private List<Usuario> usuarios;
+	
+	
+	@ManyToOne
+	@JsonIgnoreProperties
+	@JoinColumn(name = "usuario")
+	private Usuario usuario;
 
 	@ManyToOne
 	@JsonIgnoreProperties
@@ -45,8 +49,8 @@ public class Carteirinha {
 
 	}
 
-	public Carteirinha(Long idConvenio, String numero, String convenio, String validade) {
-		this.idConvenio = idConvenio;
+	public Carteirinha(Long idCarteirinha, String numero, String convenio, String validade) {
+		this.idCarteirinha = idCarteirinha;
 		this.numero = numero;
 		this.convenio = convenio;
 		this.validade = validade;
@@ -54,11 +58,11 @@ public class Carteirinha {
 
 	// GETTERS E SETTERSS
 	public Long getIdConvenio() {
-		return idConvenio;
+		return idCarteirinha;
 	}
 
-	public void setIdConvenio(Long idConvenio) {
-		this.idConvenio = idConvenio;
+	public void setIdConvenio(Long idCarteirinha) {
+		this.idCarteirinha = idCarteirinha;
 	}
 
 	public String getNumero() {
@@ -85,13 +89,7 @@ public class Carteirinha {
 		this.validade = validade;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
+	
 
 	public NomeConvenio getNomeConvenio() {
 		return nomeConvenio;
@@ -100,5 +98,14 @@ public class Carteirinha {
 	public void setNomeConvenio(NomeConvenio nomeConvenio) {
 		this.nomeConvenio = nomeConvenio;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 
 }
