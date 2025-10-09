@@ -16,7 +16,7 @@ import com.senai.clinicanord.services.CarteirinhaService;
 
 
 @RestController
-@RequestMapping("/convenio")
+@RequestMapping("/carteirinha")
 public class CarteirinhaController {
 
 	//ATRIBUTOS
