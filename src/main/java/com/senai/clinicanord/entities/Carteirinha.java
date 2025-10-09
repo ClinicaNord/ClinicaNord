@@ -20,8 +20,8 @@ public class Carteirinha {
 	// Atributos
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idConvenio", nullable = false, unique = true)
-	private Long idConvenio;
+	@Column(name = "idCarteirinha", nullable = false, unique = true)
+	private Long idCarteirinha;
 
 	@Column(name = "numero", nullable = false)
 	private String numero;
@@ -49,8 +49,8 @@ public class Carteirinha {
 
 	}
 
-	public Carteirinha(Long idConvenio, String numero, String convenio, String validade) {
-		this.idConvenio = idConvenio;
+	public Carteirinha(Long idCarteirinha, String numero, String convenio, String validade) {
+		this.idCarteirinha = idCarteirinha;
 		this.numero = numero;
 		this.convenio = convenio;
 		this.validade = validade;
@@ -58,11 +58,11 @@ public class Carteirinha {
 
 	// GETTERS E SETTERSS
 	public Long getIdConvenio() {
-		return idConvenio;
+		return idCarteirinha;
 	}
 
-	public void setIdConvenio(Long idConvenio) {
-		this.idConvenio = idConvenio;
+	public void setIdConvenio(Long idCarteirinha) {
+		this.idCarteirinha = idCarteirinha;
 	}
 
 	public String getNumero() {
