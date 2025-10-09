@@ -24,7 +24,7 @@ public class NomeConvenio {
 			private String nomeConv;
 			
 			
-			@OneToMany(mappedBy = "nomeConvenio")
+			@OneToMany(mappedBy = "carteirinhas")
 			private List<Carteirinha> carteirinhas;
 			
 			//Construtores 

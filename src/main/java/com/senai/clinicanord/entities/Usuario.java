@@ -52,10 +52,10 @@ public class Usuario {
 	@JsonManagedReference
 	private List<Endereco> enderecos;
 	
-	@ManyToOne
-	@JsonIgnoreProperties
-	@JoinColumn(name = "carteirinha")
-	private Carteirinha carteirinha;
+	@OneToMany(mappedBy = "usuario")
+	@JsonManagedReference
+	private List<Carteirinha> carterinhas;
+	
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<Agendamento> agendamento;
@@ -68,7 +68,7 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nomeUsuario, String cpf, String telefone, String email, String senha,
-			LocalDate dataNascimento, TipoUsuario tipoUsuario, List<Endereco> endereco, Carteirinha carteirinha, List<Agendamento> agendamento) {
+			LocalDate dataNascimento) {
 		this.idUsuario = idUsuario;
 		this.nomeUsuario = nomeUsuario;
 		this.cpf = cpf;
@@ -76,10 +76,6 @@ public class Usuario {
 		this.email = email;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
-		this.tipoUsuario = tipoUsuario;
-		this.enderecos = endereco;
-		this.carteirinha = carteirinha;
-		this.agendamento = agendamento;
 		
 	}
 
@@ -146,13 +142,7 @@ public class Usuario {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public Carteirinha getCarteirinha() {
-		return carteirinha;
-	}
-
-	public void setCarteirinha(Carteirinha carteirinha) {
-		this.carteirinha = carteirinha;
-	}
+	
 
 	public List<Endereco> getEndereco() {
 		return enderecos;
@@ -169,4 +159,13 @@ public class Usuario {
 	public void setAgendamento(List<Agendamento> agendamento) {
 		this.agendamento = agendamento;
 	}
+
+	public List<Carteirinha> getCarterinha() {
+		return carterinhas;
+	}
+
+	public void setCarterinha(List<Carteirinha> carterinha) {
+		this.carterinhas = carterinha;
+	}
+	
 }
