@@ -24,9 +24,8 @@ public class NomeConvenio {
 			private String nomeConv;
 			
 			
-			@OneToMany(mappedBy = "carteirinhas")
-			private List<Carteirinha> carteirinhas;
-			
+			 @OneToMany(mappedBy = "convenio") // 👈 nome do atributo em Carteirinha
+			    private List<Carteirinha> carteirinhas;
 			//Construtores 
 			public NomeConvenio() {
 				
@@ -49,11 +48,12 @@ public class NomeConvenio {
 			public void setNomeConv(String nomeConv) {
 				this.nomeConv = nomeConv;
 			}
-			public List<Carteirinha> getCarteirinha() {
+			public List<Carteirinha> getCarteirinhas() {
 				return carteirinhas;
 			}
-			public void setConvenios(List<Carteirinha> c) {
+			public void setCarteirinhas(List<Carteirinha> carteirinhas) {
 				this.carteirinhas = carteirinhas;
 			}
+			
 			
 }
