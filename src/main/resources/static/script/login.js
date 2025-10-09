@@ -20,34 +20,30 @@ document.addEventListener('DOMContentLoaded', () => {
 				email: email,
 				senha: senha
 			})
-		})
-			.then(response => {
-				// Se login for bem-sucedido, retorna os dados do usuário
-				if (response.ok) {
-					return response.json();
-				} 
-				// Se as credenciais estiverem erradas
-				else if (response.status === 401) {
-					throw new Error('Email ou senha inválidos.');
-				} 
-				// Para outros erros
-				else {
-					throw new Error('Erro na autenticação.');
-				}
-			})
-			.then(usuario => {
-				// Exibe mensagem de boas-vindas
-				alert('Login realizado com sucesso! Bem-vindo, ' + usuario.nomeUsuario);
-				
-				// Redireciona para a página de perfil
-				window.location.href = 'perfilusuario.html';
-				
-				// Armazena os dados do usuário logado no localStorage
-				localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-			})
-			.catch(error => {
-				// Exibe mensagem de erro em caso de falha
-				alert(error.message);
-			});
+})
+	.then(res => {
+		if (!res.ok) throw new Error("Usuário ou senha incorretos!");
+		return res.json();
+	})
+	.then(usuario => {
+		// Exibe mensagem de boas-vindas
+		alert('Login realizado com sucesso! Bem-vindo, ' + usuario.nomeUsuario);
+
+		// Armazena os dados do usuário logado no localStorage
+		localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+
+		// Redireciona para a página de acordo com o tipo de usuário
+		if (usuario.tipoUsuario.nome === "Admin") {
+			window.location.href = "admin.html";
+		} else if (usuario.tipoUsuario.nome === "Cliente") {
+			window.location.href = "index.html";
+		} else {
+		alert("erro no cadastro, tente novamente");
+		}
+	})
+	.catch(error => {
+		// Exibe mensagem de erro em caso de falha
+		alert(error.message);
+	});
 	});
 });

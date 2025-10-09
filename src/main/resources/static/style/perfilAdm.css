@@ -15,6 +15,36 @@ body{
   width: 100%;
     
 }
+.container {
+  background: #0b2e4a; /* Fundo semi-transparente */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+.btn-container {
+  background: #14476d;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin: 10px;
+}
+.btn-container:hover {
+  background: #296198;
+}
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  align-items: center;
+  width: 100%;
+}
 /* Header */
 header {
    background: #296198;
