@@ -4,6 +4,25 @@
       margin: 0;
       padding: 0;
     }
+   body {
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o body ocupa a tela toda */
+  background-image: url('../img/selecione_um_horario.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Conteúdo principal */
+main {
+  flex: 1; /* Faz o main crescer e empurra o footer para baixo */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
     /* Header */
     header {
       background: #296198;
@@ -95,6 +114,7 @@
       border: 1px solid #ccc;
       cursor: pointer;
       transition: background 0.3s;
+      border-radius: 5px;
     }
     .day:hover {
       background: #e6e6e6;
@@ -143,23 +163,23 @@
     }
     /* Footer */
     footer {
-      background: #092549;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      text-align: center;
-      width: 100%;
-      z-index: 10;
-      position: relative;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin-top: 20px;
+  background: #092549;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+    footer a{
+      text-decoration: none;
+      color: #4db3ff;
     }
 
     footer img {
