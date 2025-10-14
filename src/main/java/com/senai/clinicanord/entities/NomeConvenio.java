@@ -13,47 +13,51 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_nomeconvenio")
 public class NomeConvenio {
-	//ATRIBUTOS
-	
-			@Id
-		    @GeneratedValue(strategy = GenerationType.IDENTITY)
-		    @Column(name = "idNomeConv", nullable = false, unique = true)
-		    private Long idNomeConv;
-			
-			@Column(name = "nomeConv", nullable = false)
-			private String nomeConv;
-			
-			
-			@OneToMany(mappedBy = "nomeConvenio")
-			private List<Carteirinha> carteirinhas;
-			
-			//Construtores 
-			public NomeConvenio() {
-				
-			}
-			public NomeConvenio(Long idNomeConv, String nomeConv) {
-				this.idNomeConv= idNomeConv;
-				this.nomeConv = nomeConv;
-			}
-			
-			//Getters e Setters
-			public Long getIdNomeConv() {
-				return idNomeConv;
-			}
-			public void setIdNomeConv(Long idNomeConv) {
-				this.idNomeConv = idNomeConv;
-			}
-			public String getNomeConv() {
-				return nomeConv;
-			}
-			public void setNomeConv(String nomeConv) {
-				this.nomeConv = nomeConv;
-			}
-			public List<Carteirinha> getCarteirinha() {
-				return carteirinhas;
-			}
-			public void setConvenios(List<Carteirinha> c) {
-				this.carteirinhas = carteirinhas;
-			}
-			
+	// ATRIBUTOS
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idNomeConv", nullable = false, unique = true)
+	private Long idNomeConv;
+
+	@Column(name = "nomeConv", nullable = false)
+	private String nomeConv;
+
+	@OneToMany(mappedBy = "convenio") // 👈 nome do atributo em Carteirinha
+	private List<Carteirinha> carteirinhas;
+
+	// Construtores
+	public NomeConvenio() {
+
+	}
+
+	public NomeConvenio(Long idNomeConv, String nomeConv) {
+		this.idNomeConv = idNomeConv;
+		this.nomeConv = nomeConv;
+	}
+
+	// Getters e Setters
+	public Long getIdNomeConv() {
+		return idNomeConv;
+	}
+
+	public void setIdNomeConv(Long idNomeConv) {
+		this.idNomeConv = idNomeConv;
+	}
+
+	public String getNomeConv() {
+		return nomeConv;
+	}
+
+	public void setNomeConv(String nomeConv) {
+		this.nomeConv = nomeConv;
+	}
+
+	public List<Carteirinha> getCarteirinhas() {
+		return carteirinhas;
+	}
+
+	public void setCarteirinhas(List<Carteirinha> carteirinhas) {
+		this.carteirinhas = carteirinhas;
+	}
 }
