@@ -1,43 +1,75 @@
-const daysContainer = document.querySelector(".days");
-    const hoursContainer = document.querySelector(".hours");
-    const actionBtn = document.querySelector(".action-btn");
-    let selectedDay = null;
-    let selectedHour = null;
+const calendar = document.getElementById("calendar");
+const schedule = document.getElementById("schedule");
+const selectedDayEl = document.getElementById("selected-day");
+const timeSlotsEl = document.getElementById("time-slots");
 
-    // Carrega configuração salva pelo admin
-    const config = JSON.parse(localStorage.getItem("agendaConfig")) || { dias: [], horarios: [] };
+const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth();
 
-    // Cria botões de dias
-    config.dias.forEach(d => {
-      const btn = document.createElement("button");
-      btn.classList.add("btn");
-      btn.textContent = d;
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".days .btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedDay = d;
-      });
-      daysContainer.appendChild(btn);
-    });
+const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
+const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
 
-    // Cria botões de horários
-    config.horarios.forEach(h => {
-      const btn = document.createElement("button");
-      btn.classList.add("btn");
-      btn.textContent = h;
-      btn.addEventListener("click", () => {
-        document.querySelectorAll(".hours .btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        selectedHour = h;
-      });
-      hoursContainer.appendChild(btn);
-    });
+let currentDateStr = null;
 
-    // Agendar
-    actionBtn.addEventListener("click", () => {
-      if (selectedDay && selectedHour) {
-        alert(`Agendamento marcado para dia ${selectedDay} às ${selectedHour}`);
-      } else {
-        alert("Selecione um dia e um horário!");
-      }
-    });
+// Gera o calendário (sem domingos e sem dias bloqueados)
+function generateCalendar(year, month) {
+  calendar.innerHTML = "";
+
+  const lastDate = new Date(year, month + 1, 0).getDate();
+
+  for (let day = 1; day <= lastDate; day++) {
+    const date = new Date(year, month, day);
+    const weekday = date.getDay();
+    if (weekday === 0) continue; // pula domingo
+
+    const dateStr = `${year}-${month + 1}-${day}`;
+
+    // pula dias bloqueados pelo admin
+    if (blockedDays.includes(dateStr)) continue;
+
+    const dayEl = document.createElement("div");
+    dayEl.classList.add("day");
+    dayEl.textContent = day;
+
+    dayEl.addEventListener("click", () => showSchedule(dateStr));
+    calendar.appendChild(dayEl);
+  }
+}
+
+function showSchedule(dateStr) {
+  currentDateStr = dateStr;
+  selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
+  schedule.style.display = "block";
+  timeSlotsEl.innerHTML = "";
+
+  for (let hour = 7; hour < 18; hour++) {
+    for (let min = 0; min < 60; min += 30) {
+      const time = `${hour.toString().padStart(2, "0")}:${min
+        .toString()
+        .padStart(2, "0")}`;
+
+      // ignora horários bloqueados
+      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue;
+
+      const slotEl = document.createElement("div");
+      slotEl.classList.add("time-slot");
+      slotEl.textContent = time;
+
+      slotEl.addEventListener("click", () => selectTime(dateStr, time));
+      timeSlotsEl.appendChild(slotEl);
+    }
+  }
+
+  if (timeSlotsEl.innerHTML === "") {
+    timeSlotsEl.innerHTML = "<p>Nenhum horário disponível neste dia.</p>";
+  }
+}
+
+function selectTime(dateStr, time) {
+  alert(`Você selecionou ${dateStr} às ${time}`);
+  // Aqui você pode fazer o redirecionamento para confirmar o agendamento
+  // ou enviar via fetch() para o backend
+}
+
+generateCalendar(year, month);
