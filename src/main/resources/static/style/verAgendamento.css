@@ -1,10 +1,11 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-image: url("img/fundo.png");
+  background-image: url("../img/perfil_usuario.png");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  height: 100%;
 }
 
 /* Navbar */
@@ -14,7 +15,9 @@ body {
   align-items: center;
   background: #265b8a;
   padding: 10px 20px;
-  color: white;
+  color: white; 
+  font-size: 14px;
+
 }
 
 .logo {
@@ -25,7 +28,7 @@ body {
 .logo-img {
   border-radius: 50%;
   margin-right: 10px;
-  width: 70px;
+  width: 60px;
   height: 100px;
 }
 
@@ -33,10 +36,14 @@ body {
   background: #fdfce9;
   border: none;
   padding: 8px 15px;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-left: 10px;
   cursor: pointer;
   font-weight: bold;
+}
+.navbar button:hover {
+  background: #0d2c47;
+  color: white;
 }
 
 /* Card central */
@@ -50,24 +57,33 @@ body {
   display: flex;       
   justify-content: space-between;
   align-items: center;
+  height: 100%;
 }
 
 .profile {
   text-align: left;
+  
 }
 
 .profile-img {
-  width: 90px;
-  height: 90px;
   border-radius: 50%;
-  border: 3px solid white;
-  margin-bottom: 10px;
-}
+  width: 90px;
+  height: 120px;
+  }
 
 ul {
   list-style: none;
   padding: 0;
   margin: 10px 0;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  margin-top: -10px;
+}
+ul h2{
+  margin: 0 0 10px 0;
+  font-size: 22px;
 }
 
 .buttons {
@@ -75,36 +91,76 @@ ul {
   flex-direction: column; 
   gap: 12px;
   margin-left: 20px;
+  border-radius: 50px;
 }
 
 .buttons button {
   background: #0d2c47;
   border: none;
   padding: 12px 20px;
-  border-radius: 15px;
+  border-radius: 20px;
   color: white;
   font-weight: bold;
   cursor: pointer;
   text-align: center;
 }
-
-/* Rodapé */
+.buttons button:hover {
+  background: #fdfce9;
+  color: #0d2c47;
+}
+/*footer*/
 footer {
-  background: #0d2c47;
-  color: white;
+  background: #0f304c;
+  padding: 15px;
   text-align: center;
-  padding: 17px;
+  color: #ccc;
   font-size: 14px;
+  width: 100%;
+  margin-top: auto;
+  justify-content: center;
+  align-items: center;
+
+}
+
+footer p {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 footer a {
-  color: #a7d2ff;
+  color: #4db3ff;
   text-decoration: none;
-  margin: 0 3px;
 }
 
-.icon {
-  width: 18px;
-  vertical-align: middle;
-  margin: 0 4px;
+footer a:hover {
+  color: #4db3ff;
+  text-decoration: underline;
+}
+
+.fa-github {
+  color: #ccc;
+  font-size: 1.2em;
+}
+
+.fa-github:hover {
+  color: #4db3ff;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
