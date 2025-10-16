@@ -4,6 +4,11 @@
       margin: 0;
       padding: 0;
     }
+    body {
+      background: url("../img/selecione_um_horario.png")
+        no-repeat center center/cover;
+      min-height: 100vh;
+    }
     /* Header */
     header {
       background: #296198;
@@ -65,7 +70,7 @@
       margin-top: 20px;
       padding: 20px;
       border-radius: 8px;
-      width: 90%;
+      width: 70%;
       margin-left: auto;
       margin-right: auto;
       text-align: center;
@@ -79,7 +84,7 @@
       display: grid;
       grid-template-columns: repeat(6, 1fr); /* segunda a sábado */
       gap: 5px;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
     .day-name {
@@ -159,12 +164,18 @@
       bottom: 0;
       left: 0;
       right: 0;
-      margin-top: 20px;
+      margin-top: 210px;
     }
 
     footer img {
       width: 20px;
       height: 20px;
+    }
+    
+   footer a {
+      color: #4db3ff;
+      text-decoration: none;
+      margin: 0 8px;
     }
 
     .devs {
@@ -177,8 +188,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      text-decoration: none;
-      color: #4db3ff;
+      color: #296198;
       padding: 5px 17px;
     }
     .fa-github {
