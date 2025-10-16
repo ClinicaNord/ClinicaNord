@@ -6,146 +6,155 @@
 }
 
 body{
-  background: url("../img/perfil_usuario.png") no-repeat center center/cover;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff;
-  width: 100%;
-    
+    background: url("../img/perfil_usuario.png") no-repeat center center/cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    width: 100%;
 }
+
 /* Header */
 header {
-   background: #296198;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  color: #fdfce9;
-  flex-wrap: wrap;
-  gap: 15px;
-  width: 100%;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
-  top: 0;
-  z-index: 1000;
+    background: #296198;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    color: #fdfce9;
+    flex-wrap: wrap;
+    gap: 15px;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    top: 0;
+    z-index: 1000;
 }
 
 header img {
-  height: 50px;
+    height: 50px;
 }
 header .logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
 }
 .logo img {
-  width: 60px;
-  height: 100px;
+    width: 60px;
+    height: 100px;
 }
 
 header h1 {
-  font-size: 22px;
-  font-weight: bold;
+    font-size: 22px;
+    font-weight: bold;
 }
+
 /* Botão */
 header nav button {
-      margin-left: 10px;
-      padding: 10px 20px;
-      margin: 2px;
-      border: none;
-      border-radius: 20px;
-      background: #fdfce9;
-      color: #0b2e4a;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    header nav button:hover {
-      background: #0f304c;
-      color: #fff;
-    }
-    header nav .btn-inicio a {
-      text-decoration: none;
-      color: #0b2e4a;
-    } 
-.btn-submit {
-  grid-column: span 2;
-  background: #072033;
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+    margin-left: 10px;
+    padding: 10px 20px;
+    margin: 2px;
+    border: none;
+    border-radius: 20px;
+    background: #fdfce9;
+    color: #0b2e4a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.btn-submit:hover {
-  background: #14476d;
-} 
-.btn-submit a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold
-  }
-  /*container*/
+header nav button:hover {
+    background: #0f304c;
+    color: #fff;
+}
+
+/* Container */
 .container {
     background: #092549; 
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    width: 500px;
-    height: 100vh;
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    color: #fff;
 }
+
 h1{
     text-align: center;
     margin-bottom: 20px;
 }
-form{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-    width: 350px;
-    margin-left: auto;
-    margin-right: auto;
+
+/* Input de busca */
+#nomePaciente {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
-button{
-    background: #fdfce9;
-    color: #0b2e4a;
-    font-weight: bold;
+
+/* Tabela de pacientes e agendamentos */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background: #0d3b6c;
+    border-radius: 10px;
+    overflow: hidden;
 }
-   /* Footer */
+
+table thead {
+    background: #14476d;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #072033;
+}
+
+table tbody tr:hover {
+    background: #1a5b9c;
+    cursor: pointer;
+}
+
+#agendamentos h2 {
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+/* Footer */
 footer {
-  background: #092549;
-  padding: 15px;
-  text-align: center;
-  font-size: 14px;
-  color: #ccc;
-  margin-top: auto;
-  width: 100%;
+    background: #092549;
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #ccc;
+    margin-top: auto;
+    width: 100%;
 }
 
 footer a {
-  color: #4db3ff;
-  text-decoration: none;
-  margin: 0 8px;
+    color: #4db3ff;
+    text-decoration: none;
+    margin: 0 8px;
 }
 
 main {
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 40px auto;
 }
 
 .fa-github {
-  color: #ccc;
+    color: #ccc;
 }
+
 a {
-  text-decoration: none;
-  color: #ccc;
+    text-decoration: none;
+    color: #ccc;
 }
