@@ -5,13 +5,12 @@
       padding: 0;
     }
    body {
-  background: #f0f0f0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Garante que o body ocupa a tela toda */
+   min-height: 100vh; /* Garante que o body ocupa a tela toda */
   background-image: url('../img/selecione_um_horario.png');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 /* Conteúdo principal */

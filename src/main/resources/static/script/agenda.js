@@ -7,6 +7,7 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 
+// Dias e horários bloqueados pelo admin
 const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
 const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
 
@@ -17,16 +18,27 @@ function generateCalendar(year, month) {
   calendar.innerHTML = "";
 
   const lastDate = new Date(year, month + 1, 0).getDate();
+  let firstDay = new Date(year, month, 1).getDay(); 
+
+  // ajusta se o primeiro dia for domingo (0)
+  if (firstDay === 0) firstDay = 7;
+
+  // cria espaços vazios para alinhar o primeiro dia
+  for (let i = 1; i < firstDay; i++) {
+    const emptyEl = document.createElement("div");
+    emptyEl.classList.add("empty-day");
+    calendar.appendChild(emptyEl);
+  }
 
   for (let day = 1; day <= lastDate; day++) {
     const date = new Date(year, month, day);
     const weekday = date.getDay();
+
     if (weekday === 0) continue; // pula domingo
 
     const dateStr = `${year}-${month + 1}-${day}`;
 
-    // pula dias bloqueados pelo admin
-    if (blockedDays.includes(dateStr)) continue;
+    if (blockedDays.includes(dateStr)) continue; // pula dias bloqueados
 
     const dayEl = document.createElement("div");
     dayEl.classList.add("day");
@@ -37,6 +49,7 @@ function generateCalendar(year, month) {
   }
 }
 
+// Mostra horários disponíveis
 function showSchedule(dateStr) {
   currentDateStr = dateStr;
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
@@ -45,12 +58,9 @@ function showSchedule(dateStr) {
 
   for (let hour = 7; hour < 18; hour++) {
     for (let min = 0; min < 60; min += 30) {
-      const time = `${hour.toString().padStart(2, "0")}:${min
-        .toString()
-        .padStart(2, "0")}`;
+      const time = `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
 
-      // ignora horários bloqueados
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue;
+      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue; // pula horários bloqueados
 
       const slotEl = document.createElement("div");
       slotEl.classList.add("time-slot");
@@ -66,10 +76,17 @@ function showSchedule(dateStr) {
   }
 }
 
+// Seleciona horário
 function selectTime(dateStr, time) {
   alert(`Você selecionou ${dateStr} às ${time}`);
-  // Aqui você pode fazer o redirecionamento para confirmar o agendamento
-  // ou enviar via fetch() para o backend
+  // Aqui você pode enviar os dados para o backend
 }
+
+// Fecha a aba de horários quando clicar fora
+document.addEventListener("click", (e) => {
+  if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
+    schedule.style.display = "none";
+  }
+});
 
 generateCalendar(year, month);
