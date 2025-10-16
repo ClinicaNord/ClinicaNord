@@ -283,6 +283,7 @@ header .inicio {
       }
 
     }
+
     @media (max-width: 480px) {
       header h1 {
         font-size: 20px;

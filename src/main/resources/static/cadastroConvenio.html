@@ -24,34 +24,28 @@
   <!-- Conteúdo principal -->
   <main>
     <div class="container">
-      <form class="form-box">
-        <!-- Campo 1 -->
-        <div class="full">
-          <label for="numero">Número da carteirinha</label>
-          <input type="text" id="numero" name="numero" placeholder="Digite o número da carteirinha" minlength="255" required>
-        </div>
+      <form id="cadastroCarteirinhaForm" class="form-box">
+  <div class="full">
+    <label for="numero">Número da carteirinha</label>
+    <input type="text" id="numero" name="numero" required>
+  </div>
 
-        <!-- Campo 2 -->
-        <div class="full">
-          <label for="convenio">Convênio</label>
-          <select name="convenio" id="convenio" class="select">
-            <option value="" disabled selected>Selecione o convênio</option>
-            <option value="funcerv" id="Funcerv">Funcerv</option>
-            <option value="apas" id="Apas">Apas</option>
-          </select>
-        </div>
+  <div class="full">
+    <label for="convenio">Convênio</label>
+    <select name="convenio" id="convenio" class="select" required>
+      <option value="" disabled selected>Carregando convênios...</option>
+    </select>
+  </div>
 
-        <!-- Campo 3 -->
-        <div class="full">
-          <label for="validade">Validade</label>
-          <input type="date" id="validade" name="validade" placeholder="Digite a validade" required>
-        </div>
+  <div class="full">
+    <label for="validade">Validade</label>
+    <input type="date" id="validade" name="validade" required>
+  </div>
 
-        <!-- Botões -->
-        <a href="./sucesso.html"><button type="submit" class="btn-submit">Concluir Cadastro</button></a>
-        <button type="button" class="btn-submit" onclick="window.location.href='./sucessoSemConvenio.html'">Não tenho convênio</button>
-      </form>
-    </div>
+  <button type="submit" class="btn-submit">Concluir Cadastro</button>
+  <button type="button" class="btn-submit" onclick="window.location.href='./sucessoSemConvenio.html'">Não tenho convênio</button>
+  </form>
+  </div>
   </main>
 
   <!-- Rodapé -->

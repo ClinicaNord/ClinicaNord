@@ -1,3 +1,11 @@
+  document.addEventListener("DOMContentLoaded", () => {
+      const usuarioLogado = localStorage.getItem("usuarioLogado");
+
+      if (!usuarioLogado) {
+        alert("Você precisa estar logado para acessar esta página!");
+        window.location.href = "./login.html";
+      }
+    });
 const cards = document.querySelectorAll(".card");
     const btnSelecionar = document.getElementById("btnSelecionar");
     let terapiaSelecionada = null;

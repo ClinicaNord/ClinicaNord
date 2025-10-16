@@ -13,73 +13,105 @@ const calendar = document.getElementById("calendar");
     let currentDateStr = null;
     let currentDayEl = null;
 
+ 
     // Gera calendário sem domingos
-    function generateCalendar(year, month) {
-      calendar.innerHTML = "";
+   function generateCalendar(year, month) {
+  calendar.innerHTML = "";
 
-      const lastDate = new Date(year, month + 1, 0).getDate();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay(); // 0 = domingo, 1 = segunda, etc.
 
-      for (let day = 1; day <= lastDate; day++) {
-        const date = new Date(year, month, day);
-        const weekday = date.getDay(); // 0 = domingo, 1 = segunda ...
 
-        if (weekday === 0) continue; // pula domingo
+  // Preenche "espaços vazios" até o primeiro dia útil (segunda)
+  // OBS: domingo (0) vira 7 pra alinhar corretamente
+  const startIndex = firstDay === 0 ? 6 : firstDay - 1;
+  for (let i = 0; i < startIndex; i++) {
+    const empty = document.createElement("div");
+    empty.classList.add("empty");
+    calendar.appendChild(empty);
+  }
 
-        const dayEl = document.createElement("div");
-        dayEl.classList.add("day");
-        dayEl.textContent = day;
+  // Gera os dias do mês (pulando domingos)
+  for (let day = 1; day <= lastDate; day++) {
+    const date = new Date(year, month, day);
+    const weekday = date.getDay(); // 0 = domingo
 
-        const dateStr = `${year}-${month + 1}-${day}`;
+    if (weekday === 0) continue; // pula domingo
 
-        if (blockedDays.includes(dateStr)) {
-          dayEl.classList.add("blocked");
-        }
+    const dayEl = document.createElement("div");
+    dayEl.classList.add("day");
+    dayEl.textContent = day;
 
-        dayEl.addEventListener("click", () => showSchedule(dateStr, dayEl));
-        calendar.appendChild(dayEl);
-      }
+    const dateStr = `${year}-${month + 1}-${day}`;
+
+    if (blockedDays.includes(dateStr)) {
+      dayEl.classList.add("blocked");
     }
+
+    dayEl.addEventListener("click", () => showSchedule(dateStr, dayEl));
+    calendar.appendChild(dayEl);
+  }
+}
+
 
     // Mostra horários do dia
-    function showSchedule(dateStr, el) {
-      currentDateStr = dateStr;
-      currentDayEl = el;
+  function showSchedule(dateStr, el) {
+ 
+// Fecha a aba de horários ao clicar fora
+document.addEventListener("click", (event) => {
+  // Se o painel de horários estiver fechado, não faz nada
+  if (schedule.style.display !== "block") return;
 
-      selectedDayEl.textContent = `Horários de ${dateStr}`;
-      schedule.style.display = "block";
-      timeSlotsEl.innerHTML = "";
+  // Se o clique foi dentro da aba de horários, não fecha
+  if (schedule.contains(event.target)) return;
 
-      if (blockedDays.includes(dateStr)) {
-        toggleDayBtn.textContent = "Desbloquear dia inteiro";
-      } else {
-        toggleDayBtn.textContent = "Bloquear dia inteiro";
+  // Se o clique foi no dia atual, não fecha (deixa o comportamento normal)
+  if (currentDayEl && currentDayEl.contains(event.target)) return;
+
+  // Caso contrário, fecha a aba
+  schedule.style.display = "none";
+  currentDateStr = null;
+  currentDayEl = null;
+});
+
+  // Atualiza variáveis de controle
+  currentDateStr = dateStr;
+  currentDayEl = el;
+
+  selectedDayEl.textContent = `Horários de ${dateStr}`;
+  schedule.style.display = "block";
+  timeSlotsEl.innerHTML = "";
+
+  // Atualiza o texto do botão de bloqueio
+  if (blockedDays.includes(dateStr)) {
+    toggleDayBtn.textContent = "Desbloquear dia inteiro";
+  } else {
+    toggleDayBtn.textContent = "Bloquear dia inteiro";
+  }
+
+  // Gera os horários
+  for (let hour = 7; hour < 18; hour++) {
+    for (let min = 0; min < 60; min += 30) {
+      const time = `${hour.toString().padStart(2, "0")}:${min
+        .toString()
+        .padStart(2, "0")}`;
+
+      const slotEl = document.createElement("div");
+      slotEl.classList.add("time-slot");
+      slotEl.textContent = time;
+
+      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) {
+        slotEl.classList.add("time-blocked");
       }
 
-      for (let hour = 7; hour < 18; hour++) {
-        for (let min = 0; min < 60; min += 30) {
-          const time = `${hour.toString().padStart(2, "0")}:${min
-            .toString()
-            .padStart(2, "0")}`;
+      slotEl.addEventListener("click", () =>
+        toggleTime(dateStr, time, slotEl)
+      );
 
-          const slotEl = document.createElement("div");
-          slotEl.classList.add("time-slot");
-          slotEl.textContent = time;
-
-          if (
-            blockedTimes[dateStr] &&
-            blockedTimes[dateStr].includes(time)
-          ) {
-            slotEl.classList.add("time-blocked");
-          }
-
-          slotEl.addEventListener("click", () =>
-            toggleTime(dateStr, time, slotEl)
-          );
-
-          timeSlotsEl.appendChild(slotEl);
-        }
-      }
+      timeSlotsEl.appendChild(slotEl);
     }
+  }
+}
 
     // Bloqueia/Desbloqueia horários
     function toggleTime(dateStr, time, el) {
