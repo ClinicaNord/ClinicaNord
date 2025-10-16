@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const complemento = document.getElementById("complemento").value;
 
 		// Envia os dados para o backend via POST
-		const response = await fetch("http://localhost:8080/cadastroenderecos", { 
+		const response = await fetch("http://localhost:8080/cadastroendereco", { 
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json" 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Cadastro realizado com sucesso
 			alert("Cadastro de endereço realizado com sucesso!");
 			localStorage.removeItem('pessoaId'); // Remove o ID do localStorage
-			window.location.href = './index.html'; // Redireciona para a página inicial
+			window.location.href = './cadastroConvenio.html'; // Redireciona para a página de cadastro de convênio
 		})
 		.catch(error => {
 			// Em caso de erro, exibe no console e alerta o usuário

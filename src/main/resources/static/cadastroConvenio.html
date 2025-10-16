@@ -28,7 +28,7 @@
         <!-- Campo 1 -->
         <div class="full">
           <label for="numero">Número da carteirinha</label>
-          <input type="number" id="numero" name="numero" placeholder="Digite o número da carteirinha" min="0" required>
+          <input type="text" id="numero" name="numero" placeholder="Digite o número da carteirinha" minlength="255" required>
         </div>
 
         <!-- Campo 2 -->
@@ -49,7 +49,7 @@
 
         <!-- Botões -->
         <a href="./sucesso.html"><button type="submit" class="btn-submit">Concluir Cadastro</button></a>
-        <a href="./sucesso.html"><button type="submit" class="btn-submit">Não tenho convênio</button></a>
+        <button type="button" class="btn-submit" onclick="window.location.href='./sucessoSemConvenio.html'">Não tenho convênio</button>
       </form>
     </div>
   </main>
