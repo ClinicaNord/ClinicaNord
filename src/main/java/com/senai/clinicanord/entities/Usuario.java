@@ -3,6 +3,7 @@ package com.senai.clinicanord.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -50,14 +51,17 @@ public class Usuario {
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonManagedReference
+	@JsonIgnore
 	private List<Endereco> enderecos;
 	
 	@OneToMany(mappedBy = "usuario")
 	@JsonManagedReference
+	@JsonIgnore
 	private List<Carteirinha> carterinhas;
 	
 	
 	@OneToMany(mappedBy = "usuario")
+	@JsonIgnore
 	private List<Agendamento> agendamento;
 	
 

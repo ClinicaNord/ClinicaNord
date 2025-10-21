@@ -25,7 +25,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@PostMapping(consumes = "application/json", produces = "application/json")
+	@PostMapping
 	public Usuario createUsuario(@RequestBody Usuario usuario) {
 		return usuarioService.saveUsuario(usuario);
 	}

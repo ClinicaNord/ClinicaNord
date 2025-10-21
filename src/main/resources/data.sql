@@ -10,4 +10,3 @@ INSERT IGNORE INTO tb_servicos (id_servicos, nome_servicos) VALUES
 INSERT IGNORE INTO tb_nomeConvenio (id_nome_conv, nome_conv) VALUES
 (1, 'Funcerv'),
 (2, 'Apas');
-
