@@ -70,9 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
 				cep,
 				numero,
 				complemento,
-				pessoa: {
-					id_usuario: pessoaId
-				}
+				usuario: {  
+    			idUsuario: pessoaId 
+  		  	}
 			})
 		})
 		.then(response => {
