@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convênio Médico</title>
+  <link rel="stylesheet" href="./style/cadastro.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="logo">
+      <img src="./img/logo.png" alt="Logo Clínica Nord">
+      <span>Clínica Nord</span>
+    </div>
+    <h1>Convênio Médico</h1>
+    <nav>
+      <a href="./index.html"><button>Inicio</button></a>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main>
+    <div class="container">
+      <form id="cadastroCarteirinhaForm" class="form-box">
+  <div class="full">
+    <label for="numero">Número da carteirinha</label>
+    <input type="text" id="numero" name="numero" required>
+  </div>
+
+  <div class="full">
+    <label for="convenio">Convênio</label>
+    <select name="convenio" id="convenio" class="select" required>
+      <option value="" disabled selected>Carregando convênios...</option>
+    </select>
+  </div>
+
+  <div class="full">
+    <label for="validade">Validade</label>
+    <input type="date" id="validade" name="validade" required>
+  </div>
+
+  <button type="submit" class="btn-submit">Concluir Cadastro</button>
+  <button type="button" class="btn-submit" onclick="window.location.href='./sucessoSemConvenio.html'">Não tenho convênio</button>
+  </form>
+  </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <p>Feito por:</p>
+    <div></div>
+    <a href="https://github.com/Gusleme"><i class="fa fa-github"></i> Gustavo Leme</a>
+    <a href="https://github.com/Isaagapito"><i class="fa fa-github"></i> Isabele Agapito</a>
+    <a href="https://github.com/jucastrox"><i class="fa fa-github"></i> Júlia França</a>
+    <a href="https://github.com/dias-crypto"><i class="fa fa-github"></i> Natália Dias</a>
+    <a href="https://github.com/TuannyThomazelli"><i class="fa fa-github"></i> Tuanny Thomazelli</a>
+  </footer>
+
+</body>
+</html>

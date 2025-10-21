@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agendamento - Clínica Nord</title>
+  <link rel="stylesheet" href="./style/agenda.css">
+  <link rel="stylesheet" href="./style/todos.css">
+  <script src="./script/todos.js"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<header>
+  <div class="logo">
+    <img src="./img/logo.png" alt="Logo">
+    <span>Clínica Nord</span>
+  </div>
+  <nav>
+    <a href="./perfilCliente.html"><button class="btn-inicio">Perfil</button></a>
+    <a href="./index.html"><button class="btn-inicio">Início</button></a>
+  </nav>
+</header>
+
+<body>
+  <div class="calendar-container">
+    <h2>Agende seu horário</h2>
+
+    <!-- Cabeçalho dos dias -->
+    <div id="calendar-header" style="display: grid; grid-template-columns: repeat(6, 1fr); max-width: 700px; margin: 0 auto 10px auto; gap: 5px;">
+      <div class="day-name">Seg</div>
+      <div class="day-name">Ter</div>
+      <div class="day-name">Qua</div>
+      <div class="day-name">Qui</div>
+      <div class="day-name">Sex</div>
+      <div class="day-name">Sáb</div>
+    </div>
+
+    <!-- Calendário -->
+    <div id="calendar"></div>
+
+    <!-- Horários -->
+    <div id="schedule" class="schedule">
+      <h3 id="selected-day"></h3>
+      <div id="time-slots"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Feito por:</p>
+    <a href="https://github.com/Gusleme"><i class="fa fa-github"></i> Gustavo Leme</a>
+    <a href="https://github.com/Isaagapito"><i class="fa fa-github"></i> Isabele Agapito</a>
+    <a href="https://github.com/jucastrox"><i class="fa fa-github"></i> Júlia França</a>
+    <a href="https://github.com/dias-crypto"><i class="fa fa-github"></i> Natália Dias</a>
+    <a href="https://github.com/TuannyThomazelli"><i class="fa fa-github"></i> Tuanny Thomazelli</a>
+  </footer>
+
+  <script src="./script/agenda.js"></script>
+</body>
+</html>
