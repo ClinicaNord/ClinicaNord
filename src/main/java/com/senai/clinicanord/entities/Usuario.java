@@ -44,6 +44,7 @@ public class Usuario {
 	@Column(name = "dataNascimento", unique = false)
 	private LocalDate dataNascimento;
 	
+	// Ligação com outras tabelas 
 	@ManyToOne
 	@JsonIgnoreProperties
 	@JoinColumn(name = "tipoUsuario")
