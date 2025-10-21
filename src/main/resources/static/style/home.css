@@ -285,6 +285,26 @@ header .inicio {
     }
 
     @media (max-width: 480px) {
+       header nav button {
+    width: 50%;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  margin-left: 5px;
+  margin-right: auto;
+  
+}
+
+  header nav .btn-cadastro {
+    margin-top: 10px;
+  }
+  .btn-cadastro button {
+    width: 50%;
+    font-size: 0.9rem;
+    padding: 8px 0px;
+    margin-left: 0;
+  margin-right: auto;
+  
+  }
       header h1 {
         font-size: 20px;
       }
@@ -322,31 +342,4 @@ header .inicio {
       iframe {
         height: 200px;
       }
-    }
-    @media (max-width: 320px) {
-      header h1 {
-        font-size: 18px;
-      }
-
-      .hero button {
-        padding: 6px 12px;
-        font-size: 10px;
-      }
-      .btn-agendar {
-        padding: 6px 12px;
-        font-size: 10px;
-      }
-      .servicos h2 {
-        font-size: 20px;
-      }
-      .card h3 {
-        font-size: 16px;
-      }
-      .contato h2 {
-        font-size: 18px;
-      }
-      iframe {
-        height: 150px;
-      }
-
     }
