@@ -72,6 +72,41 @@ header nav button {
       color: #072033;
     } 
 
+    /* Footer */
+   footer {
+  background: #092549;
+  color: #ccc;
+  text-align: center;
+  padding: 15px;
+  width: 100%;
+  font-size: 14px;
+  margin-top: auto; /* empurra para o fim da tela */
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+footer a {
+  color: #7ec0ff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.fa-github {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.fa-github:hover {
+  color: #fff;
+}
+
+
 /* Responsividade */
 @media (max-width: 768px) {
   header {
@@ -137,7 +172,7 @@ header nav button {
       background: #143a5a;
     }
     /* Footer */
-.footer {
+footer {
   margin-top: auto; /* empurra o footer para o fim */
   padding: 15px;
   width: 100%;
@@ -147,7 +182,7 @@ header nav button {
   gap: 20px;
   flex-wrap: wrap;
 } 
-.footer a {
+footer a {
       color: #7ec0ff;
       text-decoration: none;
       font-size: 14px;

@@ -33,13 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
 
 		// Redireciona para a página de acordo com o tipo de usuário
-		if (usuario.tipoUsuario.nome === "Admin") {
-			window.location.href = "admin.html";
-		} else if (usuario.tipoUsuario.nome === "Cliente") {
-			window.location.href = "index.html";
-		} else {
-		alert("erro no cadastro, tente novamente");
-		}
+		const tipo = usuario.tipoUsuario?.nome?.trim().toLowerCase();
+
+    if (tipo === "admin") {
+  window.location.href = "perfilAdm.html";
+} else if (tipo === "cliente") {
+     window.location.href = "index.html";
+   } else {
+     alert("Erro no cadastro, tente novamente");
+  }
+
 	})
 	.catch(error => {
 		// Exibe mensagem de erro em caso de falha
