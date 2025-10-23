@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 	
-	const form = document.getElementById("cadastroEndereco");
+	const form = document.getElementById("formEndereco");
 	
 	const pessoaId = localStorage.getItem('pessoaId'); // Obtém ID da pessoa salva anteriormente
 
