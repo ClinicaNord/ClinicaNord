@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				document.getElementById("rua").value = dados.logradouro; 
 				document.getElementById("bairro").value = dados.bairro;
 				document.getElementById("cidade").value = dados.localidade;
-				document.getElementById("estado").value = dados.estado;
+				document.getElementById("estado").value = dados.uf;
 			
 			} catch (error) {
 				alert("Erro ao buscar o endereço: " + error.message);

@@ -2,6 +2,8 @@ package com.senai.clinicanord.entities;
 
 
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
