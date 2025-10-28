@@ -1,7 +1,6 @@
+// Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", () => {	  
-  const form = document.getElementById("cadastroEndereco");
-  if (!form) return; //  garante que o código só roda na página certa
-
+	
 	// Adiciona evento ao campo de CEP
 	document.getElementById("cep").addEventListener("input", async function() {
 		const cep = this.value.replace(/\D/g, ""); // Remove caracteres não numéricos
@@ -33,11 +32,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 	
-<<<<<<< Updated upstream
 	const form = document.getElementById("formEndereco");
 	
-=======
->>>>>>> Stashed changes
 	const pessoaId = localStorage.getItem('pessoaId'); // Obtém ID da pessoa salva anteriormente
 
 	// Se não houver pessoaId, redireciona para o cadastro de cliente
