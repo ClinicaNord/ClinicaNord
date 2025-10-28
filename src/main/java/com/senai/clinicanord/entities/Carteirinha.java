@@ -1,8 +1,6 @@
 package com.senai.clinicanord.entities;
 
-
-
-
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -13,94 +11,81 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
 import jakarta.persistence.Table;
 
-@Table(name = "tb_carteirinha")
 @Entity
+@Table(name = "tb_carteirinha")
 public class Carteirinha {
-	// Atributos
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idCarteirinha", nullable = false, unique = true)
-	private Long idCarteirinha;
 
-	@Column(name = "numero", nullable = false)
-	private String numero;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCarteirinha", nullable = false, unique = true)
+    private Long idCarteirinha;
 
+    @Column(name = "numero", nullable = false)
+    private String numero;
 
+    @Column(name = "validade", nullable = false)
+    private LocalDate validade;
 
-	@Column(name = "validade", nullable = false)
-	private String validade;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnoreProperties({"carteirinhas"})
+    private Usuario usuario;
 
-	
-	
-	@ManyToOne
-	@JsonIgnoreProperties
-	@JoinColumn(name = "usuario")
-	private Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "nome_convenio_id", nullable = false)
+    @JsonIgnoreProperties({"carteirinhas"})
+    private NomeConvenio nomeConvenio;
 
-	@ManyToOne
-	@JsonIgnoreProperties
-	@JoinColumn(name = "nomeConvenio")
-	private NomeConvenio nomeConvenio;
+    // ===== Construtores =====
+    public Carteirinha() {}
 
-	// CONSTRUTORES
-	public Carteirinha() {
+    public Carteirinha(String numero, LocalDate validade, Usuario usuario, NomeConvenio nomeConvenio) {
+        this.numero = numero;
+        this.validade = validade;
+        this.usuario = usuario;
+        this.nomeConvenio = nomeConvenio;
+    }
 
-	}
+    // ===== Getters e Setters =====
+    public Long getIdCarteirinha() {
+        return idCarteirinha;
+    }
 
-	public Carteirinha(Long idCarteirinha, String numero,  String validade) {
-		this.idCarteirinha = idCarteirinha;
-		this.numero = numero;
-		
-		this.validade = validade;
-	}
+    public void setIdCarteirinha(Long idCarteirinha) {
+        this.idCarteirinha = idCarteirinha;
+    }
 
-	// GETTERS E SETTERSS
-	public Long getIdConvenio() {
-		return idCarteirinha;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setIdConvenio(Long idCarteirinha) {
-		this.idCarteirinha = idCarteirinha;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public LocalDate getValidade() {
+        return validade;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setValidade(LocalDate validade) {
+        this.validade = validade;
+    }
 
-	
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-	public String getValidade() {
-		return validade;
-	}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-	public void setValidade(String validade) {
-		this.validade = validade;
-	}
+    public NomeConvenio getNomeConvenio() {
+        return nomeConvenio;
+    }
 
-	
-
-	public NomeConvenio getNomeConvenio() {
-		return nomeConvenio;
-	}
-
-	public void setNomeConvenio(NomeConvenio nomeConvenio) {
-		this.nomeConvenio = nomeConvenio;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
-
+    public void setNomeConvenio(NomeConvenio nomeConvenio) {
+        this.nomeConvenio = nomeConvenio;
+    }
 }
