@@ -1,52 +1,42 @@
-// Aguarda o carregamento completo do DOM
 document.addEventListener('DOMContentLoaded', () => {
-	const form = document.getElementById('loginForm');
+  const form = document.getElementById('loginForm');
 
-	// Adiciona um listener para o envio do formulário de login
-	form.addEventListener('submit', function(event) {
-		event.preventDefault(); // Impede o envio padrão do formulário
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-		// Captura os valores digitados nos campos de email e senha
-		const email = document.getElementById('email').value;
-		const senha = document.getElementById('senha').value;
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
 
-		// Envia os dados para o backend para autenticação
-		fetch('http://localhost:8080/cadastrocliente/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				email: email,
-				senha: senha
-			})
-})
-	.then(res => {
-		if (!res.ok) throw new Error("Usuário ou senha incorretos!");
-		return res.json();
-	})
-	.then(usuario => {
-		// Exibe mensagem de boas-vindas
-		alert('Login realizado com sucesso! Bem-vindo, ' + usuario.nomeUsuario);
+    fetch('http://localhost:8080/cadastrocliente/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, senha })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error("Usuário ou senha incorretos!");
+      return res.json();
+    })
+    .then(usuario => {
+      console.log("Resposta do servidor:", usuario);
 
-		// Armazena os dados do usuário logado no localStorage
-		localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+      alert(`Login realizado com sucesso! Bem-vindo, ${usuario.nomeUsuario || usuario.nome}`);
 
-		// Redireciona para a página de acordo com o tipo de usuário
-		const tipo = usuario.tipoUsuario?.nome?.trim().toLowerCase();
+      localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
 
-    if (tipo === "admin") {
-  window.location.href = "perfilAdm.html";
-} else if (tipo === "cliente") {
-     window.location.href = "index.html";
-   } else {
-     alert("Erro no cadastro, tente novamente");
-  }
+      const tipo = usuario.tipoUsuario?.nome?.trim().toLowerCase();
+      console.log("Tipo de usuário:", tipo);
 
-	})
-	.catch(error => {
-		// Exibe mensagem de erro em caso de falha
-		alert(error.message);
-	});
-	});
+      if (tipo === "admin") {
+        window.location.href = "perfilAdm.html";
+      } else if (tipo === "cliente") {
+        window.location.href = "perfilCliente.html";
+      } else {
+        alert("Erro: tipo de usuário não reconhecido!");
+      }
+    })
+    .catch(error => {
+      console.error("Erro no login:", error);
+      alert(error.message);
+    });
+  });
 });
