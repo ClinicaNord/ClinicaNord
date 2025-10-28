@@ -23,7 +23,7 @@ public class NomeConvenio {
 	@Column(name = "nomeConv", nullable = false)
 	private String nomeConv;
 
-	@OneToMany(mappedBy = "convenio") // 👈 nome do atributo em Carteirinha
+	@OneToMany(mappedBy = "nomeConvenio") // 👈 nome do atributo em Carteirinha
 	private List<Carteirinha> carteirinhas;
 
 	// Construtores
