@@ -11,5 +11,5 @@ import com.senai.clinicanord.entities.Agendamento;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
-	List<Agendamento> findByUsuarioId(Long usuarioId);
+	List<Agendamento> findByUsuarioIdUsuario(Long idUsuario);
 }

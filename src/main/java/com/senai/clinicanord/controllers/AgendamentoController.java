@@ -48,8 +48,8 @@ public class AgendamentoController {
         agendamentoService.deleteAgendamento(idAgendamento);
     
 }
-    @GetMapping("/usuario/{usuarioId}")
-    public List<Agendamento> getAgendamentosByUsuario(@PathVariable Long usuarioId) {
-        return agendamentoService.getAgendamentosByUsuario(usuarioId);
+    @GetMapping("/usuario/{idUsuario}")
+    public List<Agendamento> getAgendamentosByUsuario(@PathVariable Long idUsuario) {
+        return agendamentoService.getAgendamentosByUsuario(idUsuario);
     }
 }
