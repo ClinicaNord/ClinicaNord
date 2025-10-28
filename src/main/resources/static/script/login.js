@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('loginForm');
 
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
+       form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        localStorage.removeItem('usuarioLogado');
 
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tipo === "admin") {
         window.location.href = "perfilAdm.html";
       } else if (tipo === "cliente") {
-        window.location.href = "perfilCliente.html";
+        window.location.href = "index.html";
       } else {
         alert("Erro: tipo de usuário não reconhecido!");
       }
