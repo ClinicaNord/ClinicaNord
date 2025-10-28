@@ -11,12 +11,12 @@ INSERT IGNORE INTO tb_nomeConvenio (id_nome_conv, nome_conv) VALUES
 (1, 'Funcerv'),
 (2, 'Apas');
 
-INSERT IGNORE INTO tb_usuario (id_usuario, nome_usuario, cpf, telefone, email, senha, data_nascimento) VALUES
-(1, 'Cristiane Mattos', '45113473871', '15988345655', 'cristianemattos@gmail.com', '12345', '1973-05-27');
+INSERT IGNORE INTO tb_usuario (id_usuario, nome_usuario, cpf, telefone, email, senha, data_nascimento, tipo_usuario) VALUES
+(1, 'Cristiane Mattos', '45113473871', '15988345655', 'cristianemattos@gmail.com', '12345', '1973-05-27', 1);
 
 INSERT IGNORE INTO tb_endereco (id_endereco, bairro, cep, cidade, complemento, uf, rua, usuario_id) VALUES
 (1, 'jardim sao paulo', '18051895', 'sorocaba', 'portão branco', 'SP', 'Luiz antonio pereira', 1);
 
-INSERT IGNORE INTO tb_carteirinha (id_carteirinha, convenio, numero, validade, nome_convenio, usuario) VALUES
-(2, 'Funserv', '344', '2088-05-05', '1', 2);
+INSERT IGNORE INTO tb_carteirinha (id_carteirinha, numero, validade, nome_convenio, usuario) VALUES
+(2, '344', '2088-05-05', 1, 2);
 
