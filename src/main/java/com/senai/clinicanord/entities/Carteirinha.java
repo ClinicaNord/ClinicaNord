@@ -19,7 +19,7 @@ public class Carteirinha {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idCarteirinha", nullable = false, unique = true)
+    @Column(name = "id_carteirinha", nullable = false, unique = true)
     private Long idCarteirinha;
 
     @Column(name = "numero", nullable = false)

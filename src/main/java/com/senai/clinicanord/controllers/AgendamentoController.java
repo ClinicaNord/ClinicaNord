@@ -50,6 +50,6 @@ public class AgendamentoController {
 }
     @GetMapping("/usuario/{idUsuario}")
     public List<Agendamento> getAgendamentosByUsuario(@PathVariable Long idUsuario) {
-        return agendamentoService.getAgendamentosByUsuario(idUsuario);
+       return agendamentoService.getAgendamentosByUsuario(idUsuario);
     }
 }
