@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
+  const form = document.getElementById('loginForm');
+
+       form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
     const email = document.getElementById('email').value;
     const senha = document.getElementById('senha').value;
@@ -36,4 +39,4 @@ document.addEventListener('DOMContentLoaded', () => {
       alert(error.message);
     });
   });
-
+});
