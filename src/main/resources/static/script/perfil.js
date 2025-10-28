@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tenta pegar os dados do usuário armazenados no localStorage
   const usuarioJson = localStorage.getItem('usuarioLogado');
 
+  if (!usuarioJson) {
+    alert('Usuário não está logado! Redirecionando para o login...');
+    window.location.href = 'login.html';  // redireciona para login se não tiver dados
+    return;
+  }
 
   // Usa o método JSON.parse para converter a string JSON armazenada na variável 'usuarioJson' em um objeto JavaScript.
   // Isso é necessário porque os dados armazenados no localStorage são sempre strings, e para acessar suas propriedades como 'nome' ou 'email',
@@ -13,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Depois, atribui ao conteúdo de texto interno (textContent) desse elemento o valor da propriedade 'nome' do objeto 'usuario'.
   // O operador lógico OR (||) é usado para garantir que, caso 'usuario.nome' seja undefined, null ou vazio, o conteúdo do elemento será definido como uma string vazia (''),
   // evitando que apareça 'undefined' ou erro na página.
-  document.getElementById('nome').textContent = nome || '';
+  document.getElementById('nome').textContent = usuario.nomeUsuario || '';
   document.getElementById('email').textContent = usuario.email || '';
   document.getElementById('telefone').textContent = usuario.telefone || '';
   document.getElementById('dataNascimento').textContent = usuario.dataNascimento || '';
