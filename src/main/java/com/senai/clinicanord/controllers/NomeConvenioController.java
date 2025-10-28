@@ -3,6 +3,7 @@ package com.senai.clinicanord.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import com.senai.clinicanord.entities.NomeConvenio;
 import com.senai.clinicanord.services.NomeConvenioService;
 
 
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/nomeConv")
 public class NomeConvenioController {
@@ -39,7 +40,7 @@ public class NomeConvenioController {
 
     //método para buscar o nomeConv pelo id
     @GetMapping("/{id}")
-    public NomeConvenio getNomeConv(@PathVariable Long idNomeConv) {
+    public NomeConvenio getNomeConv(@PathVariable("id") Long idNomeConv) {
         return nomeConvenioService.getNomeConvById(idNomeConv);
     }
 

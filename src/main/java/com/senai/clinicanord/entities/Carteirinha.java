@@ -28,8 +28,7 @@ public class Carteirinha {
 	@Column(name = "numero", nullable = false)
 	private String numero;
 
-	@Column(name = "convenio", nullable = false)
-	private String convenio;
+
 
 	@Column(name = "validade", nullable = false)
 	private String validade;
@@ -51,10 +50,10 @@ public class Carteirinha {
 
 	}
 
-	public Carteirinha(Long idCarteirinha, String numero, String convenio, String validade) {
+	public Carteirinha(Long idCarteirinha, String numero,  String validade) {
 		this.idCarteirinha = idCarteirinha;
 		this.numero = numero;
-		this.convenio = convenio;
+		
 		this.validade = validade;
 	}
 
@@ -75,13 +74,7 @@ public class Carteirinha {
 		this.numero = numero;
 	}
 
-	public String getConvenio() {
-		return convenio;
-	}
-
-	public void setConvenio(String convenio) {
-		this.convenio = convenio;
-	}
+	
 
 	public String getValidade() {
 		return validade;
