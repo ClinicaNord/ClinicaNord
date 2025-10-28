@@ -1,4 +1,5 @@
-* {
+
+*{
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
@@ -106,340 +107,31 @@ footer a:hover {
   color: #fff;
 }
 
-
-/* Responsividade */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
- }
 /* Perfil Container */
- .perfil-container {
-      background-color: #296198;
-      padding: 30px;
-      border-radius: 20px;
-      width: 380px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    .perfil-container h2 {
-      margin-bottom: 20px;
-      font-size: 22px;
-      color: #f0f0f0;
-    }
-
-    .foto-perfil {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 10px;
-      border: 3px solid #fff;
-    }
-
-    .info {
-      text-align: left;
-      margin-top: 15px;
-    }
-
-    .info p {
-      margin: 10px 0;
-      font-size: 15px;
-    }
-
-    .info span {
-      font-weight: bold;
-      color: #fff;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      font-size: 15px;
-      border: none;
-      border-radius: 25px;
-      background: #0f304c;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #143a5a;
-    }
-    /* Footer */
-footer {
-  margin-top: auto; /* empurra o footer para o fim */
-  padding: 15px;
-  width: 100%;
-  background: #092549;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-} 
-footer a {
-      color: #7ec0ff;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .footer a:hover {
-      text-decoration: underline;
-    }
-    .footer span {
-      color: #ccc;
-      font-size: 14px;
-    }
-    .fa-github {
-      font-size: 18px;
-      color: #ccc;
-    }
-    .fa-github:hover {
-      color: #fff;
-    }
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      height: 150px;
-      object-fit: cover;
-    }
-        .card.selected {
-      background-color: #1e4f7b;
-    }
-    .card h3 {
-      margin-top: 15px;
-      background-color: #fefee9;
-      display: inline-block;
-      padding: 8px 15px;
-      border-radius: 25px;
-      font-size: 15px;
-      font-weight: bold;
-      color: #1e2f3d;
-    }
-    button.selecionar {
-      margin-top: 30px;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      background-color: #1e4f7b;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    button.selecionar:hover {
-      background-color: #163d5c;
-    }
-/* Formulário */
-.form-box {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 25px;
+.container {
+  background: #296198;
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  max-width: 600px;
-  margin: 20px auto;
-}
-.form-box h2 {
-  grid-column: span 2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90vh;
   text-align: center;
-  margin-bottom: 20px;
-  color: #072033;
+  margin-top: 100px;
 }
-.form-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+
+.info{
+  margin: 15px 0;
+  font-size: 18px;
+  text-align: left;
 }
-.form-box label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #072033;
-}
-.form-box input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 30px;
-  border: 1px solid #ccc;
-  background: #fdfce9;
-  font-size: 14px;
-}
-.form-box .full {
-  grid-column: span 2;
-}
-.btn-submit {
-  grid-column: span 2;
-  background: #072033;
-  color: #fff;
+button#logoutBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 30px;
-  padding: 12px;
-  font-size: 16px;
+  border-radius: 20px;
+  background: #fdfce9;
+  color: #0b2e4a;
+  font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
 }
-.btn-submit:hover {
-  background: #14476d;
-}
-/* Celulares */
-@media (max-width: 600px) {
-  .form-box {
-    grid-template-columns: 1fr;
-  }
-  .form-box .full {
-    grid-column: span 1;
-  }
-  .perfil-container {
-    width: 90%;
-    padding: 20px;
-  }
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  header .btns {
-    width: 100%;
-    justify-content: space-between;
-  }
-  header .btn-inicio, header .btn-agendamento {
-    width: 48%;
-    padding: 10px 0;
-    font-size: 14px;
-  }
-  .footer {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .footer span {
-    font-size: 12px;
-  }
-  .footer a {
-    font-size: 12px;
-  }
-  .fa-github {
-    font-size: 16px;
-  }
-  button.selecionar {
-    width: 100%;
-  }
-  button {
-    width: 100%;
-  }
-  .btn-submit {
-    width: 100%;
-  }
-  .btn-submit {
-    font-size: 14px;
-  }
-}
-@media (max-width: 400px) {
-  header .logo h1 {
-    font-size: 16px;
-  }
-  header .btn-inicio, header .btn-agendamento {
-    font-size: 12px;
-    padding: 8px 0;
-  }
-  .perfil-container h2 {
-    font-size: 20px;
-  }
-  .info p {
-    font-size: 14px;
-  }
-  button {
-    font-size: 14px;
-    padding: 10px 0;
-  }
-  .card h3 {
-    font-size: 14px;
-  }
-  button.selecionar {
-    font-size: 14px;
-    padding: 10px 0;
-  }
-  .footer span {
-    font-size: 10px;
-  }
-  .footer a {
-    font-size: 10px;
-    color: #7ec0ff;
-    text-decoration: none;
-}
-  .fa-github {
-    font-size: 14px;
-  }
-  .btn-submit {
-    font-size: 12px;
-    padding: 10px 0;
-  }
-}
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-      height: 150px;
-      object-fit: cover;
-    }
-        .card.selected {
-      background-color: #1e4f7b;
-    }
-
-    .card h3 {
-      margin-top: 15px;
-      background-color: #fefee9;
-      display: inline-block;
-      padding: 8px 15px;
-      border-radius: 25px;
-      font-size: 15px;
-      font-weight: bold;
-      color: #1e2f3d;
-    }
-
-    button.selecionar {
-      margin-top: 30px;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      background-color: #1e4f7b;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button.selecionar:hover {
-      background-color: #163d5c;
-    }
-
-    /* Rodapé */
-    footer {
-      background-color: #0d2236;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      font-size: 14px;
-    }
-
-    footer a {
-      color: #4db8ff;
-      margin: 0 10px;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: none;
-    }
-    
-    .fa-github {
-      font-size: 20px;
-      margin-right: 8px;
-      color: #ccc;
-    }
-    
