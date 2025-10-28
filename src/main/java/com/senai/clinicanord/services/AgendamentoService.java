@@ -35,4 +35,7 @@ public class AgendamentoService {
     public void deleteAgendamento(Long idAgendamento) {
         agendamentoRepository.deleteById(idAgendamento);
     }
+    public List<Agendamento> getAgendamentosByUsuario(Long usuarioId) {
+        return agendamentoRepository.findByUsuarioId(usuarioId);
+    }
 }
