@@ -7,8 +7,7 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 
 // Carrega dados do localStorage
 const servicoSelecionado = JSON.parse(localStorage.getItem("servicoSelecionado"));
@@ -23,12 +22,11 @@ console.log("Serviço selecionado:", servicoSelecionado);
 console.log("Usuário logado:", usuarioLogado);
 
 //  Bloqueios (se houver) 
-=======
+
 // Dias e horários bloqueados pelo admin
->>>>>>> Stashed changes
-=======
+
 // Dias e horários bloqueados pelo admin
->>>>>>> Stashed changes
+
 const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
 const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
 
