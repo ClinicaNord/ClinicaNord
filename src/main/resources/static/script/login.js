@@ -23,21 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
 
       let tipo = usuario.tipoUsuario;
-      if (typeof tipo === 'object') {
-        tipo = tipo.nome?.trim().toLowerCase();
-      } else if (typeof tipo === 'string') {
-        tipo = tipo.trim().toLowerCase();
-      }
 
+      if (tipo && typeof tipo === 'object') {
+       tipo = tipo.nome;
+     }
+
+    if (tipo) {
+    tipo = tipo.trim().toLowerCase();
+    } else {
+    tipo = '';
+    }
       console.log("Tipo de usuário:", tipo);
 
-      if (tipo === "admin") {
-        window.location.href = "perfilAdm.html";
-      } else if (tipo === "cliente") {
-        window.location.href = "perfilCliente.html";
-      } else {
-        alert("Erro: tipo de usuário não reconhecido!");
-      }
+     if (tipo === "admin") {
+  window.location.href = "perfilAdm.html";
+} else if (tipo === "cliente") {
+  window.location.href = "perfilCliente.html";
+} else {
+  alert("Erro: tipo de usuário não reconhecido!");
+}
+
     })
     .catch(error => {
       console.error("Erro no login:", error);
