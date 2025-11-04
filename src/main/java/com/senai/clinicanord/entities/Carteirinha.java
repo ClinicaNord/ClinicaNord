@@ -17,6 +17,7 @@ import jakarta.persistence.Table;
 @Table(name = "tb_carteirinha")
 public class Carteirinha {
 
+	// ====== Atributos ======
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_carteirinha", nullable = false, unique = true)
