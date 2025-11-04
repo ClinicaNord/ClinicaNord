@@ -17,9 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return res.json();
     })
     .then(usuario => {
-      console.log("Resposta do servidor:", usuario);
-      alert(`Login realizado com sucesso! Bem-vindo, ${usuario.nomeUsuario || usuario.nome || 'usuário'}`);
-
+         
       localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
 
       let tipo = usuario.tipoUsuario;
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
      if (tipo === "admin") {
   window.location.href = "perfilAdm.html";
 } else if (tipo === "cliente") {
-  window.location.href = "perfilCliente.html";
+  window.location.href = "index.html";
 } else {
   alert("Erro: tipo de usuário não reconhecido!");
 }
