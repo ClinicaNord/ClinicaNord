@@ -1,4 +1,4 @@
- /* --- Menu de perfil --- */
+/* --- Menu de perfil --- */
 .perfil-menu {
   position: relative;
   display: inline-block;
@@ -17,6 +17,7 @@
 
 .perfil-menu .fa-user-circle {
   font-size: 1.2rem;
+  color: #fff;
 }
 
 .dropdown-menu {
@@ -26,30 +27,53 @@
   right: 0;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   min-width: 120px;
   z-index: 10;
   text-align: left;
 }
 
+/* 🔹 Estilo unificado para links e botões dentro do dropdown */
 .dropdown-menu a,
 .dropdown-menu button {
   display: block;
+  text-decoration: none;
+  font-weight: bold;
   width: 100%;
   padding: 8px 12px;
-  color: #333;
+  color: #000;
   background: none;
-  border: none;
   text-align: left;
   cursor: pointer;
   font-size: 0.9rem;
+  border: none;
+} 
+
+#logoutBtn a, 
+#logoutBtn {
+  display: block;
+  text-decoration: none;
+  font-weight: bold;
+  width: 100%;
+  padding: 8px 12px;
+  color: #000;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  border: none;
 }
 
+/* 🔹 Efeito hover igual para ambos */
 .dropdown-menu a:hover,
 .dropdown-menu button:hover {
-  background-color: #f0f0f0;
+  background-color: #0f304c;
+  border-radius: 15px;
+  color: #fff;
+  align-items: center;
 }
 
+/* 🔹 Exibe o menu ao clicar */
 .dropdown-menu.show {
   display: block;
 }
