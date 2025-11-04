@@ -7,6 +7,7 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 
+
 // Carrega dados do localStorage
 const servicoSelecionado = JSON.parse(localStorage.getItem("servicoSelecionado"));
 const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));

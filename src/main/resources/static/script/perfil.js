@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const usuario = JSON.parse(usuarioJson);
 
-  document.getElementById('nome').textContent = usuario.nomeUsuario || usuario.nome || '';
+  document.getElementById('nomeUsuario').textContent = usuario.nomeUsuario || '';
   document.getElementById('email').textContent = usuario.email || '';
   document.getElementById('telefone').textContent = usuario.telefone || '';
   document.getElementById('dataNascimento').textContent = usuario.dataNascimento || '';
