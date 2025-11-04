@@ -43,7 +43,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       if (!res.ok) throw new Error("Erro ao cadastrar carteirinha");
 
-      alert("Carteirinha cadastrada com sucesso!");
       localStorage.removeItem("usuarioCadastrado"); // limpa fluxo
       window.location.href = "./sucesso.html";
 

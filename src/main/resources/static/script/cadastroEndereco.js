@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Erro ao cadastrar endereço");
 
       await response.json();
-      alert("Endereço cadastrado com sucesso!");
       window.location.href = "./cadastroConvenio.html";
 
     } catch (error) {
