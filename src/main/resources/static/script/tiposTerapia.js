@@ -1,4 +1,22 @@
-  // --- Código original abaixo ---gf
+document.addEventListener("DOMContentLoaded", () => {
+  // Verifica se há um usuário logado no localStorage
+  const usuarioJson = localStorage.getItem("usuarioLogado");
+
+  if (!usuarioJson) {
+    alert("Você precisa estar logado para acessar esta página!");
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Converte o JSON em objeto
+  const usuario = JSON.parse(usuarioJson);
+
+  // Verifica se o tipo de usuário é Cliente
+  if (!usuario.tipoUsuario || usuario.tipoUsuario.nome !== "Cliente") {
+    alert("Acesso restrito! Somente clientes podem acessar esta página.");
+    window.location.href = "index.html"; // ou outra página adequada
+    return;
+  }
 
   const cards = document.querySelectorAll(".card");
   const btnSelecionar = document.getElementById("btnSelecionar");
@@ -43,4 +61,4 @@
     // Redireciona para a página de agendamento
     window.location.href = "./agenda.html";
   });
-
+});
