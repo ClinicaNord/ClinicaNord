@@ -1,25 +1,20 @@
-// Aguarda o carregamento completo do DOM
 document.addEventListener("DOMContentLoaded", () => {
-
   const cepInput = document.getElementById("cep");
 
-  // Evento ao sair do campo CEP
+  // Preenche endereço pelo CEP
   cepInput.addEventListener("blur", async function () {
-    const cep = this.value.replace(/\D/g, ""); // Remove caracteres não numéricos
-
+    const cep = this.value.replace(/\D/g, "");
     if (cep.length === 8) {
       try {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         if (!response.ok) throw new Error("Erro ao buscar o CEP");
 
         const dados = await response.json();
-
         if (dados.erro) {
           alert("CEP não encontrado.");
           return;
         }
 
-        // Preenche os campos com os dados do ViaCEP
         document.getElementById("rua").value = dados.logradouro || "";
         document.getElementById("bairro").value = dados.bairro || "";
         document.getElementById("cidade").value = dados.localidade || "";
@@ -33,15 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const form = document.getElementById("formEndereco");
-  const pessoaId = localStorage.getItem('pessoaId');
 
-  if (!pessoaId) {
-    alert("Pessoa não encontrada. Por favor, cadastre uma pessoa primeiro.");
-    window.location.href = "cadastrocliente.html";
+  // Recupera usuário cadastrado
+  const usuario = JSON.parse(localStorage.getItem("usuarioCadastrado"));
+  if (!usuario || !usuario.idUsuario) {
+    alert("Usuário não encontrado. Cadastre-se primeiro.");
+    window.location.href = "./cadastrocliente.html";
     return;
   }
 
-  // Evento de envio do formulário
+  // Submissão do endereço
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -53,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cep: document.getElementById("cep").value,
       numero: document.getElementById("numero").value,
       complemento: document.getElementById("complemento").value,
-      usuario: { idUsuario: pessoaId }
+      usuario: { idUsuario: usuario.idUsuario }
     };
 
     try {
@@ -66,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!response.ok) throw new Error("Erro ao cadastrar endereço");
 
       await response.json();
-      alert("Cadastro de endereço realizado com sucesso!");
-      localStorage.removeItem("pessoaId");
+      alert("Endereço cadastrado com sucesso!");
       window.location.href = "./cadastroConvenio.html";
+
     } catch (error) {
       console.error("Erro no cadastro:", error);
       alert("Falha ao cadastrar endereço. Tente novamente.");
