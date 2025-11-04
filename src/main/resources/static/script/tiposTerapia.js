@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+  // --- Código original abaixo ---gf
+
   const cards = document.querySelectorAll(".card");
   const btnSelecionar = document.getElementById("btnSelecionar");
   let servicoSelecionado = null;
@@ -42,4 +43,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Redireciona para a página de agendamento
     window.location.href = "./agenda.html";
   });
-});
+

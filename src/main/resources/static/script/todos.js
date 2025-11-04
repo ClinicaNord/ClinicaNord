@@ -12,7 +12,7 @@
           <i class="fa fa-user-circle"></i> ${usuarioLogado.nomeUsuario} ▾
         </button>
         <div class="dropdown-menu">
-          <a href="./perfil.html">Perfil</a>
+          <a href="./perfilCliente.html">Perfil</a>
           <button id="logoutBtn">Sair</button>
         </div>
       </div>
