@@ -1,35 +1,45 @@
-  document.addEventListener("DOMContentLoaded", () => {
-      const usuarioLogado = localStorage.getItem("usuarioLogado");
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  const btnSelecionar = document.getElementById("btnSelecionar");
+  let servicoSelecionado = null;
 
-      if (!usuarioLogado) {
-        window.location.href = "./login.html";
-      }
+  // Mapeia os tipos com base no banco de dados
+  const mapaServicos = {
+    "Audiometria Clínica": 1,
+    "Fonoterapia (TDAH, TEA, TPAC)": 2,
+    "Reabilitação Auditiva": 3
+  };
+
+  // Selecionar o card
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      cards.forEach(c => c.classList.remove("selected"));
+      card.classList.add("selected");
+
+      const nomeServico = card.dataset.tipo;
+      const idServico = mapaServicos[nomeServico];
+
+      // Armazena o serviço selecionado
+      servicoSelecionado = {
+        idServicos: idServico,
+        nomeServico: nomeServico
+      };
+
+      btnSelecionar.disabled = false;
     });
-const cards = document.querySelectorAll(".card");
-    const btnSelecionar = document.getElementById("btnSelecionar");
-    let terapiaSelecionada = null;
+  });
 
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        // remove seleção dos outros
-        cards.forEach(c => c.classList.remove("selected"));
+  // Botão “Selecionar” salva no localStorage e redireciona
+  btnSelecionar.addEventListener("click", () => {
+    if (!servicoSelecionado) {
+      alert("Selecione um tipo de terapia antes de continuar!");
+      return;
+    }
 
-        // marca o clicado
-        card.classList.add("selected");
-        terapiaSelecionada = card.getAttribute("data-tipo");
+    // Salva no localStorage (para a página agenda usar)
+    localStorage.setItem("servicoSelecionado", JSON.stringify(servicoSelecionado));
 
-        // habilita botão
-        btnSelecionar.disabled = false;
-        btnSelecionar.classList.add("enabled");
-      });
-    });
-
-    btnSelecionar.addEventListener("click", () => {
-      if (terapiaSelecionada == null) {
-        // redireciona para a página escolhida
-        alert("Por favor, selecione um tipo de terapia.");
-        return;
-      } else {
-        window.location.href = `./agendamento.html?tipo=${terapiaSelecionada}`;
-      }
-          });
+    // Redireciona para a página de agendamento
+    window.location.href = "./agenda.html";
+  });
+});

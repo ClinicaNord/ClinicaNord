@@ -7,7 +7,19 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 
-// Dias e horários bloqueados pelo admin
+// Carrega dados do localStorage
+const servicoSelecionado = JSON.parse(localStorage.getItem("servicoSelecionado"));
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+if (!servicoSelecionado) {
+  alert("Nenhum tipo de terapia foi selecionado! Retornando à página anterior.");
+  window.location.href = "./tiposTerapia.html";
+}
+
+console.log("Serviço selecionado:", servicoSelecionado);
+console.log("Usuário logado:", usuarioLogado);
+
+//  Bloqueios (se houver) 
 const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
 const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
 
@@ -18,12 +30,10 @@ function generateCalendar(year, month) {
   calendar.innerHTML = "";
 
   const lastDate = new Date(year, month + 1, 0).getDate();
-  let firstDay = new Date(year, month, 1).getDay(); 
+  let firstDay = new Date(year, month, 1).getDay();
 
-  // ajusta se o primeiro dia for domingo (0)
-  if (firstDay === 0) firstDay = 7;
+  if (firstDay === 0) firstDay = 7; // ajusta se domingo
 
-  // cria espaços vazios para alinhar o primeiro dia
   for (let i = 1; i < firstDay; i++) {
     const emptyEl = document.createElement("div");
     emptyEl.classList.add("empty-day");
@@ -36,9 +46,9 @@ function generateCalendar(year, month) {
 
     if (weekday === 0) continue; // pula domingo
 
-    const dateStr = `${year}-${month + 1}-${day}`;
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
-    if (blockedDays.includes(dateStr)) continue; // pula dias bloqueados
+    if (blockedDays.includes(dateStr)) continue;
 
     const dayEl = document.createElement("div");
     dayEl.classList.add("day");
@@ -49,7 +59,7 @@ function generateCalendar(year, month) {
   }
 }
 
-// Mostra horários disponíveis
+//  Mostra horários disponíveis para o dia selecionado 
 function showSchedule(dateStr) {
   currentDateStr = dateStr;
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
@@ -60,7 +70,7 @@ function showSchedule(dateStr) {
     for (let min = 0; min < 60; min += 30) {
       const time = `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
 
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue; // pula horários bloqueados
+      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue;
 
       const slotEl = document.createElement("div");
       slotEl.classList.add("time-slot");
@@ -76,17 +86,50 @@ function showSchedule(dateStr) {
   }
 }
 
-// Seleciona horário
-function selectTime(dateStr, time) {
-  alert(`Você selecionou ${dateStr} às ${time}`);
-  // Aqui você pode enviar os dados para o backend
+// Seleciona horário e envia para o backend 
+async function selectTime(dateStr, time) {
+  if (!usuarioLogado) {
+    alert("Você precisa estar logado para agendar!");
+    window.location.href = "./login.html";
+    return;
+  }
+
+  const agendamento = {
+    data: dateStr,
+    hora: time,
+    servico: { idServicos: servicoSelecionado.idServicos },
+    cliente: { idCliente: usuarioLogado.idCliente }
+  };
+
+  try {
+    const response = await fetch("http://localhost:8080/agendamento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(agendamento)
+    });
+
+    if (response.ok) {
+      alert(`Agendamento realizado com sucesso para ${dateStr} às ${time}!`);
+      // opcional: bloqueia o horário localmente
+      if (!blockedTimes[dateStr]) blockedTimes[dateStr] = [];
+      blockedTimes[dateStr].push(time);
+      localStorage.setItem("blockedTimes", JSON.stringify(blockedTimes));
+    } else {
+      const errorText = await response.text();
+      alert("Erro ao agendar: " + errorText);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Erro de conexão com o servidor.");
+  }
 }
 
-// Fecha a aba de horários quando clicar fora
+//  Fecha a aba de horários 
 document.addEventListener("click", (e) => {
   if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
     schedule.style.display = "none";
   }
 });
 
+// Inicializa o calendário
 generateCalendar(year, month);

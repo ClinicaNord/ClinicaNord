@@ -22,7 +22,7 @@ public class Agendamento {
 	
 	@ManyToOne
 	@JsonIgnoreProperties
-	@JoinColumn(name = "sevicos")
+	@JoinColumn(name = "servicos")
 	private Servicos servicos;
 	
 	@ManyToOne
@@ -41,6 +41,7 @@ public class Agendamento {
 	 }
 	 public Agendamento(Long idAgendamento) {
 		 this.idAgendamento = idAgendamento;
+		 
 	 }
 	 
 	 // GETTERS E SETTERS
