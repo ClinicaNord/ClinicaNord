@@ -1,4 +1,4 @@
-  // Se chegou aqui, o usuário está logado normalmente 👇
+document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".card");
   const btnSelecionar = document.getElementById("btnSelecionar");
   let servicoSelecionado = null;
@@ -36,10 +36,10 @@
       return;
     }
 
-    // Salva o serviço e o usuário logado para usar no agendamento
+    // Salva no localStorage (para a página agenda usar)
     localStorage.setItem("servicoSelecionado", JSON.stringify(servicoSelecionado));
 
     // Redireciona para a página de agendamento
     window.location.href = "./agenda.html";
   });
-
+});
