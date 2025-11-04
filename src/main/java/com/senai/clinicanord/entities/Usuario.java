@@ -58,7 +58,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario")
 	@JsonManagedReference
 	@JsonIgnore
-	private List<Carteirinha> carterinhas;
+	private List<Carteirinha> carteirinhas;
 	
 	
 	@OneToMany(mappedBy = "usuario")
@@ -166,11 +166,11 @@ public class Usuario {
 	}
 
 	public List<Carteirinha> getCarterinha() {
-		return carterinhas;
+		return carteirinhas;
 	}
 
 	public void setCarterinha(List<Carteirinha> carterinha) {
-		this.carterinhas = carterinha;
+		this.carteirinhas = carterinha;
 	}
 	
 }
