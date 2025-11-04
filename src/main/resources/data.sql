@@ -18,6 +18,6 @@ INSERT IGNORE INTO tb_endereco (id_endereco, bairro, cep, cidade, complemento, u
 (1, 'jardim sao paulo', '18051895', 'sorocaba', 'portão branco', 'SP', 'Luiz antonio pereira', 1);
 
 INSERT IGNORE INTO tb_carteirinha (id_carteirinha, numero, validade, usuario_id, nome_convenio_id)
-VALUES (2, '344', '2088-05-05', 2, 1);
+VALUES (2, '344', '2088-05-05', 1, 1);
 
 

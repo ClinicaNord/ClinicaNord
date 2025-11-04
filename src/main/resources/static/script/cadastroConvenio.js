@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nomeConvenioId = Number(document.getElementById("convenio").value);
     const usuarioId = Number(localStorage.getItem("usuarioId"));
 
+
     if (!nomeConvenioId) return alert("Por favor, selecione um convênio.");
     if (!numero || !validade) return alert("Preencha todos os campos.");
 
