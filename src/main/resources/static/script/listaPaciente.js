@@ -1,12 +1,12 @@
- const inputNome = document.getElementById('nomePaciente');
-        const tabelaPacientes = document.getElementById('tabelaPacientes').querySelector('tbody');
+        const inputNome = document.getElementById('nomeUsuario');
+        const tabelaUsuario = document.getElementById('tabelaUsuario').querySelector('tbody');
         const tabelaAgendamentos = document.getElementById('tabelaAgendamentos').querySelector('tbody');
         const agendamentosDiv = document.getElementById('agendamentos');
-        const nomePacienteSpan = document.getElementById('nomePacienteSelecionado');
+        const nomeUsuarioSpan = document.getElementById('nomeUsuarioSelecionado');
 
         inputNome.addEventListener('input', async () => {
             const nome = inputNome.value;
-            tabelaPacientes.innerHTML = '';
+            tabelaUsuario.innerHTML = '';
             agendamentosDiv.style.display = 'none';
 
             if(nome.length === 0) return;
@@ -15,29 +15,29 @@
                 const res = await fetch(`/cadastrocliente/buscarpornomeusuario?nomeUsuario=${encodeURIComponent(nome)}`);
                 if(!res.ok) throw new Error('Erro ao buscar pacientes');
 
-                const pacientes = await res.json();
+                const Usuario = await res.json();
 
-                pacientes.forEach(paciente => {
+                Usuario.forEach(Usuario => {
                     const tr = document.createElement('tr');
                     tr.style.cursor = 'pointer';
-                    tr.innerHTML = `<td>${paciente.nomeUsuario}</td><td>${paciente.email}</td>`;
-                    tr.onclick = () => mostrarAgendamentos(paciente.id, paciente.nomeUsuario);
-                    tabelaPacientes.appendChild(tr);
+                    tr.innerHTML = `<td>${Usuario.nomeUsuario}</td><td>${Usuario.email}</td>`;
+                    tr.onclick = () => mostrarAgendamentos(idUsuario, Usuario.nomeUsuario);
+                    tabelaUsuario.appendChild(tr);
                 });
             } catch(e) {
                 console.error(e);
             }
         });
 
-        async function mostrarAgendamentos(pacienteId, nomePaciente){
+        async function mostrarAgendamentos(idUsuario, nomeUsuario){
             try {
-                const res = await fetch(`/agendamento/paciente/${pacienteId}`);
+                const res = await fetch(`/agendamento/usuario/${usuarioIdId}`);
                 if(!res.ok) throw new Error('Erro ao buscar agendamentos');
 
                 const agendamentos = await res.json();
 
                 tabelaAgendamentos.innerHTML = '';
-                nomePacienteSpan.textContent = nomePaciente;
+                nomeUsuarioSpan.textContent = nomeUsuario;
 
                 if(agendamentos.length === 0){
                     const tr = document.createElement('tr');

@@ -6,8 +6,6 @@
     <title>Lista de Pacientes</title>
     <link rel="stylesheet" href="./style/listaPacientes.css">
     <link rel="stylesheet" href="./style/todos.css">
-    <script src="./script/listaPaciente.js" defer></script>
-    <script src="./script/todos.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -28,10 +26,10 @@
         <h1>Lista de Pacientes</h1>
 
         <!-- Busca -->
-        <input type="text" id="nomePaciente" placeholder="Digite o nome do paciente">
+        <input type="text" id="nomeUsuario" placeholder="Digite o nome do paciente">
 
         <!-- Tabela de Pacientes -->
-        <table id="tabelaPacientes">
+        <table id="tabelaUsuarios">
             <thead>
                 <tr>
                     <th>Nome do Paciente</th>
@@ -43,7 +41,7 @@
 
         <!-- Tabela de Agendamentos -->
         <div id="agendamentos" style="display:none;">
-            <h2>Agendamentos de <span id="nomePacienteSelecionado"></span></h2>
+            <h2>Agendamentos de <span id="nomeUsuarioSelecionado"></span></h2>
             <table id="tabelaAgendamentos">
                 <thead>
                     <tr>
@@ -65,3 +63,7 @@
         <a href="https://github.com/dias-crypto"><i class="fa fa-github"></i> Natália Dias</a>
         <a href="https://github.com/TuannyThomazelli"><i class="fa fa-github"></i> Tuanny Thomazelli</a>
     </footer>
+    
+<script src="./script/listaPaciente.js"></script>
+</body>
+</html>
