@@ -50,7 +50,10 @@
 } 
 
 #logoutBtn a, 
-#logoutBtn {
+#logoutBtn,
+#inicioBtn a,
+#inicioBtn,
+#perfilLink {
   display: block;
   text-decoration: none;
   font-weight: bold;

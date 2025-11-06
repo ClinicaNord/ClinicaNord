@@ -1,6 +1,4 @@
-// =====================
 // VARIÁVEIS GERAIS
-// =====================
 const calendar = document.getElementById("calendar");
 const schedule = document.getElementById("schedule");
 const selectedDayEl = document.getElementById("selected-day");
@@ -21,14 +19,12 @@ if (!servicoSelecionado) {
 console.log("Serviço selecionado:", servicoSelecionado);
 console.log("Usuário logado:", usuarioLogado);
 
-// =====================
+
 // VARIÁVEIS DE BLOQUEIO
-// =====================
+
 let blockedTimes = {};
 
-// =====================
 // FUNÇÃO PARA CARREGAR HORÁRIOS BLOQUEADOS DO BACKEND
-// =====================
 async function carregarHorariosBloqueados() {
   try {
     const response = await fetch("http://localhost:8080/agenda");
@@ -50,9 +46,8 @@ async function carregarHorariosBloqueados() {
   }
 }
 
-// =====================
+
 // FUNÇÃO PARA GERAR O CALENDÁRIO
-// =====================
 function generateCalendar(year, month) {
   calendar.innerHTML = "";
 
@@ -82,9 +77,7 @@ function generateCalendar(year, month) {
   }
 }
 
-// =====================
 // MOSTRA HORÁRIOS DISPONÍVEIS
-// =====================
 function showSchedule(dateStr) {
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
   schedule.style.display = "block";
@@ -152,32 +145,28 @@ async function selectTime(dateStr, time, slotEl) {
     const agendamento = await agendamentoResponse.json();
     console.log("Agendamento criado:", agendamento);
 
-    // ✅ Remove o horário da tela imediatamente
+    // Remove o horário da tela imediatamente
     slotEl.remove();
 
-    // ✅ Marca localmente como bloqueado
+    // Marca localmente como bloqueado
     blockedTimes[dateStr] = blockedTimes[dateStr] || [];
     blockedTimes[dateStr].push(time);
 
-    alert(`✅ Agendamento realizado com sucesso em ${dateStr} às ${time}!`);
+    alert(` Agendamento realizado com sucesso em ${dateStr} às ${time}!`);
   } catch (error) {
     console.error("Erro ao agendar:", error);
-    alert("❌ Ocorreu um erro ao tentar agendar. Tente novamente.");
+    alert(" Ocorreu um erro ao tentar agendar. Tente novamente.");
   }
 }
 
-// =====================
 // FECHAR ABA DE HORÁRIOS AO CLICAR FORA
-// =====================
 document.addEventListener("click", (e) => {
   if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
     schedule.style.display = "none";
   }
 });
 
-// =====================
 // INICIALIZAÇÃO
-// =====================
 (async () => {
   await carregarHorariosBloqueados();
   generateCalendar(year, month);
