@@ -50,6 +50,13 @@ public class UsuarioController {
 		usuarioService.deleteUsuario(id);
 	}
 	
+	@GetMapping("/buscar")
+	public ResponseEntity<List<Usuario>> buscarPorNome(@RequestParam String nome) {
+	    List<Usuario> usuarios = usuarioService.buscarPorNomeParcial(nome);
+	    return ResponseEntity.ok(usuarios);
+	}
+
+	
 	//buscar por nome de usuário 
 	@GetMapping("/buscarpornomeusuario")
 	public Usuario getByNomeUsuario(@RequestParam String nomeUsuario) {

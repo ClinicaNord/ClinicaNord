@@ -43,6 +43,10 @@ public class UsuarioService {
 		return usuarioRepository.findByNomeUsuario(nomeUsuario);
 	}
 	
+	public List<Usuario> buscarPorNomeParcial(String nome) {
+	    return usuarioRepository.buscarPorNomeParcial(nome);
+	}
+	
 	public Usuario autenticarPessoa(String email, String senha) {
 		
 		//Buscar no banco de dados um usuário que tenha o email informado
