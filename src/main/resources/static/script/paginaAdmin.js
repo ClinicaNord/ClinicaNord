@@ -1,9 +1,4 @@
-    function salvarConfig() {
-      const dias = document.getElementById("dias").value.split(",").map(d => d.trim());
-      const horarios = document.getElementById("horarios").value.split(",").map(h => h.trim());
-
-      const config = { dias, horarios };
-      localStorage.setItem("agendaConfig", JSON.stringify(config));
-
-      alert("Configurações salvas com sucesso!");
+    if(!usuarioLogado || usuarioLogado.tipo === 2) {
+        alert("Acesso negado. Você não esta logado");
+        window.location.href = "index.html";
     }
