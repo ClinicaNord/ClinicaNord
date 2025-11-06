@@ -1,58 +1,63 @@
-        const inputNome = document.getElementById('nomeUsuario');
-        const tabelaUsuario = document.getElementById('tabelaUsuario').querySelector('tbody');
-        const tabelaAgendamentos = document.getElementById('tabelaAgendamentos').querySelector('tbody');
-        const agendamentosDiv = document.getElementById('agendamentos');
-        const nomeUsuarioSpan = document.getElementById('nomeUsuarioSelecionado');
+document.addEventListener("DOMContentLoaded", () => {
+  const inputNome = document.getElementById("nomeUsuario");
+  const btnPesquisar = document.getElementById("btnPesquisar");
+  const tabelaUsuarios = document.querySelector("#tabelaUsuarios tbody");
 
-        inputNome.addEventListener('input', async () => {
-            const nome = inputNome.value;
-            tabelaUsuario.innerHTML = '';
-            agendamentosDiv.style.display = 'none';
+  async function buscarUsuarios() {
+    const nome = inputNome.value.trim();
 
-            if(nome.length === 0) return;
+    if (!nome) {
+      alert("Digite um nome para pesquisar.");
+      return;
+    }
 
-            try {
-                const res = await fetch(`/cadastrocliente/buscarpornomeusuario?nomeUsuario=${encodeURIComponent(nome)}`);
-                if(!res.ok) throw new Error('Erro ao buscar pacientes');
+    try {
+      const response = await fetch(`http://localhost:8080/cadastrocliente/buscar?nome=${encodeURIComponent(nome)}`);
+      if (!response.ok) throw new Error("Erro na busca");
 
-                const Usuario = await res.json();
+      const usuarios = await response.json();
 
-                Usuario.forEach(Usuario => {
-                    const tr = document.createElement('tr');
-                    tr.style.cursor = 'pointer';
-                    tr.innerHTML = `<td>${Usuario.nomeUsuario}</td><td>${Usuario.email}</td>`;
-                    tr.onclick = () => mostrarAgendamentos(idUsuario, Usuario.nomeUsuario);
-                    tabelaUsuario.appendChild(tr);
-                });
-            } catch(e) {
-                console.error(e);
-            }
+      // Limpa resultados anteriores
+      tabelaUsuarios.innerHTML = "";
+
+      if (usuarios.length === 0) {
+        tabelaUsuarios.innerHTML = "<tr><td colspan='4'>Nenhum usuário encontrado.</td></tr>";
+        return;
+      }
+
+      // Preenche a tabela
+      usuarios.forEach(usuario => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${usuario.idUsuario}</td>
+          <td>${usuario.nomeUsuario}</td>
+          <td>${usuario.email}</td>
+          <td><button class="btn-ver" data-id="${usuario.idUsuario}">Ver perfil</button></td>
+        `;
+
+        tabelaUsuarios.appendChild(tr);
+      });
+
+      // Evento nos botões "Ver perfil"
+      document.querySelectorAll(".btn-ver").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const id = e.target.dataset.id;
+          // Redireciona para a página de perfil com o id na URL
+          window.location.href = `perfilCliente.html?id=${id}`;
         });
+      });
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+      alert("Ocorreu um erro ao buscar os usuários.");
+    }
+  }
 
-        async function mostrarAgendamentos(idUsuario, nomeUsuario){
-            try {
-                const res = await fetch(`/agendamento/usuario/${usuarioIdId}`);
-                if(!res.ok) throw new Error('Erro ao buscar agendamentos');
+  // Botão de pesquisa
+  btnPesquisar.addEventListener("click", buscarUsuarios);
 
-                const agendamentos = await res.json();
-
-                tabelaAgendamentos.innerHTML = '';
-                nomeUsuarioSpan.textContent = nomeUsuario;
-
-                if(agendamentos.length === 0){
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td colspan="2">Sem agendamentos</td>`;
-                    tabelaAgendamentos.appendChild(tr);
-                } else {
-                    agendamentos.forEach(a => {
-                        const tr = document.createElement('tr');
-                        tr.innerHTML = `<td>${a.dataHora}</td><td>${a.servico || '-'}</td>`;
-                        tabelaAgendamentos.appendChild(tr);
-                    });
-                }
-
-                agendamentosDiv.style.display = 'block';
-            } catch(e){
-                console.error(e);
-            }
-        }
+  // Pesquisa automática (opcional)
+  inputNome.addEventListener("input", () => {
+    if (inputNome.value.length >= 2) buscarUsuarios();
+  });
+});
