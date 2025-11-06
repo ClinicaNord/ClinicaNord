@@ -8,12 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  const usuarioId = usuarioLogado.idUsuario; // Pega o ID do usuário logado
-
+  const usuarioId = usuarioLogado.idUsuario;
   const main = document.querySelector("main.card");
-  main.innerHTML = "<h2>Carregando seus agendamentos...</h2>";
 
   try {
+    // Busca os agendamentos do usuário
     const response = await fetch(`http://localhost:8080/agendamento/usuario/${usuarioId}`);
     if (!response.ok) throw new Error("Erro ao buscar agendamentos");
 
@@ -24,51 +23,42 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    main.innerHTML = "";
+    const ag = agendamentos[0]; // Exibe o primeiro agendamento (ou o mais recente)
 
-    
-    agendamentos.forEach((ag) => {
-      const card = document.createElement("div");
-      card.classList.add("agendamento-card");
+    // Preenche as informações na página
+    document.getElementById("nome").textContent = usuarioLogado.nome;
+    document.getElementById("servico").textContent = ag.servicos?.nome || "Serviço não informado";
+    document.getElementById("data").textContent = new Date(ag.agenda?.data).toLocaleDateString("pt-BR");
+    document.getElementById("hora").textContent = ag.agenda?.hora || "Hora não informada";
 
-      card.innerHTML = `
-        <div class="profile">
-          <img src="./img/logo.png" alt="Foto" class="profile-img">
-          <ul>
-            <li><strong>Nome:</strong> ${usuarioLogado.nome}</li>
-            <li><strong>Serviço:</strong> ${ag.servicos?.nome || "Serviço"}</li>
-            <li><strong>Data:</strong> ${new Date(ag.agenda?.data).toLocaleDateString("pt-BR")}</li>
-            <li><strong>Hora:</strong> ${ag.agenda?.hora || "Hora"}</li>
-          </ul>
-        </div>
+    // Botão: cancelar agendamento
+    document.getElementById("cancelar").addEventListener("click", async () => {
+      const confirma = confirm("Deseja realmente cancelar este agendamento?");
+      if (!confirma) return;
 
-        <div class="buttons">
-          <button class="cancel" data-id="${ag.idAgendamento}">Cancelar</button>
-          <button class="edit" data-id="${ag.idAgendamento}">Editar</button>
-        </div>
-      `;
-
-      main.appendChild(card);
+      const res = await fetch(`http://localhost:8080/agendamento/${ag.idAgendamento}`, { method: "DELETE" });
+      if (res.ok) {
+        alert("Agendamento cancelado com sucesso!");
+        location.reload();
+      } else {
+        alert("Erro ao cancelar agendamento.");
+      }
     });
 
-    document.querySelectorAll(".cancel").forEach((btn) => {
-      btn.addEventListener("click", async (e) => {
-        const id = e.target.getAttribute("data-id");
-        const confirma = confirm("Deseja realmente cancelar este agendamento?");
-        if (!confirma) return;
+    // Botão: editar agendamento
+    document.getElementById("editar").addEventListener("click", () => {
+      alert("Função de edição ainda em desenvolvimento!");
+      // Aqui no futuro você pode redirecionar para uma página de edição:
+      // window.location.href = `editarAgendamento.html?id=${ag.idAgendamento}`;
+    });
 
-        const res = await fetch(`http://localhost:8080/agendamento/${id}`, { method: "DELETE" });
-        if (res.ok) {
-          alert("Agendamento cancelado com sucesso!");
-          location.reload();
-        } else {
-          alert("Erro ao cancelar agendamento.");
-        }
-      });
+    // Botão: novo agendamento
+    document.getElementById("novo").addEventListener("click", () => {
+      window.location.href = "./agenda.html";
     });
 
   } catch (err) {
     console.error("Erro ao carregar agendamentos:", err);
-    main.innerHTML = "<h2>Erro ao carregar agendamentos.</h2>";
+    main.innerHTML = "<h2>Erro ao carregar seus agendamentos.</h2>";
   }
 });

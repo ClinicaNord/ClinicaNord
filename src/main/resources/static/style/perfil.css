@@ -123,7 +123,7 @@ footer a:hover {
   font-size: 18px;
   text-align: left;
 }
-button#Btn {
+button#LogoutBtn, button#VerAgendamentosBtn {
   margin-top: 20px;
   padding: 10px 20px;
   border: none;

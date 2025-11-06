@@ -6,8 +6,9 @@
   <title>Clínica Nord</title>
   <link rel="stylesheet" href="./style/verAgendamento.css">
   <link rel="stylesheet" href="./style/todos.css">
-  <script src="./script/todos.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="./script/todos.js" defer></script>
+  <script src="./script/verAgendamento.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <!-- Navbar -->
@@ -25,7 +26,7 @@
   <!-- Card central -->
   <main class="card">
     <div class="profile">
-      <img src="./img/logo.png" alt="Brenda" class="profile-img">
+      <img src="./img/logo.png" alt="Foto" class="profile-img">
       <ul>
         <div>
           <strong>Nome: </strong><span id="nome"></span>
@@ -41,16 +42,17 @@
         </div>       
       </ul>
     </div>
+
     <div class="buttons">
-      <button class="cancel">Cancelar agendamento</button>
-      <button class="edit">Editar agendamento</button>
-      <button class="new">Agendar um novo atendimento</button>
+      <button id="cancelar">Cancelar agendamento</button>
+      <button id="editar">Editar agendamento</button>
+      <button id="novo">Agendar um novo atendimento</button>
     </div>
   </main>
 
   <!-- Rodapé -->
   <footer>
-     <p>Feito por:</p>
+    <p>Feito por:</p>
     <a href="https://github.com/Gusleme"><i class="fa fa-github"></i> Gustavo Leme</a>
     <a href="https://github.com/Isaagapito"><i class="fa fa-github"></i> Isabele Agapito</a>
     <a href="https://github.com/jucastrox"><i class="fa fa-github"></i> Júlia França</a>

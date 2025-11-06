@@ -1,3 +1,6 @@
+// =====================
+// VARIÁVEIS GERAIS
+// =====================
 const calendar = document.getElementById("calendar");
 const schedule = document.getElementById("schedule");
 const selectedDayEl = document.getElementById("selected-day");
@@ -7,9 +10,6 @@ const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth();
 
-
-
-// Carrega dados do localStorage
 const servicoSelecionado = JSON.parse(localStorage.getItem("servicoSelecionado"));
 const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
@@ -21,28 +21,45 @@ if (!servicoSelecionado) {
 console.log("Serviço selecionado:", servicoSelecionado);
 console.log("Usuário logado:", usuarioLogado);
 
-//  Bloqueios (se houver) 
+// =====================
+// VARIÁVEIS DE BLOQUEIO
+// =====================
+let blockedTimes = {};
 
-// Dias e horários bloqueados pelo admin
+// =====================
+// FUNÇÃO PARA CARREGAR HORÁRIOS BLOQUEADOS DO BACKEND
+// =====================
+async function carregarHorariosBloqueados() {
+  try {
+    const response = await fetch("http://localhost:8080/agenda");
+    const agendas = await response.json();
 
-// Dias e horários bloqueados pelo admin
+    blockedTimes = {};
 
-const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
-const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
+    agendas.forEach((a) => {
+      if (a.diponibilidade === false) {
+        const data = a.data.split("T")[0];
+        if (!blockedTimes[data]) blockedTimes[data] = [];
+        blockedTimes[data].push(a.hora);
+      }
+    });
 
-let currentDateStr = null;
+    console.log("Horários bloqueados carregados:", blockedTimes);
+  } catch (error) {
+    console.error("Erro ao carregar horários bloqueados:", error);
+  }
+}
 
-// Gera o calendário (sem domingos e sem dias bloqueados)
+// =====================
+// FUNÇÃO PARA GERAR O CALENDÁRIO
+// =====================
 function generateCalendar(year, month) {
   calendar.innerHTML = "";
 
   const lastDate = new Date(year, month + 1, 0).getDate();
-  let firstDay = new Date(year, month, 1).getDay(); 
-
-  // ajusta se o primeiro dia for domingo (0)
+  let firstDay = new Date(year, month, 1).getDay();
   if (firstDay === 0) firstDay = 7;
 
-  // cria espaços vazios para alinhar o primeiro dia
   for (let i = 1; i < firstDay; i++) {
     const emptyEl = document.createElement("div");
     emptyEl.classList.add("empty-day");
@@ -52,25 +69,23 @@ function generateCalendar(year, month) {
   for (let day = 1; day <= lastDate; day++) {
     const date = new Date(year, month, day);
     const weekday = date.getDay();
+    if (weekday === 0) continue;
 
-    if (weekday === 0) continue; // pula domingo
-
-    const dateStr = `${year}-${month + 1}-${day}`;
-
-    if (blockedDays.includes(dateStr)) continue; // pula dias bloqueados
+    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
     const dayEl = document.createElement("div");
     dayEl.classList.add("day");
     dayEl.textContent = day;
-
     dayEl.addEventListener("click", () => showSchedule(dateStr));
+
     calendar.appendChild(dayEl);
   }
 }
 
-// Mostra horários disponíveis
+// =====================
+// MOSTRA HORÁRIOS DISPONÍVEIS
+// =====================
 function showSchedule(dateStr) {
-  currentDateStr = dateStr;
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
   schedule.style.display = "block";
   timeSlotsEl.innerHTML = "";
@@ -79,13 +94,13 @@ function showSchedule(dateStr) {
     for (let min = 0; min < 60; min += 30) {
       const time = `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
 
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue; // pula horários bloqueados
+      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue;
 
       const slotEl = document.createElement("div");
       slotEl.classList.add("time-slot");
       slotEl.textContent = time;
 
-      slotEl.addEventListener("click", () => selectTime(dateStr, time));
+      slotEl.addEventListener("click", () => selectTime(dateStr, time, slotEl));
       timeSlotsEl.appendChild(slotEl);
     }
   }
@@ -95,17 +110,75 @@ function showSchedule(dateStr) {
   }
 }
 
-// Seleciona horário
-function selectTime(dateStr, time) {
-  alert(`Você selecionou ${dateStr} às ${time}`);
-  // Aqui você pode enviar os dados para o backend
+// =====================
+// SELECIONA E BLOQUEIA O HORÁRIO
+// =====================
+async function selectTime(dateStr, time, slotEl) {
+  if (!usuarioLogado || !usuarioLogado.idUsuario) {
+    alert("Você precisa estar logado para agendar!");
+    return;
+  }
+
+  const agendaData = {
+    data: dateStr,
+    hora: time,
+    diponibilidade: false,
+  };
+
+  try {
+    const agendaResponse = await fetch("http://localhost:8080/agenda", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(agendaData),
+    });
+
+    if (!agendaResponse.ok) throw new Error("Erro ao salvar a agenda");
+    const agenda = await agendaResponse.json();
+    console.log("Agenda criada:", agenda);
+
+    const agendamentoData = {
+      servicos: { idServicos: servicoSelecionado.idServicos },
+      usuario: { idUsuario: usuarioLogado.idUsuario },
+      agenda: { idAgenda: agenda.idAgenda },
+    };
+
+    const agendamentoResponse = await fetch("http://localhost:8080/agendamento", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(agendamentoData),
+    });
+
+    if (!agendamentoResponse.ok) throw new Error("Erro ao salvar o agendamento");
+    const agendamento = await agendamentoResponse.json();
+    console.log("Agendamento criado:", agendamento);
+
+    // ✅ Remove o horário da tela imediatamente
+    slotEl.remove();
+
+    // ✅ Marca localmente como bloqueado
+    blockedTimes[dateStr] = blockedTimes[dateStr] || [];
+    blockedTimes[dateStr].push(time);
+
+    alert(`✅ Agendamento realizado com sucesso em ${dateStr} às ${time}!`);
+  } catch (error) {
+    console.error("Erro ao agendar:", error);
+    alert("❌ Ocorreu um erro ao tentar agendar. Tente novamente.");
+  }
 }
 
-// Fecha a aba de horários quando clicar fora
+// =====================
+// FECHAR ABA DE HORÁRIOS AO CLICAR FORA
+// =====================
 document.addEventListener("click", (e) => {
   if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
     schedule.style.display = "none";
   }
 });
 
-generateCalendar(year, month);
+// =====================
+// INICIALIZAÇÃO
+// =====================
+(async () => {
+  await carregarHorariosBloqueados();
+  generateCalendar(year, month);
+})();
