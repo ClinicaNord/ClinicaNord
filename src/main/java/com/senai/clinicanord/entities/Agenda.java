@@ -22,10 +22,10 @@ public class Agenda {
 	
 		@Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "idAgenda", nullable = false, unique = true)
+	    @Column(name = "id_agenda", nullable = false, unique = true)
 	    private Long idAgenda;
 		
-		@Column(name= "Data", nullable = false)
+		@Column(name= "data_agenda", nullable = false)
 		private Date data;
 		
 		@Column(name = "hora", nullable = false)

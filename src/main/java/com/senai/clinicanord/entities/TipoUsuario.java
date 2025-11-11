@@ -25,9 +25,9 @@ public class TipoUsuario {
 		@Column(name = "nome", nullable = false)
 		private String nome;
 		 
-			@JsonIgnoreProperties
-		    @OneToMany(mappedBy = "idUsuario") 
-		    private List<Usuario> usuarios;
+		@JsonIgnoreProperties
+		@OneToMany(mappedBy = "idUsuario") 
+		private List<Usuario> usuarios;
 		 
 		 
 		 //Construtores

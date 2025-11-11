@@ -17,12 +17,12 @@ public class Agendamento {
 
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "idAgendamento", nullable = false, unique = true)
+	 @Column(name = "id_agendamento", nullable = false, unique = true)
 	 private Long idAgendamento;
 	
 	@ManyToOne
 	@JsonIgnoreProperties
-	@JoinColumn(name = "servicos")
+	@JoinColumn(name = "servicos_id")
 	private Servicos servicos;
 	
 	@ManyToOne
@@ -31,7 +31,7 @@ public class Agendamento {
 	
 	@ManyToOne
 	@JsonIgnoreProperties
-	@JoinColumn(name = "agenda")
+	@JoinColumn(name = "agenda_id")
 	private Agenda agenda;
 	 
 	 // CONSTRUTORES
