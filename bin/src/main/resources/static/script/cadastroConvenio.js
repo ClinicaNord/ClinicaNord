@@ -22,9 +22,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// ================================
-// BLOCO 2 — Enviar formulário de carteirinha
-// ================================
+// Enviar formulário de carteirinha
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("cadastroCarteirinhaForm");
 
