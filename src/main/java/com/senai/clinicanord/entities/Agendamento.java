@@ -1,7 +1,6 @@
 package com.senai.clinicanord.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,16 +21,16 @@ public class Agendamento {
 	 private Long idAgendamento;
 	
 	@ManyToOne
-	@JsonManagedReference
+	@JsonIgnoreProperties
 	@JoinColumn(name = "servicos")
 	private Servicos servicos;
 	
 	@ManyToOne
-	@JsonBackReference
+	@JsonIgnoreProperties
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JsonManagedReference
+	@JsonIgnoreProperties
 	@JoinColumn(name = "agenda")
 	private Agenda agenda;
 	 

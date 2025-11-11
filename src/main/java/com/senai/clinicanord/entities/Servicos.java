@@ -2,7 +2,7 @@ package com.senai.clinicanord.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ public class Servicos {
 	private String servicos;
 	
 	@OneToMany(mappedBy = "servicos")
-	@JsonBackReference
+	@JsonIgnoreProperties
 	private List<Agendamento> agendamento;
 	
 	//construtores

@@ -1,6 +1,6 @@
 package com.senai.clinicanord.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,7 +42,7 @@ public class Endereco {
 	private String complemento;
 	
 	@ManyToOne
-	@JsonIgnore
+	@JsonIgnoreProperties
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
