@@ -27,6 +27,7 @@ public class Agendamento {
 	
 	@ManyToOne
 	@JsonIgnoreProperties
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
 	@ManyToOne
