@@ -2,7 +2,7 @@ package com.senai.clinicanord.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,7 +26,7 @@ public class NomeConvenio {
 	private String nomeConv;
 
 	@OneToMany(mappedBy = "nomeConvenio") // 👈 nome do atributo em Carteirinha
-	@JsonIgnore
+	@JsonBackReference
 	private List<Carteirinha> carteirinhas;
 
 	// Construtores
