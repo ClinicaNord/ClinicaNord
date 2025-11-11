@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   nav.innerHTML = `
-    <a href="./sobreNos.html"><button>Sobre nós</button></a>
+    <a href="./index.html"><button>Inicio</button></a>
     <div class="perfil-menu">
       <button id="perfilBtn">
         <i class="fa fa-user-circle"></i> ${usuario.nomeUsuario} ▾
