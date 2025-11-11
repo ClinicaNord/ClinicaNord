@@ -1,6 +1,10 @@
-body {
+*{
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
   background-image: url("../img/perfil_usuario.png");
   background-size: cover;
   background-position: center;
@@ -17,7 +21,6 @@ body {
   padding: 10px 20px;
   color: white; 
   font-size: 14px;
-
 }
 
 .logo {
@@ -46,30 +49,40 @@ body {
   color: white;
 }
 
-/* Card central */
+/* Container principal para vários cards */
 .card {
+  display: flex;
+  flex-direction: column; /*  permite vários cards empilhados */
+  align-items: center;
+  gap: 20px; /* espaço entre cards */
+  padding: 40px 20px 100px 20px; /* espaçamento interno */
+}
+
+/* Cada agendamento */
+.profile {
   background: #2f6fa5;
   color: white;
   border-radius: 20px;
   padding: 30px;
-  max-width: 500px;   
-  margin: 106px auto;
-  display: flex;       
+  width: 100%;
+  max-width: 500px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.profile {
-  text-align: left;
-  
+.profile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.25);
 }
 
 .profile-img {
   border-radius: 50%;
   width: 90px;
   height: 120px;
-  }
+}
 
 ul {
   list-style: none;
@@ -81,11 +94,12 @@ ul {
   font-size: 16px;
   margin-top: -10px;
 }
-ul h2{
+ul h2 {
   margin: 0 0 10px 0;
   font-size: 22px;
 }
 
+/*  Botões dentro de cada card */
 .buttons {
   display: flex;
   flex-direction: column; 
@@ -108,7 +122,28 @@ ul h2{
   background: #fdfce9;
   color: #0d2c47;
 }
-/*footer*/
+
+/*  Botão "Novo agendamento" global */
+.novo-btn {
+  background: #fdfce9;
+  color: #0d2c47;
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.novo-btn:hover {
+  background: #0d2c47;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+/* Footer */
 footer {
   background: #0f304c;
   padding: 15px;
@@ -119,7 +154,9 @@ footer {
   margin-top: auto;
   justify-content: center;
   align-items: center;
-
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 footer p {
@@ -157,10 +194,4 @@ footer a:hover {
 
 .fa-github:hover {
   color: #4db3ff;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
 }

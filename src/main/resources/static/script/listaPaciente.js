@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const tr = document.createElement("tr");
 
         tr.innerHTML = `
-          <td>${usuario.idUsuario}</td>
           <td>${usuario.nomeUsuario}</td>
           <td>${usuario.email}</td>
           <td><button class="btn-ver" data-id="${usuario.idUsuario}">Ver perfil</button></td>
@@ -49,14 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     } catch (error) {
       console.error("Erro ao buscar usuários:", error);
-      alert("Ocorreu um erro ao buscar os usuários.");
     }
   }
-
   // Botão de pesquisa
   btnPesquisar.addEventListener("click", buscarUsuarios);
-
-  // Pesquisa automática (opcional)
+  // Pesquisa automática
   inputNome.addEventListener("input", () => {
     if (inputNome.value.length >= 2) buscarUsuarios();
   });
