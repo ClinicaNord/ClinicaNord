@@ -33,7 +33,7 @@ public class UsuarioController {
 	@GetMapping
 	public List<Usuario> getAllUsuario() {
 		return usuarioService.getAllUsuario();
-	}
+	} 
 
 	@GetMapping("/{id}")
 	public Usuario getUsuario(@PathVariable Long id) {
