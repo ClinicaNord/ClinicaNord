@@ -79,6 +79,48 @@ main {
   flex-direction: column;
   align-items: center;
 }
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card-agendamento {
+  background-color: #1f558c;
+  color: white;
+  border-radius: 20px;
+  padding: 20px;
+  width: 350px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.card-buttons button {
+  background-color: #092c47;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
 
 /* --- Footer --- */
 footer {
