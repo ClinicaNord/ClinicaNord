@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const usuario = JSON.parse(usuarioJson);
 
-  // Atualiza informações do perfil (se existirem esses elementos)
+  // Atualiza informações do perfil
   if (document.getElementById('nomeUsuario')) {
     document.getElementById('nomeUsuario').textContent = usuario.nomeUsuario || '';
     document.getElementById('email').textContent = usuario.email || '';
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dataNascimento').textContent = usuario.dataNascimento || '';
   }
 
-  // --- Cria menu de navegação dinâmico ---
+  // Cria menu de navegação dinâmico 
   const nav = document.querySelector('nav');
   if (!nav) return;
 
   let linkPerfil = './perfilCliente.html';
   if (usuario.tipo === 1) {
-    // tipo 1 = Administrador (por exemplo)
+    // tipo 1 = Administrador
     linkPerfil = './perfilAdm.html';
   }
 

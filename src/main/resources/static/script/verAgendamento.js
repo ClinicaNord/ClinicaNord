@@ -1,141 +1,67 @@
-document.addEventListener("DOMContentLoaded", async () => {
-	// Recupera o usuário logado
-	const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+document.addEventListener("DOMContentLoaded", () => {
+  const nomeSpan = document.getElementById("nome");
+  const servicoSpan = document.getElementById("servico");
+  const dataSpan = document.getElementById("data");
+  const horaSpan = document.getElementById("hora");
 
-	if (!usuarioLogado) {
-		alert("Você precisa estar logado para ver seus agendamentos!");
-		window.location.href = "./login.html";
-		return;
-	}
+  // Botões
+  const btnCancelar = document.getElementById("cancelar");
+  const btnEditar = document.getElementById("editar");
+  const btnNovo = document.getElementById("novo");
 
-	const usuarioId = usuarioLogado.idUsuario;
-	const main = document.querySelector("main.card");
-
-	try {
-		// Busca os agendamentos do usuário
-		const response = await fetch(`http://localhost:8080/agendamento/usuario/${usuarioId}`);
-		if (!response.ok) throw new Error("Erro ao buscar agendamentos");
-
-		const agendamentos = await response.json();
-		console.log("Agendamentos recebidos:", agendamentos);
-
-		if (!agendamentos || agendamentos.length === 0) {
-			main.innerHTML = "<h2>Você ainda não possui agendamentos.</h2>";
-			return;
-		}
-
-		const ag = agendamentos[0]; // exibe o primeiro agendamento
-
-		// Preenche os dados corretamente
-		document.getElementById("nome").textContent = usuarioLogado.nomeUsuario || ag.usuario?.nome || "";
-		document.getElementById("servico").textContent = servico || ag.servicos?.nome || "";
-
-		// Formata a data corretamente
-		let dataFormatada = "";
-		if (ag.agenda?.data) {
-			const dataObj = new Date(ag.agenda.data);
-			if (!isNaN(dataObj)) {
-				dataFormatada = dataObj.toLocaleDateString("pt-BR");
-			} else {
-				dataFormatada = ag.agenda.data; // fallback
-			}
-		}
-		document.getElementById("data").textContent = dataFormatada || ag.agenda?.data || "";
-
-		document.getElementById("hora").textContent = hora || ag.agenda?.hora || "";
-
-		// ===== Botões =====
-		// Cancelar agendamento
-		document.getElementById("cancelar").addEventListener("click", async () => {
-			const confirma = confirm("Deseja realmente cancelar este agendamento?");
-			if (!confirma) return;
-
-			try {
-				const res = await fetch(`http://localhost:8080/agendamento/${ag.idAgendamento}`, {
-					method: "DELETE",
-				});
-				if (res.ok) {
-					alert("Agendamento cancelado com sucesso!");
-					location.reload();
-				} else {
-					alert("Erro ao cancelar agendamento.");
-				}
-			} catch (erro) {
-				console.error("Erro ao cancelar:", erro);
-				alert("Erro de conexão ao cancelar.");
-			}
-		});
-
-		// Editar agendamento
-		document.getElementById("editar").addEventListener("click", () => {
-			window.location.href = `editarAgendamento.html?id=${ag.idAgendamento}`;
-		});
-
-		// Novo agendamento
-		document.getElementById("novo").addEventListener("click", () => {
-			window.location.href = "./agenda.html";
-		});
-
-	} catch (err) {
-		console.error("Erro ao carregar agendamentos:", err);
-		main.innerHTML = "<h2>Erro ao carregar seus agendamentos.</h2>";
-	}
-});
-
-//--- Menu de perfil --- 
-document.addEventListener('DOMContentLoaded', () => {
-  const usuarioJson = localStorage.getItem('usuarioLogado');
-
-  const usuario = JSON.parse(usuarioJson);
-
-  // --- Cria menu de navegação dinâmico ---
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-
-  let linkPerfil = './perfilCliente.html';
-  if (usuario.tipo === 1) {
-    // tipo 1 = Administrador (por exemplo)
-    linkPerfil = './perfilAdm.html';
+  // Tenta pegar o agendamento selecionado
+  const agendamentoSelecionado = JSON.parse(localStorage.getItem("agendamentoSelecionado"));
+  
+  // Também pega o usuário logado (para controle, se necessário)
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+  const botaoLogout = document.getElementById("logout"); // ajuste conforme o id no seu HTML
+  if (usuarioLogado && usuarioLogado.tipoUsuario === "adm") {
+    if (botaoLogout) botaoLogout.style.display = "none";
   }
+  if (!agendamentoSelecionado) {
+    alert("Nenhum agendamento selecionado.");
+    window.location.href = "./index.html";
+    return;
+  }
+  
 
-  nav.innerHTML = `
-    <a href="./sobreNos.html"><button>Sobre nós</button></a>
-    <div class="perfil-menu">
-      <button id="perfilBtn">
-        <i class="fa fa-user-circle"></i> ${usuario.nomeUsuario} ▾
-      </button>
-      <div class="dropdown-menu">
-        <button id="inicioBtn">Início</button>
-        <a href="${linkPerfil}" id="perfilLink">Perfil</a>
-        <button id="logoutBtn">Sair</button>
-      </div>
-    </div>
-  `;
+  // Exibe as informações do agendamento selecionado
+  nomeSpan.textContent = agendamentoSelecionado.nomePaciente || "Não informado";
+  servicoSpan.textContent = agendamentoSelecionado.servico || "Não informado";
+  dataSpan.textContent = agendamentoSelecionado.data || "Não informado";
+  horaSpan.textContent = agendamentoSelecionado.hora || "Não informado";
 
-  // Mostra/oculta o menu suspenso ao clicar
-  const perfilBtn = document.getElementById('perfilBtn');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
+  // Função cancelar agendamento
+  btnCancelar.addEventListener("click", async () => {
+    if (confirm("Tem certeza que deseja cancelar este agendamento?")) {
+      try {
+        const resposta = await fetch(`http://localhost:8080/agendamentos/${agendamentoSelecionado.id}`, {
+          method: "DELETE",
+        });
 
-  perfilBtn.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('show');
-  });
-
-  // Fecha o menu se clicar fora
-  document.addEventListener('click', (e) => {
-    if (!perfilBtn.contains(e.target)) {
-      dropdownMenu.classList.remove('show');
+        if (resposta.ok) {
+          alert("Agendamento cancelado com sucesso!");
+          localStorage.removeItem("agendamentoSelecionado");
+          window.location.href = "./paginaInicial.html";
+        } else {
+          alert("Erro ao cancelar agendamento.");
+        }
+      } catch (erro) {
+        console.error(erro);
+        alert("Erro de conexão com o servidor.");
+      }
     }
   });
 
-  document.getElementById('inicioBtn').addEventListener('click', () => {
-    window.location.href = 'index.html';
+  // Função editar agendamento
+  btnEditar.addEventListener("click", () => {
+    localStorage.setItem("agendamentoEditando", JSON.stringify(agendamentoSelecionado));
+    window.location.href = "./editarAgendamento.html";
   });
 
-  // Logout
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('usuarioLogado');
-    alert('Você saiu da conta.');
-    window.location.href = 'index.html';
+  // Função novo agendamento
+
+  btnNovo.addEventListener("click", () => {
+    window.location.href = "./agendamento.html";
   });
 });
-
