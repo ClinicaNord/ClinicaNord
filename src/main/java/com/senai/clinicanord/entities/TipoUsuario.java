@@ -2,6 +2,8 @@ package com.senai.clinicanord.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,13 +19,13 @@ public class TipoUsuario {
 	//Atributos	
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		 @Column(name = "idTipoUsuario", nullable = false, unique = true)
-		 private Long idTipoUsuario;
+		@Column(name = "idTipoUsuario", nullable = false, unique = true)
+		private Long idTipoUsuario;
 		
-		 @Column(name = "nome", nullable = false)
-		 private String nome;
+		@Column(name = "nome", nullable = false)
+		private String nome;
 		 
-		 // @JsonManagedReference
+		 	@JsonBackReference
 		    @OneToMany(mappedBy = "idUsuario") 
 		    private List<Usuario> usuarios;
 		 
