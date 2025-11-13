@@ -27,11 +27,8 @@ public class CarteirinhaController {
         return carteirinhaService.getAllCarteirinha();
     }
     
-  //buscar por nome de usuário 
-  	@GetMapping("/buscarpornomeusuario")
-  	public Carteirinha getByNomeUsuario(@RequestParam Long idUsuario) {
-  		return carteirinhaService.findByNomeUsuario(idUsuario);
-  	}
+
+  
 
     @GetMapping("/{id}")
     public Carteirinha getCarteirinha(@PathVariable("id") Long idCarteirinha) {

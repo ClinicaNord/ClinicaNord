@@ -9,5 +9,5 @@ import com.senai.clinicanord.entities.Carteirinha;
 @Repository
 public interface CarteirinhaRepository extends JpaRepository<Carteirinha, Long> {
 
-	   Carteirinha findByNomeUsuario(Long idUsuario);
+	 
 }
