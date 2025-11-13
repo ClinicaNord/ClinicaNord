@@ -13,9 +13,9 @@ const calendar = document.getElementById("calendar");
     let currentDateStr = null;
     let currentDayEl = null;
 
- 
+
     // Gera calendário sem domingos
-   function generateCalendar(year, month) {
+    function generateCalendar(year, month) {
   calendar.innerHTML = "";
 
   const lastDate = new Date(year, month + 1, 0).getDate();
