@@ -21,17 +21,17 @@ public class Agendamento {
 	 private Long idAgendamento;
 	
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "servicos_id")
 	private Servicos servicos;
 	
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JsonIgnore
+	//@JsonIgnore
 	@JoinColumn(name = "agenda_id")
 	private Agenda agenda;
 	 
