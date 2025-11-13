@@ -3,6 +3,7 @@ package com.senai.clinicanord.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -45,15 +46,15 @@ public class Usuario {
 	// Ligação com outras tabelas 
 	@ManyToOne
 	@JoinColumn(name = "tipoUsuario")
-	@JsonIgnoreProperties
+	@JsonIgnore
 	private TipoUsuario tipoUsuario;
 	
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnoreProperties
+	@JsonIgnore
 	private List<Endereco> enderecos;
 	
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnoreProperties
+	@JsonIgnore
 	private List<Carteirinha> carteirinhas;
 	
 	

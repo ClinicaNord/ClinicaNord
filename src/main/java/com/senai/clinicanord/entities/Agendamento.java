@@ -1,6 +1,6 @@
 package com.senai.clinicanord.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,17 +21,17 @@ public class Agendamento {
 	 private Long idAgendamento;
 	
 	@ManyToOne
-	@JsonIgnoreProperties
+	@JsonIgnore
 	@JoinColumn(name = "servicos_id")
 	private Servicos servicos;
 	
 	@ManyToOne
-	@JsonIgnoreProperties
+	@JsonIgnore
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
 	@ManyToOne
-	@JsonIgnoreProperties
+	@JsonIgnore
 	@JoinColumn(name = "agenda_id")
 	private Agenda agenda;
 	 

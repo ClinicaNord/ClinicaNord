@@ -3,7 +3,7 @@ package com.senai.clinicanord.entities;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,7 +35,7 @@ public class Agenda {
 		private Boolean diponibilidade;
 		
 		@OneToMany(mappedBy = "agenda")
-		@JsonIgnoreProperties
+		@JsonIgnore
 		private List<Agendamento> agendamento;
 		
 		// CONSTRUTORES
