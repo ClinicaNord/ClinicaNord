@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --------------- FETCH ---------------
   const base = "http://localhost:8080";
   // 1) Rota esperada
-  const url1 = `${base}/agendamento/usuario/${usuario.idUsuario}`;
+  const idUsuario = usuario.idUsuario || usuario.id || usuario.usuario_id || usuario.idUser;
+  const url1 = `${base}/agendamento/usuario/${idUsuario}`;
   // 2) alternativa caso backend retorne diferente
   const url2 = `${base}/agendamentos?usuarioId=${usuario.idUsuario}`;
   // 3) buscar todos e filtrar cliente-side
@@ -108,11 +109,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("Usando agendamento:", ag);
 
     // tenta acessar propriedades comuns, com proteção contra undefined
-    const nomeUsuario = ag.usuario?.nomeUsuario ?? ag.usuario?.nome ?? "Nome não disponível";
+    const nomeUsuario = ag.usuario?.nomeUsuario ?? ag.usuario?.nomeUsuario ?? "Nome não disponível";
     const servico = ag.servicos?.servicos ?? ag.servicos?.nomeServicos ?? ag.servico ?? "Serviço não disponível";
 
     // agenda pode vir como objeto (agenda.data/hora) ou direto no agendamento
-    const dataRaw = ag.agenda?.data ?? ag.dataAgendamento ?? ag.data ?? ag.data_agendamento;
+    const dataRaw = ag.agenda?.data ?? ag.dataAgendamento ?? ag.data_agenda ?? ag.data_agendamento;
     const horaRaw = ag.agenda?.hora ?? ag.horaAgendamento ?? ag.hora ?? ag.hora_agendamento;
 
     if (nomeSpan) nomeSpan.textContent = nomeUsuario;
