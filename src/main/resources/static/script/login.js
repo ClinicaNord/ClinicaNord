@@ -43,9 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redireciona com base no tipo
       if (tipo === "admin") {
-        window.location.href = "perfilAdm.html";
+        window.location.href = "./perfilAdm.html";
       } else if (tipo === "cliente") {
-        window.location.href = "index.html";
+        window.location.href = "./index.html";
       } else {
         alert("Erro: tipo de usuário não reconhecido!");
       }

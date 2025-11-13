@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   // Exibe as informações do agendamento selecionado
-  nomeSpan.textContent = agendamentoSelecionado.nomePaciente || "Não informado";
+  nomeSpan.textContent = agendamentoSelecionado.nomeUsuario || "Não informado";
   servicoSpan.textContent = agendamentoSelecionado.servico || "Não informado";
   dataSpan.textContent = agendamentoSelecionado.data || "Não informado";
   horaSpan.textContent = agendamentoSelecionado.hora || "Não informado";
@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", () => {
   btnCancelar.addEventListener("click", async () => {
     if (confirm("Tem certeza que deseja cancelar este agendamento?")) {
       try {
-        const resposta = await fetch(`http://localhost:8080/agendamentos/${agendamentoSelecionado.id}`, {
+        const resposta = await fetch(`http://localhost:8080/agendamento/${agendamentoSelecionado.id}`, {
           method: "DELETE",
         });
 
         if (resposta.ok) {
           alert("Agendamento cancelado com sucesso!");
           localStorage.removeItem("agendamentoSelecionado");
-          window.location.href = "./paginaInicial.html";
+          window.location.href = "./index.html";
         } else {
           alert("Erro ao cancelar agendamento.");
         }
