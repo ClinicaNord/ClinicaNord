@@ -22,6 +22,19 @@ public class AgendaService {
         return agendaRepository.save(agenda);
     }
     
+ // 🔹 novo: retorna só horários disponíveis
+    public List<Agenda> getAgendasDisponiveis() {
+        return agendaRepository.findByDiponibilidadeTrue();
+    }
+
+    // 🔹 novo: altera disponibilidade
+    public Agenda alterarDisponibilidade(Long idAgenda, boolean disponivel) {
+        Agenda agenda = agendaRepository.findById(idAgenda)
+            .orElseThrow(() -> new RuntimeException("Agenda não encontrada"));
+        agenda.setDiponibilidade(disponivel);
+        return agendaRepository.save(agenda);
+    }
+    
     //método para listar todos as agendas salvas
     public List<Agenda> getAllAgenda(){
         return agendaRepository.findAll();
