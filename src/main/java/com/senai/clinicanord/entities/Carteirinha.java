@@ -2,8 +2,6 @@ package com.senai.clinicanord.entities;
 
 import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,12 +29,10 @@ public class Carteirinha {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonIgnore
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "nome_convenio_id", nullable = false)
-    @JsonIgnore
     private NomeConvenio nomeConvenio;
 
     // ===== Construtores =====
