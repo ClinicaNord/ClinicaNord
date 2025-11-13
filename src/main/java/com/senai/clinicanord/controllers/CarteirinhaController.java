@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.senai.clinicanord.entities.Carteirinha;
+
 import com.senai.clinicanord.services.CarteirinhaService;
 
 @CrossOrigin(origins = "http://localhost:5500") // ou a porta onde seu front está
@@ -25,6 +26,12 @@ public class CarteirinhaController {
     public List<Carteirinha> getAllCarteirinha() {
         return carteirinhaService.getAllCarteirinha();
     }
+    
+  //buscar por nome de usuário 
+  	@GetMapping("/buscarpornomeusuario")
+  	public Carteirinha getByNomeUsuario(@RequestParam String nomeUsuario) {
+  		return carteirinhaService.findByNomeUsuario(nomeUsuario);
+  	}
 
     @GetMapping("/{id}")
     public Carteirinha getCarteirinha(@PathVariable("id") Long idCarteirinha) {
