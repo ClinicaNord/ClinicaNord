@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const validade = document.getElementById("validade").value;
     const nomeConvenioId = document.getElementById("convenio").value;
 
-    // ID do usuário logado — precisa estar salvo após o login
+    // ID do usuário logado 
     const usuarioId = localStorage.getItem("usuarioId");
 
     if (!usuarioId) {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           numero,
-          convenio: nomeConvenioId, // campo String no banco (pode ser nomeConv)
+          convenio: nomeConvenioId, 
           validade,
           usuario: { id: usuarioId },
           nomeConvenio: { idNomeConv: nomeConvenioId }

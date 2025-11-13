@@ -43,6 +43,24 @@ public class AgendaController {
     public Agenda getAgenda(@PathVariable Long idAgenda) {
         return agendaService.getAgendaById(idAgenda);
     }
+    
+ // 🔹 novo: listar apenas horários disponíveis
+    @GetMapping("/disponiveis")
+    public List<Agenda> getAgendasDisponiveis() {
+        return agendaService.getAgendasDisponiveis();
+    }
+
+    // 🔹 novo: bloquear horário
+    @PostMapping("/bloquear/{idAgenda}")
+    public Agenda bloquearAgenda(@PathVariable Long idAgenda) {
+        return agendaService.alterarDisponibilidade(idAgenda, false);
+    }
+
+    // 🔹 novo: desbloquear horário
+    @PostMapping("/desbloquear/{idAgenda}")
+    public Agenda desbloquearAgenda(@PathVariable Long idAgenda) {
+        return agendaService.alterarDisponibilidade(idAgenda, true);
+    }
 
 
     //método para deletar a agenda pelo id
