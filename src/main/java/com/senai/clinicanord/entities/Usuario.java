@@ -46,7 +46,7 @@ public class Usuario {
 	// Ligação com outras tabelas 
 	@ManyToOne
 	@JoinColumn(name = "tipoUsuario")
-	@JsonIgnore
+	//@JsonIgnore
 	private TipoUsuario tipoUsuario;
 	
 	@OneToMany(mappedBy = "usuario")
