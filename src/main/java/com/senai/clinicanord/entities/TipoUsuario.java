@@ -2,7 +2,7 @@ package com.senai.clinicanord.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +25,7 @@ public class TipoUsuario {
 		@Column(name = "nome", nullable = false)
 		private String nome;
 		 
-		@JsonIgnoreProperties
+		@JsonIgnore
 		@OneToMany(mappedBy = "idUsuario") 
 		private List<Usuario> usuarios;
 		 
