@@ -29,8 +29,8 @@ public class CarteirinhaController {
     
   //buscar por nome de usuário 
   	@GetMapping("/buscarpornomeusuario")
-  	public Carteirinha getByNomeUsuario(@RequestParam String nomeUsuario) {
-  		return carteirinhaService.findByNomeUsuario(nomeUsuario);
+  	public Carteirinha getByNomeUsuario(@RequestParam Long idUsuario) {
+  		return carteirinhaService.findByNomeUsuario(idUsuario);
   	}
 
     @GetMapping("/{id}")

@@ -57,8 +57,8 @@ public class CarteirinhaService {
         return carteirinhaRepository.findById(idCarteirinha).orElse(null);
     }
     
-    public Carteirinha findByNomeUsuario(String nomeUsuario) {
-		return carteirinhaRepository.findByNomeUsuario(nomeUsuario);
+    public Carteirinha findByNomeUsuario(Long idUsuario) {
+		return carteirinhaRepository.findByNomeUsuario(idUsuario);
 	}
 
     // DELETAR
