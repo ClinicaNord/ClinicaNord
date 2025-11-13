@@ -183,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let linkPerfil = './perfilCliente.html';
   if (usuario.tipo === 1) {
-    // tipo 1 = Administrador (por exemplo)
     linkPerfil = './perfilAdm.html';
   }
 
