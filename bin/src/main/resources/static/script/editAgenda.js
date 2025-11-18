@@ -1,184 +1,178 @@
+document.addEventListener("click", (e) => {
+  const perfilBtn = document.getElementById("perfilBtn");
+  const dropdownMenu = document.querySelector(".dropdown-menu");
+  if (perfilBtn && e.target === perfilBtn) dropdownMenu.classList.toggle("show");
+  else if (dropdownMenu && !dropdownMenu.contains(e.target)) dropdownMenu.classList.remove("show");
+});
+const API_AGENDA = "http://localhost:8080/agenda";
 const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-  const nav = document.querySelector("nav");
-
-  if (usuarioLogado) {
-    // Substitui os botões de login e cadastro por um menu de perfil
-    nav.innerHTML = `
-      <a href="./sobreNos.html"><button>Sobre nós</button></a>
-      <div class="perfil-menu">
-        <button id="perfilBtn">
-          <i class="fa fa-user-circle"></i> ${usuarioLogado.nomeUsuario} ▾
-        </button>
-        <div class="dropdown-menu">
-          <a href="./perfil.html">Perfil</a>
-          <button id="logoutBtn">Sair</button>
-        </div>
-      </div>
-    `;
-  }
-    // Mostra/oculta o menu suspenso ao clicar
-    const perfilBtn = document.getElementById("perfilBtn");
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-
-    perfilBtn.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-    });
-
-    // Fecha o menu se clicar fora
-    document.addEventListener("click", (e) => {
-      if (!perfilBtn.contains(e.target)) {
-        dropdownMenu.classList.remove("show");
-      }
-    });
 
 const calendar = document.getElementById("calendar");
-    const schedule = document.getElementById("schedule");
-    const selectedDayEl = document.getElementById("selected-day");
-    const timeSlotsEl = document.getElementById("time-slots");
-    const toggleDayBtn = document.getElementById("toggle-day-btn");
+const schedule = document.getElementById("schedule");
+const selectedDayEl = document.getElementById("selected-day");
+const timeSlotsEl = document.getElementById("time-slots");
+const toggleDayBtn = document.getElementById("toggle-day-btn");
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = today.getMonth();
-    const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
-    const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
+let agendas = [];
+let currentDateStr = null;
 
-    let currentDateStr = null;
-    let currentDayEl = null;
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!usuarioLogado || usuarioLogado.tipoUsuario !== "ADMIN") {
+    alert("Acesso restrito a administradores!");
+    window.location.href = "./index.html";
+    return;
+  }
 
+  await carregarAgendas();
+  gerarCalendario();
+});
 
-    // Gera calendário sem domingos
-    function generateCalendar(year, month) {
+//  Busca todas as agendas (bloqueadas e liberadas)
+async function carregarAgendas() {
+  try {
+    const response = await fetch(API_AGENDA);
+    if (!response.ok) throw new Error("Erro ao buscar agendas");
+    agendas = await response.json();
+  } catch (error) {
+    console.error("Erro ao carregar agendas:", error);
+  }
+}
+
+//  Gera o calendário (Seg a Sáb)
+function gerarCalendario() {
   calendar.innerHTML = "";
 
-  const lastDate = new Date(year, month + 1, 0).getDate();
-  const firstDay = new Date(year, month, 1).getDay(); // 0 = domingo, 1 = segunda, etc.
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+  let primeiroDiaSemana = new Date(ano, mes, 1).getDay();
 
+  if (primeiroDiaSemana === 0) primeiroDiaSemana = 7;
 
-  // Preenche "espaços vazios" até o primeiro dia útil (segunda)
-  // OBS: domingo (0) vira 7 pra alinhar corretamente
-  const startIndex = firstDay === 0 ? 6 : firstDay - 1;
-  for (let i = 0; i < startIndex; i++) {
+  for (let i = 1; i < primeiroDiaSemana; i++) {
     const empty = document.createElement("div");
-    empty.classList.add("empty");
+    empty.classList.add("empty-day");
     calendar.appendChild(empty);
   }
 
-  // Gera os dias do mês (pulando domingos)
-  for (let day = 1; day <= lastDate; day++) {
-    const date = new Date(year, month, day);
-    const weekday = date.getDay(); // 0 = domingo
-
+  // Gera os dias úteis (segunda a sábado)
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const data = `${ano}-${mes + 1}-${dia}`;
+    const weekday = new Date(ano, mes, dia).getDay();
     if (weekday === 0) continue; // pula domingo
 
     const dayEl = document.createElement("div");
     dayEl.classList.add("day");
-    dayEl.textContent = day;
+    dayEl.textContent = dia;
 
-    const dateStr = `${year}-${month + 1}-${day}`;
+    const horariosDia = agendas.filter(a => a.data === data);
+    const todosBloqueados = horariosDia.length > 0 && horariosDia.every(a => !a.disponibilidade);
 
-    if (blockedDays.includes(dateStr)) {
+    if (todosBloqueados) {
       dayEl.classList.add("blocked");
     }
 
-    dayEl.addEventListener("click", () => showSchedule(dateStr, dayEl));
+    dayEl.addEventListener("click", () => mostrarHorarios(data));
     calendar.appendChild(dayEl);
   }
 }
 
-
-    // Mostra horários do dia
-  function showSchedule(dateStr, el) {
- 
-// Fecha a aba de horários ao clicar fora
-document.addEventListener("click", (event) => {
-  // Se o painel de horários estiver fechado, não faz nada
-  if (schedule.style.display !== "block") return;
-
-  // Se o clique foi dentro da aba de horários, não fecha
-  if (schedule.contains(event.target)) return;
-
-  // Se o clique foi no dia atual, não fecha (deixa o comportamento normal)
-  if (currentDayEl && currentDayEl.contains(event.target)) return;
-
-  // Caso contrário, fecha a aba
-  schedule.style.display = "none";
-  currentDateStr = null;
-  currentDayEl = null;
-});
-
-  // Atualiza variáveis de controle
-  currentDateStr = dateStr;
-  currentDayEl = el;
-
-  selectedDayEl.textContent = `Horários de ${dateStr}`;
+//  Mostra os horários de um dia
+function mostrarHorarios(data) {
+  currentDateStr = data;
+  selectedDayEl.textContent = `Horários de ${data}`;
   schedule.style.display = "block";
   timeSlotsEl.innerHTML = "";
 
-  // Atualiza o texto do botão de bloqueio
-  if (blockedDays.includes(dateStr)) {
-    toggleDayBtn.textContent = "Desbloquear dia inteiro";
-  } else {
-    toggleDayBtn.textContent = "Bloquear dia inteiro";
+  const horariosDia = agendas.filter(a => a.data === data);
+
+  // Se o dia não tem horários cadastrados, cria automaticamente
+  if (horariosDia.length === 0) {
+    criarHorariosPadrao(data);
+    return;
   }
 
-  // Gera os horários
-  for (let hour = 7; hour < 18; hour++) {
-    for (let min = 0; min < 60; min += 30) {
-      const time = `${hour.toString().padStart(2, "0")}:${min
-        .toString()
-        .padStart(2, "0")}`;
+  horariosDia.forEach(agenda => {
+    const slot = document.createElement("div");
+    slot.classList.add("time-slot");
+    slot.textContent = agenda.hora;
 
-      const slotEl = document.createElement("div");
-      slotEl.classList.add("time-slot");
-      slotEl.textContent = time;
-
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) {
-        slotEl.classList.add("time-blocked");
-      }
-
-      slotEl.addEventListener("click", () =>
-        toggleTime(dateStr, time, slotEl)
-      );
-
-      timeSlotsEl.appendChild(slotEl);
+    if (!agenda.disponibilidade) {
+      slot.classList.add("time-blocked");
     }
+
+    slot.addEventListener("click", () => alternarHorario(agenda));
+    timeSlotsEl.appendChild(slot);
+  });
+}
+
+//  Cria horários padrão (7h às 17h30, 30/30min)
+async function criarHorariosPadrao(data) {
+  const horarios = [];
+  for (let h = 7; h < 18; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      const hora = `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+      horarios.push({ data, hora, disponibilidade: true });
+    }
+  }
+
+  try {
+    for (const horario of horarios) {
+      await fetch(API_AGENDA, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(horario),
+      });
+    }
+    await carregarAgendas();
+    mostrarHorarios(data);
+  } catch (error) {
+    console.error("Erro ao criar horários padrão:", error);
   }
 }
 
-    // Bloqueia/Desbloqueia horários
-    function toggleTime(dateStr, time, el) {
-      if (!blockedTimes[dateStr]) {
-        blockedTimes[dateStr] = [];
-      }
+//  Alterna (bloqueia/desbloqueia) um horário específico
+async function alternarHorario(agenda) {
+  const rota = agenda.disponibilidade ? "bloquear" : "desbloquear";
+  try {
+    await fetch(`${API_AGENDA}/${rota}/${agenda.idAgenda}`, { method: "POST" });
+    agenda.disponibilidade = !agenda.disponibilidade;
+    await carregarAgendas();
+    mostrarHorarios(currentDateStr);
+  } catch (error) {
+    console.error("Erro ao alterar disponibilidade:", error);
+  }
+}
 
-      if (blockedTimes[dateStr].includes(time)) {
-        blockedTimes[dateStr] = blockedTimes[dateStr].filter(t => t !== time);
-        el.classList.remove("time-blocked");
-      } else {
-        blockedTimes[dateStr].push(time);
-        el.classList.add("time-blocked");
-      }
+//  Bloquear ou desbloquear o dia inteiro
+toggleDayBtn.addEventListener("click", async () => {
+  if (!currentDateStr) return;
 
-      localStorage.setItem("blockedTimes", JSON.stringify(blockedTimes));
+  const horariosDia = agendas.filter(a => a.data === currentDateStr);
+  if (horariosDia.length === 0) {
+    alert("Nenhum horário encontrado neste dia.");
+    return;
+  }
+
+  const todosBloqueados = horariosDia.every(a => !a.disponibilidade);
+  const rota = todosBloqueados ? "desbloquear" : "bloquear";
+
+  try {
+    for (const agenda of horariosDia) {
+      await fetch(`${API_AGENDA}/${rota}/${agenda.idAgenda}`, { method: "POST" });
     }
+    await carregarAgendas();
+    mostrarHorarios(currentDateStr);
+    gerarCalendario();
+  } catch (error) {
+    console.error("Erro ao bloquear/desbloquear dia:", error);
+  }
+});
 
-    // Bloqueia/Desbloqueia dia inteiro
-    toggleDayBtn.addEventListener("click", () => {
-      if (!currentDateStr || !currentDayEl) return;
-
-      if (blockedDays.includes(currentDateStr)) {
-        const index = blockedDays.indexOf(currentDateStr);
-        blockedDays.splice(index, 1);
-        currentDayEl.classList.remove("blocked");
-        toggleDayBtn.textContent = "Bloquear dia inteiro";
-      } else {
-        blockedDays.push(currentDateStr);
-        currentDayEl.classList.add("blocked");
-        toggleDayBtn.textContent = "Desbloquear dia inteiro";
-      }
-
-      localStorage.setItem("blockedDays", JSON.stringify(blockedDays));
-    });
-
-    generateCalendar(year, month);
+//  Fecha painel de horários ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
+    schedule.style.display = "none";
+  }
+});

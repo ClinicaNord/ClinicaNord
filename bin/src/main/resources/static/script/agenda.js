@@ -1,124 +1,140 @@
+const API_AGENDA = "http://localhost:8080/agenda";
+const API_AGENDAMENTO = "http://localhost:8080/agendamento";
 const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-  const nav = document.querySelector("nav");
 
-  if (usuarioLogado) {
-    // Substitui os botões de login e cadastro por um menu de perfil
-    nav.innerHTML = `
-      <a href="./sobreNos.html"><button>Sobre nós</button></a>
-      <div class="perfil-menu">
-        <button id="perfilBtn">
-          <i class="fa fa-user-circle"></i> ${usuarioLogado.nomeUsuario} ▾
-        </button>
-        <div class="dropdown-menu">
-          <a href="./perfil.html">Perfil</a>
-          <button id="logoutBtn">Sair</button>
-        </div>
-      </div>
-    `;
-  }
-    // Mostra/oculta o menu suspenso ao clicar
-    const perfilBtn = document.getElementById("perfilBtn");
-    const dropdownMenu = document.querySelector(".dropdown-menu");
-
-    perfilBtn.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show");
-    });
-
-    // Fecha o menu se clicar fora
-    document.addEventListener("click", (e) => {
-      if (!perfilBtn.contains(e.target)) {
-        dropdownMenu.classList.remove("show");
-      }
-    });
+// Elementos da página
 const calendar = document.getElementById("calendar");
 const schedule = document.getElementById("schedule");
 const selectedDayEl = document.getElementById("selected-day");
 const timeSlotsEl = document.getElementById("time-slots");
 
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth();
-
-// Dias e horários bloqueados pelo admin
-const blockedDays = JSON.parse(localStorage.getItem("blockedDays")) || [];
-const blockedTimes = JSON.parse(localStorage.getItem("blockedTimes")) || {};
-
+let agendas = [];
 let currentDateStr = null;
 
-// Gera o calendário (sem domingos e sem dias bloqueados)
-function generateCalendar(year, month) {
-  calendar.innerHTML = "";
-
-  const lastDate = new Date(year, month + 1, 0).getDate();
-  let firstDay = new Date(year, month, 1).getDay(); 
-
-  // ajusta se o primeiro dia for domingo (0)
-  if (firstDay === 0) firstDay = 7;
-
-  // cria espaços vazios para alinhar o primeiro dia
-  for (let i = 1; i < firstDay; i++) {
-    const emptyEl = document.createElement("div");
-    emptyEl.classList.add("empty-day");
-    calendar.appendChild(emptyEl);
+// ====================================
+// INICIALIZAÇÃO
+// ====================================
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!usuarioLogado) {
+    alert("Você precisa estar logado para agendar uma consulta.");
+    window.location.href = "./login.html";
+    return;
   }
 
-  for (let day = 1; day <= lastDate; day++) {
-    const date = new Date(year, month, day);
-    const weekday = date.getDay();
+  await carregarAgendasDisponiveis();
+  gerarCalendario();
+});
 
+// ====================================
+// FUNÇÕES
+// ====================================
+
+// 🔹 Carrega do backend as agendas disponíveis
+async function carregarAgendasDisponiveis() {
+  try {
+    const response = await fetch(`${API_AGENDA}/disponiveis`);
+    if (!response.ok) throw new Error("Erro ao buscar horários disponíveis");
+    agendas = await response.json();
+  } catch (error) {
+    console.error("Erro ao carregar agendas:", error);
+  }
+}
+
+// 🔹 Gera o calendário do mês atual (Seg a Sáb)
+function gerarCalendario() {
+  calendar.innerHTML = "";
+
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+  let primeiroDiaSemana = new Date(ano, mes, 1).getDay();
+
+  if (primeiroDiaSemana === 0) primeiroDiaSemana = 7;
+
+  // Preenche espaço antes do primeiro dia
+  for (let i = 1; i < primeiroDiaSemana; i++) {
+    const empty = document.createElement("div");
+    empty.classList.add("empty-day");
+    calendar.appendChild(empty);
+  }
+
+  // Pega os dias que possuem horários disponíveis
+  const diasComDisponibilidade = [...new Set(agendas.map(a => a.data))];
+
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const data = `${ano}-${mes + 1}-${dia}`;
+    const weekday = new Date(ano, mes, dia).getDay();
     if (weekday === 0) continue; // pula domingo
-
-    const dateStr = `${year}-${month + 1}-${day}`;
-
-    if (blockedDays.includes(dateStr)) continue; // pula dias bloqueados
 
     const dayEl = document.createElement("div");
     dayEl.classList.add("day");
-    dayEl.textContent = day;
+    dayEl.textContent = dia;
 
-    dayEl.addEventListener("click", () => showSchedule(dateStr));
+    if (diasComDisponibilidade.includes(data)) {
+      dayEl.addEventListener("click", () => mostrarHorarios(data));
+    } else {
+      dayEl.classList.add("day-disabled");
+    }
+
     calendar.appendChild(dayEl);
   }
 }
 
-// Mostra horários disponíveis
-function showSchedule(dateStr) {
+// 🔹 Mostra os horários disponíveis de um dia
+function mostrarHorarios(dateStr) {
   currentDateStr = dateStr;
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
   schedule.style.display = "block";
   timeSlotsEl.innerHTML = "";
 
-  for (let hour = 7; hour < 18; hour++) {
-    for (let min = 0; min < 60; min += 30) {
-      const time = `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
+  const horariosDia = agendas.filter(a => a.data === dateStr && a.disponibilidade);
 
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue; // pula horários bloqueados
-
-      const slotEl = document.createElement("div");
-      slotEl.classList.add("time-slot");
-      slotEl.textContent = time;
-
-      slotEl.addEventListener("click", () => selectTime(dateStr, time));
-      timeSlotsEl.appendChild(slotEl);
-    }
+  if (horariosDia.length === 0) {
+    timeSlotsEl.innerHTML = "<p>Não há horários disponíveis neste dia.</p>";
+    return;
   }
 
-  if (timeSlotsEl.innerHTML === "") {
-    timeSlotsEl.innerHTML = "<p>Nenhum horário disponível neste dia.</p>";
+  horariosDia.forEach(agenda => {
+    const slot = document.createElement("div");
+    slot.classList.add("time-slot");
+    slot.textContent = agenda.hora;
+
+    slot.addEventListener("click", () => agendarHorario(agenda.idAgenda));
+    timeSlotsEl.appendChild(slot);
+  });
+}
+
+// 🔹 Faz o agendamento (POST /agendamento)
+async function agendarHorario(idAgenda) {
+  if (!confirm("Deseja confirmar este horário?")) return;
+
+  const body = {
+    idAgenda: idAgenda,
+    idUsuario: usuarioLogado.idUsuario,
+  };
+
+  try {
+    const response = await fetch(API_AGENDAMENTO, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) throw new Error("Erro ao realizar agendamento");
+
+    alert(" Consulta agendada com sucesso!");
+    await carregarAgendasDisponiveis();
+    mostrarHorarios(currentDateStr);
+  } catch (error) {
+    console.error("Erro ao agendar:", error);
+    alert("Erro ao agendar. Tente novamente mais tarde.");
   }
 }
 
-// Seleciona horário
-function selectTime(dateStr, time) {
-  alert(`Você selecionou ${dateStr} às ${time}`);
-  // Aqui você pode enviar os dados para o backend
-}
-
-// Fecha a aba de horários quando clicar fora
+// 🔹 Fecha o painel de horários ao clicar fora
 document.addEventListener("click", (e) => {
   if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
     schedule.style.display = "none";
   }
 });
-
-generateCalendar(year, month);
