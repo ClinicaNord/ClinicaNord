@@ -11,9 +11,7 @@ const timeSlotsEl = document.getElementById("time-slots");
 let agendas = [];
 let currentDateStr = null;
 
-// ====================================
 // INICIALIZAÇÃO
-// ====================================
 document.addEventListener("DOMContentLoaded", async () => {
   if (!usuarioLogado) {
     alert("Você precisa estar logado para agendar uma consulta.");
@@ -25,11 +23,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   gerarCalendario();
 });
 
-// ====================================
 // FUNÇÕES
-// ====================================
 
-// 🔹 Carrega do backend as agendas disponíveis
+//  Carrega do backend as agendas disponíveis
 async function carregarAgendasDisponiveis() {
   try {
     const response = await fetch(`${API_AGENDA}/disponiveis`);
@@ -40,7 +36,7 @@ async function carregarAgendasDisponiveis() {
   }
 }
 
-// 🔹 Gera o calendário do mês atual (Seg a Sáb)
+//  Gera o calendário do mês atual (Seg a Sáb)
 function gerarCalendario() {
   calendar.innerHTML = "";
 
@@ -81,7 +77,7 @@ function gerarCalendario() {
   }
 }
 
-// 🔹 Mostra os horários disponíveis de um dia
+//  Mostra os horários disponíveis de um dia
 function mostrarHorarios(dateStr) {
   currentDateStr = dateStr;
   selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
@@ -105,7 +101,7 @@ function mostrarHorarios(dateStr) {
   });
 }
 
-// 🔹 Faz o agendamento (POST /agendamento)
+//  Faz o agendamento (POST /agendamento)
 async function agendarHorario(idAgenda) {
   if (!confirm("Deseja confirmar este horário?")) return;
 
@@ -132,7 +128,7 @@ async function agendarHorario(idAgenda) {
   }
 }
 
-// 🔹 Fecha o painel de horários ao clicar fora
+//  Fecha o painel de horários ao clicar fora
 document.addEventListener("click", (e) => {
   if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
     schedule.style.display = "none";
