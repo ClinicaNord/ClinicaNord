@@ -202,6 +202,24 @@
     .fa-github {
   color: #ccc;
 }
-.day.blocked {
-  display: none; /* O cliente nem vê o dia bloqueado */
+
+.day-available {
+  background-color: #0066ff;
+  color: white;
+  cursor: pointer;
 }
+
+.day-blocked {
+  background-color: #ff4c4c;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.day-disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: default;
+  opacity: 0.6;
+}
+
