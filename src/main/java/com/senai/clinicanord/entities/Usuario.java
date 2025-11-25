@@ -44,22 +44,21 @@ public class Usuario {
 	private LocalDate dataNascimento;
 	
 	// Ligação com outras tabelas 
+	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "tipoUsuario")
-	//@JsonIgnore
 	private TipoUsuario tipoUsuario;
 	
-	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
 	private List<Endereco> enderecos;
 	
-	@OneToMany(mappedBy = "usuario")
 	@JsonIgnore
+	@OneToMany(mappedBy = "usuario")
 	private List<Carteirinha> carteirinhas;
 	
-	
-	@OneToMany(mappedBy = "usuario")
 	@JsonIgnoreProperties
+	@OneToMany(mappedBy = "usuario")
 	private List<Agendamento> agendamento;
 	
 	// Construtores

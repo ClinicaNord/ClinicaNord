@@ -23,8 +23,8 @@ public class Servicos {
 	@Column(name = "nomeServicos", nullable = false, length = 100)
 	private String servicos;
 	
-	@OneToMany(mappedBy = "servicos")
 	@JsonIgnore
+	@OneToMany(mappedBy = "servicos")
 	private List<Agendamento> agendamento;
 	
 	//construtores

@@ -34,8 +34,8 @@ public class Agenda {
 		@Column(name = "diponibilidade", nullable = false)
 		private Boolean diponibilidade;
 		
-		@OneToMany(mappedBy = "agenda")
 		@JsonIgnore
+		@OneToMany(mappedBy = "agenda")
 		private List<Agendamento> agendamento;
 		
 		// CONSTRUTORES

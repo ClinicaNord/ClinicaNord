@@ -25,8 +25,8 @@ public class NomeConvenio {
 	@Column(name = "nomeConv", nullable = false)
 	private String nomeConv;
 
-	@OneToMany(mappedBy = "nomeConvenio") // 👈 nome do atributo em Carteirinha
 	@JsonIgnore
+	@OneToMany(mappedBy = "nomeConvenio") // 👈 nome do atributo em Carteirinha
 	private List<Carteirinha> carteirinhas;
 
 	// Construtores

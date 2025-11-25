@@ -41,8 +41,8 @@ public class Endereco {
 	@Column(name = "complemento")
 	private String complemento;
 	
-	@ManyToOne
 	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
