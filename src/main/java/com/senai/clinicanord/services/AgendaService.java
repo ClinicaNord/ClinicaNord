@@ -12,7 +12,7 @@ import com.senai.clinicanord.repositories.AgendaReposirory;
 @Service
 public class AgendaService {
 
-	//ATRIBUTOS
+    //ATRIBUTOS
     @Autowired
     private AgendaReposirory agendaRepository;
     
@@ -24,7 +24,7 @@ public class AgendaService {
     
  // 🔹 novo: retorna só horários disponíveis
     public List<Agenda> getAgendasDisponiveis() {
-        return agendaRepository.findByDisponibilidadeTrue();
+        return agendaRepository.findByDiponibilidadeTrue();
     }
 
     // 🔹 novo: altera disponibilidade
@@ -49,5 +49,4 @@ public class AgendaService {
     public void deleteAgenda(Long idAgenda) {
         agendaRepository.deleteById(idAgenda);
     }
- 
 }

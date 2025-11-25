@@ -21,7 +21,7 @@ import com.senai.clinicanord.services.AgendaService;
 @CrossOrigin(origins = "*")
 public class AgendaController {
 
-	//ATRIBUTOS
+    //ATRIBUTOS
     @Autowired
     private AgendaService agendaService;
 
@@ -44,19 +44,19 @@ public class AgendaController {
         return agendaService.getAgendaById(idAgenda);
     }
     
- // 🔹 novo: listar apenas horários disponíveis
+    // listar apenas horários disponíveis
     @GetMapping("/disponiveis")
     public List<Agenda> getAgendasDisponiveis() {
         return agendaService.getAgendasDisponiveis();
     }
 
-    // 🔹 novo: bloquear horário
+    //  bloquear horário
     @PostMapping("/bloquear/{idAgenda}")
     public Agenda bloquearAgenda(@PathVariable Long idAgenda) {
         return agendaService.alterarDisponibilidade(idAgenda, false);
     }
 
-    // 🔹 novo: desbloquear horário
+    // desbloquear horário
     @PostMapping("/desbloquear/{idAgenda}")
     public Agenda desbloquearAgenda(@PathVariable Long idAgenda) {
         return agendaService.alterarDisponibilidade(idAgenda, true);
