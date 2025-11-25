@@ -31,8 +31,8 @@ public class Agenda {
 		@Column(name = "hora", nullable = false)
 		private String hora;
 		
-		@Column(name = "diponibilidade", nullable = false)
-		private Boolean diponibilidade;
+		@Column(name = "disponibilidade", nullable = false)
+		private Boolean disponibilidade;
 		
 		@JsonIgnore
 		@OneToMany(mappedBy = "agenda")
@@ -47,7 +47,7 @@ public class Agenda {
 			this.idAgenda = idAgenda;
 			this.data = data;
 			this.hora= hora;
-			this.diponibilidade = disponibilidade;
+			this.disponibilidade = disponibilidade;
 		}
 		
 		//GETTERS E SETTERS
@@ -69,11 +69,11 @@ public class Agenda {
 		public void setHora(String hora) {
 			this.hora = hora;
 		}
-		public Boolean getDiponibilidade() {
-			return diponibilidade;
+		public Boolean getDisponibilidade() {
+			return disponibilidade;
 		}
-		public void setDiponibilidade(Boolean diponibilidade) {
-			this.diponibilidade = diponibilidade;
+		public void setDisponibilidade(Boolean disponibilidade) {
+			this.disponibilidade = disponibilidade;
 		}
 		public List<Agendamento> getAgendamento() {
 			return agendamento;

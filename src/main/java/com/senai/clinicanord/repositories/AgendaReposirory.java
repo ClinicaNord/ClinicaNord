@@ -10,7 +10,7 @@ import com.senai.clinicanord.entities.Agenda;
 @Repository
 public interface AgendaReposirory extends JpaRepository<Agenda , Long> {
 	
-	List<Agenda> findByDiponibilidadeTrue();
+	List<Agenda> findByDisponibilidadeTrue();
 
 
 }

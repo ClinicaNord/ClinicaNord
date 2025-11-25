@@ -24,14 +24,14 @@ public class AgendaService {
     
  // 🔹 novo: retorna só horários disponíveis
     public List<Agenda> getAgendasDisponiveis() {
-        return agendaRepository.findByDiponibilidadeTrue();
+        return agendaRepository.findByDisponibilidadeTrue();
     }
 
     // 🔹 novo: altera disponibilidade
     public Agenda alterarDisponibilidade(Long idAgenda, boolean disponivel) {
         Agenda agenda = agendaRepository.findById(idAgenda)
             .orElseThrow(() -> new RuntimeException("Agenda não encontrada"));
-        agenda.setDiponibilidade(disponivel);
+        agenda.setDisponibilidade(disponivel);
         return agendaRepository.save(agenda);
     }
     
