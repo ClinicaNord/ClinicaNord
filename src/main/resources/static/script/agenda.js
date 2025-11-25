@@ -1,229 +1,207 @@
-// VARIÁVEIS GERAIS
+const API_AGENDA = "http://localhost:8080/agenda";
+const API_AGENDAMENTO = "http://localhost:8080/agendamento";
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
 const calendar = document.getElementById("calendar");
 const schedule = document.getElementById("schedule");
 const selectedDayEl = document.getElementById("selected-day");
 const timeSlotsEl = document.getElementById("time-slots");
 
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth();
+// Variáveis Globais para controle do estado
+let agendas = [];
+let currentDateStr = null;
+let selectedAgendaId = null; // 🚨 NOVO: Armazena o ID selecionado temporariamente
 
-const servicoSelecionado = JSON.parse(localStorage.getItem("servicoSelecionado"));
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-if (!servicoSelecionado) {
-  alert("Nenhum tipo de terapia foi selecionado! Retornando à página anterior.");
-  window.location.href = "./tiposTerapia.html";
-}
-
-console.log("Serviço selecionado:", servicoSelecionado);
-console.log("Usuário logado:", usuarioLogado);
-
-
-// VARIÁVEIS DE BLOQUEIO
-
-let blockedTimes = {};
-
-// FUNÇÃO PARA CARREGAR HORÁRIOS BLOQUEADOS DO BACKEND
-async function carregarHorariosBloqueados() {
-  try {
-    const response = await fetch("http://localhost:8080/agenda");
-    const agendas = await response.json();
-
-    blockedTimes = {};
-
-    agendas.forEach((a) => {
-      if (a.diponibilidade === false) {
-        const data = a.data.split("T")[0];
-        if (!blockedTimes[data]) blockedTimes[data] = [];
-        blockedTimes[data].push(a.hora);
-      }
-    });
-
-    console.log("Horários bloqueados carregados:", blockedTimes);
-  } catch (error) {
-    console.error("Erro ao carregar horários bloqueados:", error);
-  }
-}
-
-
-// FUNÇÃO PARA GERAR O CALENDÁRIO
-function generateCalendar(year, month) {
-  calendar.innerHTML = "";
-
-  const lastDate = new Date(year, month + 1, 0).getDate();
-  let firstDay = new Date(year, month, 1).getDay();
-  if (firstDay === 0) firstDay = 7;
-
-  for (let i = 1; i < firstDay; i++) {
-    const emptyEl = document.createElement("div");
-    emptyEl.classList.add("empty-day");
-    calendar.appendChild(emptyEl);
-  }
-
-  for (let day = 1; day <= lastDate; day++) {
-    const date = new Date(year, month, day);
-    const weekday = date.getDay();
-    if (weekday === 0) continue;
-
-    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-
-    const dayEl = document.createElement("div");
-    dayEl.classList.add("day");
-    dayEl.textContent = day;
-    dayEl.addEventListener("click", () => showSchedule(dateStr));
-
-    calendar.appendChild(dayEl);
-  }
-}
-
-// MOSTRA HORÁRIOS DISPONÍVEIS
-function showSchedule(dateStr) {
-  selectedDayEl.textContent = `Horários disponíveis em ${dateStr}`;
-  schedule.style.display = "block";
-  timeSlotsEl.innerHTML = "";
-
-  for (let hour = 7; hour < 18; hour++) {
-    for (let min = 0; min < 60; min += 30) {
-      const time = `${hour.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
-
-      if (blockedTimes[dateStr] && blockedTimes[dateStr].includes(time)) continue;
-
-      const slotEl = document.createElement("div");
-      slotEl.classList.add("time-slot");
-      slotEl.textContent = time;
-
-      slotEl.addEventListener("click", () => selectTime(dateStr, time, slotEl));
-      timeSlotsEl.appendChild(slotEl);
+// ----------------------------------------------------
+// 📌 INICIALIZAÇÃO E CARREGAMENTO DE DADOS
+// ----------------------------------------------------
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!usuarioLogado) {
+        alert("Você precisa estar logado para agendar uma consulta.");
+        window.location.href = "./login.html";
+        return;
     }
-  }
 
-  if (timeSlotsEl.innerHTML === "") {
-    timeSlotsEl.innerHTML = "<p>Nenhum horário disponível neste dia.</p>";
-  }
+    await carregarAgendas();
+    gerarCalendario();
+});
+
+// ➜ Carrega TODAS as agendas (bloqueadas + disponíveis)
+async function carregarAgendas() {
+    try {
+        const res = await fetch(`${API_AGENDA}`);
+        if (!res.ok) throw new Error("Erro ao buscar agendas");
+        agendas = await res.json();
+    } catch (error) {
+        console.error("Erro ao carregar agendas:", error);
+    }
 }
 
-// =====================
-// SELECIONA E BLOQUEIA O HORÁRIO
-// =====================
-async function selectTime(dateStr, time, slotEl) {
-  if (!usuarioLogado || !usuarioLogado.idUsuario) {
-    alert("Você precisa estar logado para agendar!");
-    return;
-  }
+// ----------------------------------------------------
+// 📅 GERAÇÃO DO CALENDÁRIO
+// ----------------------------------------------------
+function gerarCalendario() {
+    calendar.innerHTML = "";
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = hoje.getMonth();
+    const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+    let primeiroDiaSemana = new Date(ano, mes, 1).getDay();
+    if (primeiroDiaSemana === 0) primeiroDiaSemana = 7;
 
-  const agendaData = {
-    data: dateStr,
-    hora: time,
-    diponibilidade: false,
-  };
+    for (let i = 1; i < primeiroDiaSemana; i++) {
+        const empty = document.createElement("div");
+        empty.classList.add("empty-day");
+        calendar.appendChild(empty);
+    }
 
-  try {
-    const agendaResponse = await fetch("http://localhost:8080/agenda", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(agendaData),
+    const hojeStr = hoje.toISOString().split("T")[0];
+
+    for (let dia = 1; dia <= ultimoDia; dia++) {
+        const data = `${ano}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
+        const weekday = new Date(ano, mes, dia).getDay();
+        if (weekday === 0) continue; // Pula Domingo
+
+        const horariosDia = agendas.filter(a => a.data === data);
+        const horariosDisponiveis = horariosDia.filter(a => a.disponibilidade);
+
+        const dayEl = document.createElement("div");
+        dayEl.classList.add("day");
+        dayEl.textContent = dia;
+        
+        // Bloqueia dias passados
+        if (data < hojeStr) {
+            dayEl.classList.add("day-blocked");
+            dayEl.title = "Data já passou";
+        }
+        // Bloqueia dias sem horários na agenda
+        else if (horariosDia.length === 0) {
+            dayEl.classList.add("day-disabled");
+            dayEl.title = "Sem horários cadastrados";
+        } 
+        // Bloqueia dias com todos horários ocupados/bloqueados pela clínica
+        else if (horariosDisponiveis.length === 0) {
+            dayEl.classList.add("day-blocked");
+            dayEl.title = "Dia bloqueado pela clínica";
+        } 
+        // Dias disponíveis
+        else {
+            dayEl.classList.add("day-available");
+            dayEl.addEventListener("click", () => mostrarHorarios(data));
+        }
+
+        calendar.appendChild(dayEl);
+    }
+}
+
+// ----------------------------------------------------
+// 🕑 EXIBIÇÃO E SELEÇÃO DE HORÁRIOS
+// ----------------------------------------------------
+function mostrarHorarios(dateStr) {
+    currentDateStr = dateStr;
+    // Reseta o estado de seleção ao mudar o dia
+    selectedAgendaId = null; 
+    
+    selectedDayEl.textContent = `Horários em ${dateStr}`;
+    schedule.style.display = "block";
+    timeSlotsEl.innerHTML = "";
+
+    const horariosDia = agendas.filter(a => a.data === dateStr);
+
+    if (horariosDia.length === 0) {
+        timeSlotsEl.innerHTML = "<p>Não há horários neste dia.</p>";
+        return;
+    }
+
+    horariosDia.forEach(agenda => {
+        const slot = document.createElement("div");
+        slot.classList.add("time-slot");
+        slot.textContent = agenda.hora;
+
+        if (!agenda.disponibilidade) {
+            slot.classList.add("time-blocked");
+            slot.title = "Horário bloqueado pela clínica!";
+            slot.style.pointerEvents = "none";
+        } else {
+            // 🚨 MUDANÇA: Chama selecionarHorario (Não agendar direto)
+            slot.addEventListener("click", () => selecionarHorario(slot, agenda.idAgenda));
+        }
+
+        timeSlotsEl.appendChild(slot);
     });
+    
+    // 🚨 NOVO: Adiciona o Botão de Confirmação
+    const confirmBtn = document.createElement("button");
+    confirmBtn.id = "confirm-schedule-btn";
+    confirmBtn.textContent = "Confirmar Agendamento";
+    confirmBtn.disabled = true; // Desabilitado até que um horário seja selecionado
+    confirmBtn.addEventListener("click", agendarHorarioFinal);
+    timeSlotsEl.appendChild(confirmBtn);
+}
 
-    if (!agendaResponse.ok) throw new Error("Erro ao salvar a agenda");
-    const agenda = await agendaResponse.json();
-    console.log("Agenda criada:", agenda);
+// 🚨 NOVO: Função para selecionar o horário
+function selecionarHorario(slot, idAgenda) {
+    // Remove a classe 'selected' de todos os slots para garantir que apenas um esteja selecionado
+    document.querySelectorAll(".time-slot").forEach(s => s.classList.remove("selected"));
+    
+    // Adiciona a classe 'selected' ao slot clicado
+    slot.classList.add("selected");
+    
+    // Armazena o ID da agenda selecionada
+    selectedAgendaId = idAgenda;
+    
+    // Habilita o botão de confirmação
+    document.getElementById("confirm-schedule-btn").disabled = false;
+}
 
-    const agendamentoData = {
-      servicos: { idServicos: servicoSelecionado.idServicos },
-      usuario: { idUsuario: usuarioLogado.idUsuario },
-      agenda: { idAgenda: agenda.idAgenda },
+// ----------------------------------------------------
+// ✅ CONFIRMAÇÃO E AGENDAMENTO (via Botão)
+// ----------------------------------------------------
+// 🚨 MUDANÇA: Esta função é chamada SOMENTE pelo botão de confirmação
+async function agendarHorarioFinal() {
+    if (selectedAgendaId === null) {
+        alert("Por favor, selecione um horário primeiro.");
+        // O botão já deve estar desabilitado, mas é um bom fallback
+        return; 
+    }
+    
+    if (!confirm("Confirmar agendamento do horário selecionado?")) return;
+
+    const body = {
+        agenda: { idAgenda: selectedAgendaId }, 
+        usuario: { idUsuario: usuarioLogado.idUsuario },
+        servicos: null
     };
 
-    const agendamentoResponse = await fetch("http://localhost:8080/agendamento", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(agendamentoData),
-    });
+    try {
+        const res = await fetch(API_AGENDAMENTO, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+        });
 
-    if (!agendamentoResponse.ok) throw new Error("Erro ao salvar o agendamento");
-    const agendamento = await agendamentoResponse.json();
-    console.log("Agendamento criado:", agendamento);
+        if (!res.ok) throw new Error("Erro ao agendar");
+        
+        alert("Consulta agendada com sucesso!");
 
-    // Remove o horário da tela imediatamente
-    slotEl.remove();
-
-    // Marca localmente como bloqueado
-    blockedTimes[dateStr] = blockedTimes[dateStr] || [];
-    blockedTimes[dateStr].push(time);
-
-    alert(` Agendamento realizado com sucesso em ${dateStr} às ${time}!`);
-  } catch (error) {
-    console.error("Erro ao agendar:", error);
-    alert(" Ocorreu um erro ao tentar agendar. Tente novamente.");
-  }
+        // Limpa o estado e atualiza a interface
+        selectedAgendaId = null; 
+        await carregarAgendas();
+        mostrarHorarios(currentDateStr);
+        gerarCalendario();
+    } catch (error) {
+        console.error("Erro ao agendar:", error);
+        alert("Erro ao agendar. O horário pode ter sido reservado por outro usuário.");
+    }
 }
 
-// FECHAR ABA DE HORÁRIOS AO CLICAR FORA
+// ----------------------------------------------------
+// 🚪 FECHAR PAINEL DE HORÁRIOS
+// ----------------------------------------------------
 document.addEventListener("click", (e) => {
-  if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
-    schedule.style.display = "none";
-  }
-});
-
-// INICIALIZAÇÃO
-(async () => {
-  await carregarHorariosBloqueados();
-  generateCalendar(year, month);
-})(); 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const usuarioJson = localStorage.getItem('usuarioLogado');
-
-  const usuario = JSON.parse(usuarioJson);
-
-  // --- Cria um menu pro perfil ---
-  const nav = document.querySelector('nav');
-  if (!nav) return;
-
-  let linkPerfil = './perfilCliente.html';
-  if (usuario.tipo === 1) {
-    linkPerfil = './perfilAdm.html';
-  }
-
-  nav.innerHTML = `
-    <a href="./sobreNos.html"><button>Sobre nós</button></a>
-    <div class="perfil-menu">
-      <button id="perfilBtn">
-        <i class="fa fa-user-circle"></i> ${usuario.nomeUsuario} ▾
-      </button>
-      <div class="dropdown-menu">
-        <button id="inicioBtn">Início</button>
-        <a href="${linkPerfil}" id="perfilLink">Perfil</a>
-        <button id="logoutBtn">Sair</button>
-      </div>
-    </div>
-  `;
-
-  // Mostra/oculta o menu suspenso ao clicar
-  const perfilBtn = document.getElementById('perfilBtn');
-  const dropdownMenu = document.querySelector('.dropdown-menu');
-
-  perfilBtn.addEventListener('click', () => {
-    dropdownMenu.classList.toggle('show');
-  });
-
-  // Fecha o menu se clicar fora
-  document.addEventListener('click', (e) => {
-    if (!perfilBtn.contains(e.target)) {
-      dropdownMenu.classList.remove('show');
+    // Fecha o painel se clicar fora dele e não for um dia do calendário
+    if (!schedule.contains(e.target) && !e.target.classList.contains("day")) {
+        schedule.style.display = "none";
+        selectedAgendaId = null; // Opcional: limpa seleção ao fechar
     }
-  });
-
-  document.getElementById('inicioBtn').addEventListener('click', () => {
-    window.location.href = 'index.html';
-  });
-
-  // Logout
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    localStorage.removeItem('usuarioLogado');
-    alert('Você saiu da conta.');
-    window.location.href = 'index.html';
-  });
 });
-
