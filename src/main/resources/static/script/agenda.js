@@ -115,7 +115,7 @@ async function selectTime(dateStr, time, slotEl) {
   const agendaData = {
     data: dateStr,
     hora: time,
-    diponibilidade: false,
+    diponibilidade: false
   };
 
   try {
