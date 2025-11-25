@@ -62,12 +62,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       ag.servicos?.nomeServicos ??
       "Serviço não disponível";
 
-    const dataRaw = ag.agenda?.data ?? null;
+    const dataRaw = ag.agenda?.data_agenda ?? null;
     dataSpan.textContent = dataRaw
       ? new Date(dataRaw).toLocaleDateString("pt-BR")
-      : "Data indisponível";
+      : "";
 
-    horaSpan.textContent = ag.agenda?.hora ?? "Hora indisponível";
+    horaSpan.textContent = ag.agenda?.hora ?? " ";
 
   } catch (error) {
     console.error("Erro:", error);

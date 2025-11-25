@@ -38,14 +38,14 @@ public class AgendamentoController {
     }
 
     //método para buscar o agendamento pelo id
-    @GetMapping("/{id}")
+    @GetMapping("/{idAgendamento}")
     public Agendamento getAgendamento(@PathVariable Long idAgendamento) {
         return agendamentoService.getAgendamentoById(idAgendamento);
     }
 
 
     //método para deletar o agendamento pelo id
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idAgendamento}")
     public void deleteAgendamento (@PathVariable Long idAgendamento) {
         agendamentoService.deleteAgendamento(idAgendamento);
     
